@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes">
+    <title>Aashaq Bike Point | Elite Motorcycle Engineering</title>
+    
+    <!-- PWA Capabilities & Icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Aashaq%20Bike%20Point%22%2C%22short_name%22%3A%22AashaqBP%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23050505%22%2C%22theme_color%22%3A%22%23D4AF37%22%7D">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA7C11',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP for scroll animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis for smooth scroll physics -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <style>
+        /* CSS VARIABLE SYSTEMS FOR THEME SYSTEM ENGINE */
+        :root {
+            --bg-950: #050505;
+            --bg-900: #0A0A0A;
+            --bg-900-opacity: rgba(10, 10, 10, 0.75);
+            --bg-900-solid: #0A0A0A;
+            --bg-800: #121212;
+            --text-100: #F5F5F5;
+            --text-400: #A3A3A3;
+            --text-500: #737373;
+            --border-color: rgba(212, 175, 55, 0.15);
+            --border-hard: rgba(212, 175, 55, 0.3);
+            --white-black: #FFFFFF;
+            --black-white: #000000;
+            --card-bg: rgba(18, 18, 18, 0.6);
+            --smoke-clear: rgba(5, 5, 5, 0.12);
+        }
+        
+        body.theme-light {
+            --bg-950: #F4F4F6;
+            --bg-900: #FFFFFF;
+            --bg-900-opacity: rgba(255, 255, 255, 0.85);
+            --bg-900-solid: #FFFFFF;
+            --bg-800: #EBEBEF;
+            --text-100: #1C1C1E;
+            --text-400: #555558;
+            --text-500: #8E8E93;
+            --border-color: rgba(170, 124, 17, 0.25);
+            --border-hard: rgba(170, 124, 17, 0.5);
+            --white-black: #000000;
+            --black-white: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --smoke-clear: rgba(244, 244, 246, 0.12);
+        }
+
+        /* Map custom CSS variables to theme containers */
+        .themed-bg-950 { background-color: var(--bg-950); }
+        .themed-bg-900 { background-color: var(--bg-900); }
+        .themed-border-color { border-color: var(--border-color); }
+        .themed-text-100 { color: var(--text-100); }
+        .themed-text-400 { color: var(--text-400); }
+
+        /* Custom Premium Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-950);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 3px;
+        }
+        
+        /* Carbon Fiber Texture Overlay simulation */
+        .carbon-pattern {
+            background-color: var(--bg-950);
+            background-image: 
+                linear-gradient(45deg, var(--bg-900) 25%, transparent 25%), 
+                linear-gradient(-45deg, var(--bg-900) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, var(--bg-900) 75%), 
+                linear-gradient(-45deg, transparent 75%, var(--bg-900) 75%);
+            background-size: 8px 8px;
+            background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Prevent default cursor on desktop to support the magnetic custom cursor */
+        @media (min-width: 768px) {
+            body {
+                cursor: none;
+            }
+            a, button, select, input, textarea {
+                cursor: none;
+            }
+        }
+    </style>
+</head>
+<body class="themed-bg-950 text-neutral-100 font-sans overflow-x-hidden relative transition-colors duration-500">
+
+    <!-- FLUID PARTICLES & GLOW CANVAS BACKGROUND -->
+    <canvas id="bg-fluid-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- MAGNETIC CUSTOM CURSOR -->
+    <div id="custom-cursor" class="hidden md:block fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 mix-blend-difference">
+        <div class="w-8 h-8 rounded-full border border-gold flex items-center justify-center">
+            <div class="w-1.5 h-1.5 bg-gold rounded-full"></div>
+        </div>
+    </div>
+
+    <!-- LUXURY INITIAL LOADING SCREEN -->
+    <div id="loader" class="fixed inset-0 bg-black z-[10000] flex flex-col items-center justify-center p-6">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="relative w-64 h-64 flex flex-col items-center justify-center">
+            <!-- Custom Traced Mountain Logo in Loader -->
+            <svg class="w-24 h-24 mb-6" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gold-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#D4AF37" />
+                        <stop offset="30%" stop-color="#FFF2B2" />
+                        <stop offset="70%" stop-color="#AA7C11" />
+                        <stop offset="100%" stop-color="#5A3E00" />
+                    </linearGradient>
+                </defs>
+                <path d="M 12 70 L 22 58 L 26 58 L 30 52 L 34 54 L 39 45 L 43 47 L 48 43 L 52 48 L 56 48 L 61 51 L 67 44 L 75 55 L 82 63 L 88 70 Z" fill="url(#gold-logo-grad)" />
+                <path d="M 45 44 L 52 52 L 57 49 L 66 58 L 72 70" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1.5" />
+            </svg>
+            
+            <div class="text-center z-10">
+                <h1 class="font-display text-3xl font-extrabold tracking-[0.25em] text-gold">AASHAQ</h1>
+                <p class="text-[9px] tracking-[0.4em] text-neutral-500 mt-2 uppercase">Precision Workshop</p>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="w-48 h-[1px] bg-neutral-800 relative mt-8 overflow-hidden">
+            <div id="loader-progress" class="absolute top-0 left-0 h-full bg-gold w-0 transition-all duration-100 ease-out"></div>
+        </div>
+        <div id="loader-status" class="text-[10px] font-mono text-gold/60 mt-3 tracking-widest">SYSTEM SYNAPSE: 0%</div>
+        
+        <button onclick="enableSynthesizedAudio()" class="absolute bottom-12 px-6 py-2.5 rounded-full border border-neutral-800 text-neutral-400 hover:text-gold hover:border-gold/50 text-[10px] tracking-widest transition-all">
+            ACTIVATE AUDIO MECHANICS
+        </button>
+    </div>
+
+    <!-- UPPER NAVIGATION CONTROLLERS: AUDIO & THEME MODE SWITCHERS -->
+    <div class="fixed top-6 right-6 z-[90] flex items-center gap-3">
+        <!-- Light / Dark Mode Toggle button -->
+        <button onclick="toggleThemeMode()" class="w-12 h-12 rounded-full border border-neutral-800 themed-bg-900 backdrop-blur-md flex items-center justify-center text-neutral-400 hover:text-gold hover:border-gold/50 transition-all shadow-lg themed-border-color">
+            <svg id="theme-sun-icon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
+            <svg id="theme-moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <!-- Mechanical Audio Synthesis Button -->
+        <button id="audio-toggle" onclick="toggleEngineSynth()" class="w-12 h-12 rounded-full border border-neutral-800 themed-bg-900 backdrop-blur-md flex items-center justify-center text-neutral-400 hover:text-gold hover:border-gold/50 transition-all shadow-lg themed-border-color">
+            <svg id="mute-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+            <svg id="play-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+        </button>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-gradient-to-b from-black via-black/80 to-transparent backdrop-blur-sm px-4 lg:px-16 py-5 flex items-center justify-between border-b border-white/5 transition-all">
+        <div class="flex items-center gap-3">
+            <svg class="w-10 h-10 filter drop-shadow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 12 70 L 22 58 L 26 58 L 30 52 L 34 54 L 39 45 L 43 47 L 48 43 L 52 48 L 56 48 L 61 51 L 67 44 L 75 55 L 82 63 L 88 70 Z" fill="url(#gold-logo-grad)" />
+            </svg>
+            <div>
+                <span class="font-display font-extrabold tracking-widest uppercase block text-xs themed-text-100">Aashaq Bike Point</span>
+                <span class="text-[8px] tracking-[0.3em] text-gold uppercase block">Elite Performance</span>
+            </div>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-[11px] font-medium tracking-widest text-neutral-400">
+            <a href="#services" class="hover:text-white transition-colors">SERVICES</a>
+            <a href="#canvas-lab" class="hover:text-white transition-colors">3D LAB</a>
+            <a href="#gallery" class="hover:text-white transition-colors">GALLERY</a>
+            <a href="#founder" class="hover:text-white transition-colors">FOUNDER</a>
+            <button onclick="toggleMotoBhatConsole()" class="hover:text-white transition-colors text-gold flex items-center gap-1.5">
+                ASK MOTO-BHAT 
+                <svg class="w-3.5 h-3.5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </button>
+        </nav>
+
+        <a href="#book" class="px-5 py-2.5 rounded-full bg-gold text-black text-[11px] font-bold tracking-widest hover:bg-white hover:scale-105 transition-all duration-300">
+            BOOK SERVICE
+        </a>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden px-4 z-10">
+        <div class="absolute inset-0 z-0 bg-radial-at-c from-neutral-900/40 via-black to-black transition-all"></div>
+        <div class="absolute top-1/3 left-0 w-[200%] h-[1px] bg-gradient-to-r from-transparent via-gold/15 to-transparent blur-md -rotate-12 animate-[pulse_8s_infinite]"></div>
+
+        <div class="relative z-10 text-center max-w-4xl px-4 flex flex-col items-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-md mb-8 text-[10px] tracking-[0.25em] uppercase text-gold">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                THE STANDARD FOR PERFORMANCE MOTORCYCLES
+            </div>
+
+            <h1 class="font-display text-4xl md:text-8xl font-black tracking-tighter leading-none mb-6 uppercase themed-text-100">
+                THE ART OF <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-gold">
+                    MECHANICAL PURSUIT
+                </span>
+            </h1>
+
+            <p class="text-neutral-400 text-xs md:text-lg tracking-wide max-w-2xl mb-12 font-light leading-relaxed themed-text-400">
+                We handle premium motorcycle restoration, complete Desmo valve rebuilding, precise ECU custom re-mapping, and high-tolerance chassis setups with absolute mechanical transparency.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md">
+                <a href="#book" class="px-8 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-widest hover:bg-gold hover:text-black transition-all duration-300 uppercase shadow-md">
+                    Schedule Tuning
+                </a>
+                <button onclick="toggleMotoBhatConsole()" class="px-8 py-4 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md text-white font-semibold text-xs tracking-widest hover:border-gold transition-all duration-300 uppercase flex items-center justify-center gap-2">
+                    Consult Moto-Bhat <span class="w-1.5 h-1.5 bg-gold rounded-full animate-ping"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+            <span class="text-[9px] tracking-[0.4em] uppercase text-neutral-500">SCROLL DOWN</span>
+            <div class="w-[1px] h-8 bg-gradient-to-b from-gold to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- STATS OVERVIEW SECTION -->
+    <section class="relative py-20 border-y border-white/5 bg-black z-10 transition-colors">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-6 text-center">
+            <div class="stat-box">
+                <h3 class="font-display text-4xl md:text-6xl font-black tracking-tight text-gold mb-1" id="stat-1">5000+</h3>
+                <p class="text-[10px] uppercase tracking-[0.25em] text-neutral-400">Riders Assisted</p>
+            </div>
+            <div class="stat-box">
+                <h3 class="font-display text-4xl md:text-6xl font-black tracking-tight text-gold mb-1" id="stat-2">12000+</h3>
+                <p class="text-[10px] uppercase tracking-[0.25em] text-neutral-400">Services Logged</p>
+            </div>
+            <div class="stat-box">
+                <h3 class="font-display text-4xl md:text-6xl font-black tracking-tight text-gold mb-1" id="stat-3">10+</h3>
+                <p class="text-[10px] uppercase tracking-[0.25em] text-neutral-400">Years Active</p>
+            </div>
+            <div class="stat-box">
+                <h3 class="font-display text-4xl md:text-6xl font-black tracking-tight text-gold mb-1" id="stat-4">99%</h3>
+                <p class="text-[10px] uppercase tracking-[0.25em] text-neutral-400">Calibration Perfect</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE SERVICES / DEMONSTRATIVE MECHANICAL STACK LAB -->
+    <section id="services" class="relative py-32 px-4 themed-bg-900 z-10 border-b border-white/5 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">TUNING BLUEPRINT</span>
+                    <h2 class="font-display text-3xl md:text-6xl font-black tracking-tight uppercase themed-text-100">OUR MECHANICAL STACK</h2>
+                </div>
+                <p class="text-neutral-400 max-w-md mt-6 lg:mt-0 text-xs md:text-sm tracking-wide font-light leading-relaxed themed-text-400">
+                    Interactive engineering dashboard. Select vectors to demonstrate dynamic structural diagnostics under variable workloads.
+                </p>
+            </div>
+
+            <!-- Custom Navigation Tabs for the Mechanical Stack -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b border-white/10 pb-6 themed-border-color">
+                <button onclick="switchStackTab('engine-tab')" id="btn-engine-tab" class="px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all">
+                    01 // CYLINDER HEAD
+                </button>
+                <button onclick="switchStackTab('electronics-tab')" id="btn-electronics-tab" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400">
+                    02 // ECU MAPPING
+                </button>
+                <button onclick="switchStackTab('hydraulic-tab')" id="btn-hydraulic-tab" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400">
+                    03 // SUSPENSION SAG
+                </button>
+            </div>
+
+            <!-- Tab Content 1: Engine -->
+            <div id="engine-tab" class="stack-content grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-300">
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">INLET VALVES</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Shim Clearance Optimization</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">We balance shims down to ±0.01mm. Prevents high temperature exhaust flow leaks and ensures mechanical sealing.</p>
+                        
+                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Micro Shim Scale</span> <span class="text-gold" id="shim-val">0.12mm</span></div>
+                            <input type="range" min="5" max="25" value="12" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('shim-val').innerText = (this.value/100).toFixed(2) + 'mm'">
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>TARGET SPEC:</span> <span>0.10mm - 0.15mm</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">EXHAUST CORRIDORS</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Backpressure Equilibrium</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Exhaust breathing flows must remain aligned to prevent pressure delta disruptions inside primary header pipes.</p>
+                        
+                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                            <span class="text-[9px] font-mono text-neutral-400 themed-text-400 block">Exhaust Scavenging Efficiency</span>
+                            <div class="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gold w-[88%] animate-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>FLOW MARGIN:</span> <span>96.4% Optimum</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">COMPRESSION CORE</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Piston-to-Bore Alignment</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">High pressure wall seals prevent intake charge bypass leaks. We test using chemical vacuum gauges.</p>
+                        
+                        <div class="bg-black/10 p-3 rounded-lg border border-white/5 font-mono text-[10px] space-y-1">
+                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Chamber Seals</span> <span class="text-emerald-500">Nominal</span></div>
+                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Leak Down Loss</span> <span class="text-gold">&lt; 2.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>PRESSURE SPEC:</span> <span>185 PSI Target</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 2: Electronics -->
+            <div id="electronics-tab" class="stack-content grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-300 hidden">
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">LAMBDA PROFILES</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Air-Fuel Ratio Mapping</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Configuring timing thresholds to smooth power delivery and eliminate erratic torque flat spots.</p>
+                        
+                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Lambda Goal</span> <span class="text-gold" id="lambda-val">13.2 AFR</span></div>
+                            <input type="range" min="110" max="150" value="132" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('lambda-val').innerText = (this.value/10).toFixed(1) + ' AFR'">
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>CRUISING AFR:</span> <span>14.7 : 1 Balanced</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">IGNITION TIMING</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Spark Advance Curves</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Determines precise millisecond advance angles relative to piston top dead center under various engine RPM loads.</p>
+                        
+                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                            <span class="text-[9px] font-mono text-neutral-400 themed-text-400 block">Spark Propagation Speed</span>
+                            <div class="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gold w-[74%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>ADVANCE RANGE:</span> <span>8° - 34° Advanced</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">VACUUM BALANCE</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Throttle Body Sync</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Aligning separate intake cylinders to prevent engine shaking at low-rev deceleration ranges.</p>
+                        
+                        <div class="bg-black/10 p-3 rounded-lg border border-white/5 font-mono text-[10px] space-y-1">
+                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Cylinder 1 Vacuum</span> <span class="text-gold">220 mmHg</span></div>
+                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Cylinder 2 Vacuum</span> <span class="text-gold">220 mmHg</span></div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>TOLERANCE DELTA:</span> <span>&lt; 2 mmHg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 3: Hydraulics -->
+            <div id="hydraulic-tab" class="stack-content grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-300 hidden">
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">FORK DYNAMICS</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Sag & Compression Tuning</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Altering internal spring pre-loads to align static suspension geometry with the rider's active gear weight.</p>
+                        
+                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Rider Preload</span> <span class="text-gold" id="sag-val">38mm</span></div>
+                            <input type="range" min="20" max="60" value="38" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('sag-val').innerText = this.value + 'mm'">
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>OPTIMUM SAG:</span> <span>30mm - 40mm</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">HYDRAULIC VALVE</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Fluid Rebound Rates</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Controls fork return speeds to prevent suspension bounce-back when leaned over corners.</p>
+                        
+                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                            <span class="text-[9px] font-mono text-neutral-400 themed-text-400 block">Damping Valve Speed</span>
+                            <div class="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gold w-[63%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>FLUID VISCOSITY:</span> <span>SAE 5W Premium</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">CALIPER PISTONS</span>
+                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Braking Hydraulic Seal</h4>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Aligning hydraulic pressure delivery parameters to prevent caliper dragging or sudden lever fading under extreme heat loads.</p>
+                        
+                        <div class="bg-black/10 p-3 rounded-lg border border-white/5 font-mono text-[10px] space-y-1">
+                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Lever Pressure</span> <span class="text-emerald-500">Perfect</span></div>
+                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Caliper Seals</span> <span class="text-gold">Checked</span></div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
+                        <span>BOILING TEMP LIMIT:</span> <span>310°C / 590°F</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE ENGINE & 3D WHEEL SIMULATOR -->
+    <section id="canvas-lab" class="relative py-32 px-4 bg-black z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">MECHANICAL SIMULATOR</span>
+                <h2 class="font-display text-4xl md:text-5xl font-black tracking-tight uppercase mb-6">PHYSICS OF MOTION</h2>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-8 font-light">
+                    The mechanical layout below simulates real-time crank displacement, piston movement, and magnetic rotor rotational cycles. Adjust the speed of combustion cycles via cursor movement over the simulator box to visualize cylinder pressure and stress.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 bg-dark-900 border border-white/5 p-4 rounded-xl">
+                        <div class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold font-mono text-xs">A</div>
+                        <div>
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-white">Cylinder Pressure Limit</h4>
+                            <p class="text-[10px] text-neutral-500">Maximum thermal stress is sustained through premium structural gaskets.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-dark-900 border border-white/5 p-4 rounded-xl">
+                        <div class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold font-mono text-xs">B</div>
+                        <div>
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-white">Rotational Equilibrium</h4>
+                            <p class="text-[10px] text-neutral-500">Unbalanced mass loads are neutralized using high-accuracy flywheel machining.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <div class="relative w-full max-w-[450px] aspect-square bg-[#080808] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col items-center justify-center p-6 group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-[40px]"></div>
+                    
+                    <canvas id="engine-canvas" width="400" height="400" class="w-full max-w-[350px] aspect-square relative z-10"></canvas>
+                    
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-mono tracking-[0.25em] text-neutral-500 bg-black/80 px-4 py-1.5 rounded-full border border-white/5">
+                        ACTIVE COMBUSTION FLUID DYNAMICS
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKSHOP GALLERY (BEFORE / AFTER COMPARISON SLIDER) - INTEGRATED RESTORATION PORTFOLIO -->
+    <section id="gallery" class="relative py-32 px-4 bg-dark-950 z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">METICULOUS RESTORATIONS</span>
+                <h2 class="font-display text-3xl md:text-5xl font-black tracking-tight uppercase">THE RESTORATION SUITE</h2>
+            </div>
+
+            <!-- Project Selector Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all">
+                    01 // YAMAHA RX 100
+                </button>
+                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all">
+                    02 // HERO SPLENDOR
+                </button>
+                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all">
+                    03 // BURAQ SPORT
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left dynamic text panel -->
+                <div class="lg:col-span-5 space-y-6" id="resto-text-container">
+                    <span id="resto-badge" class="px-3 py-1 border border-gold/30 bg-gold/5 text-gold text-[9px] tracking-widest rounded-full uppercase">Classic 2-Stroke Rebuild</span>
+                    <h3 id="resto-title" class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight text-white">Yamaha RX 100 Resto-Mod</h3>
+                    <p id="resto-desc" class="text-neutral-400 text-sm font-light leading-relaxed">
+                        A legendary machine rescued from complete engine seizure. Our team executed a full block re-bore, crank balancing, chrome electroplating, and paint restoration to bring back its signature 2-stroke crispness.
+                    </p>
+
+                    <div class="space-y-3 pt-4 border-t border-white/5 themed-border-color" id="resto-specs-list">
+                        <div class="flex items-center gap-3 text-xs text-neutral-300">
+                            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Full engine overhaul & crank blueprinting
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-neutral-300">
+                            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Custom split-spoke alloys with updated disc brakes
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-neutral-300">
+                            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Electroplated chrome exhausts and crash-guards
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Before/After Compare Slider Container -->
+                <div class="lg:col-span-7">
+                    <div id="slider-container" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl select-none">
+                        
+                        <!-- After Image / State -->
+                        <div id="slider-after-bg" class="absolute inset-0 bg-neutral-900 bg-cover bg-center flex flex-col items-center justify-center text-center p-8 transition-all duration-300" style="background-image: url('rx100-after.jpg');">
+                            <!-- Visual placeholder fallback if local image is absent -->
+                            <div class="fallback-placeholder absolute inset-0 bg-gradient-to-tr from-yellow-950 to-black pointer-events-none opacity-90 transition-opacity duration-300"></div>
+                            <span id="slider-after-label" class="font-display text-3xl md:text-5xl font-black tracking-widest text-gold opacity-90 z-10 relative">PREMIUM CHROME METALLIC</span>
+                            <p class="text-[10px] font-mono text-neutral-400 tracking-[0.3em] uppercase mt-2 z-10 relative">POST-CALIBRATION OPTIMUM</p>
+                        </div>
+
+                        <!-- Before Image / State (Clipped Overlay) -->
+                        <div id="before-overlay" class="absolute inset-y-0 left-0 overflow-hidden border-r-2 border-gold/60" style="width: 50%;">
+                            <div id="slider-before-bg" class="absolute inset-y-0 left-0 w-[800px] h-full bg-cover bg-center bg-neutral-950 flex flex-col items-center justify-center text-center p-8 transition-all duration-300" style="background-image: url('rx100-before.jpg'); width: 100vw;">
+                                <div class="fallback-placeholder absolute inset-0 bg-gradient-to-tr from-neutral-900 to-stone-950 pointer-events-none opacity-90 transition-opacity duration-300"></div>
+                                <span id="slider-before-label" class="font-display text-3xl md:text-5xl font-black tracking-widest text-neutral-600 z-10 relative">RAW STRIPPED CLASSIC</span>
+                                <p class="text-[10px] font-mono text-neutral-500 tracking-[0.3em] uppercase mt-2 z-10 relative">PRE-RESTORATION SCALE</p>
+                            </div>
+                        </div>
+
+                        <!-- Drag slider input -->
+                        <input type="range" min="0" max="100" value="50" id="slider-input" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20">
+
+                        <div class="absolute top-4 left-4 bg-black/80 border border-white/5 text-[9px] font-mono px-3 py-1 rounded-full text-neutral-400 pointer-events-none z-30">
+                            DRAG VERTICAL EDGE TO VIEW CLEARANCE DIFFERENTIAL
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHIEF FOUNDER SECTION -->
+    <section id="founder" class="relative py-32 px-4 bg-black z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-5">
+                <div class="aspect-[3/4] rounded-2xl bg-neutral-900 border border-white/10 overflow-hidden relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
+                    <div class="absolute inset-0 carbon-pattern opacity-10"></div>
+                    
+                    <div class="absolute bottom-6 left-6 z-20">
+                        <h4 class="font-display text-lg font-bold tracking-wide text-white">Aashaq Hussain Bhat</h4>
+                        <p class="text-[9px] text-gold uppercase tracking-[0.25em] font-mono mt-1">FOUNDER & MASTER TUNER</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-7 space-y-6">
+                <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block">THE MASTER CRAFTSMAN</span>
+                <h2 class="font-display text-3xl md:text-4xl font-black uppercase tracking-tight">CRAFTED FOR PEAK DURABILITY</h2>
+                <p class="text-neutral-400 text-sm font-light leading-relaxed">
+                    "We do not treat motorcycle mechanics as basic component swap jobs. For over a decade, my goal has been to ensure absolute precision. Our clients trust us because we verify tolerances down to a thousandth of an inch, ensuring their machine acts as a reliable partner on the asphalt."
+                </p>
+                
+                <div class="grid grid-cols-2 gap-6 pt-6 border-t border-white/5">
+                    <div>
+                        <h5 class="text-gold font-display font-bold text-lg">10+ Years</h5>
+                        <p class="text-[9px] text-neutral-500 uppercase tracking-widest mt-1">Operational Expertise</p>
+                    </div>
+                    <div>
+                        <h5 class="text-gold font-display font-bold text-lg">Fully Certified</h5>
+                        <p class="text-[9px] text-neutral-500 uppercase tracking-widest mt-1">High-Tolerance Mechanical Lab</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS (GLASS CARDS) -->
+    <section class="relative py-32 px-4 bg-[#0B0B0B] z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">TRUST ANALYSIS</span>
+                <h2 class="font-display text-3xl md:text-5xl font-black tracking-tight uppercase">THE RACER LOGS</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between">
+                    <p class="text-neutral-300 text-xs font-light leading-relaxed italic mb-8">
+                        "The throttle modulation on my Triumph Bonneville has reached surgical levels after their dyno and manifold re-balancing service."
+                    </p>
+                    <div>
+                        <h4 class="font-display font-bold text-gold text-sm tracking-wider">Sartaj Ahmad</h4>
+                        <p class="text-[9px] text-neutral-500 uppercase tracking-widest mt-1">Triumph Bonneville T120</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between">
+                    <p class="text-neutral-300 text-xs font-light leading-relaxed italic mb-8">
+                        "Aashaq's valve profiling on my desmo block engine was precise. You can hear the dynamic mechanical balance at high revs."
+                    </p>
+                    <div>
+                        <h4 class="font-display font-bold text-gold text-sm tracking-wider">Mohammad Yusuf</h4>
+                        <p class="text-[9px] text-neutral-500 uppercase tracking-widest mt-1">Ducati Monster SP</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between">
+                    <p class="text-neutral-300 text-xs font-light leading-relaxed italic mb-8">
+                        "Moto-Bhat simulated my estimated maintenance cost instantly. Excellent, frictionless, forward-thinking service workflow."
+                    </p>
+                    <div>
+                        <h4 class="font-display font-bold text-gold text-sm tracking-wider">Imran Bhat</h4>
+                        <p class="text-[9px] text-neutral-500 uppercase tracking-widest mt-1">KTM RC 390</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM INTEGRATIVE AI HOMEPAGE SECTION -->
+    <section class="relative py-32 px-4 bg-black z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-4xl mx-auto glass-panel p-6 md:p-12 rounded-3xl relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-[50px]"></div>
+
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+                <div class="w-16 h-16 rounded-2xl bg-gold/15 border border-gold/30 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-8 h-8 text-gold animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <span class="text-[9px] tracking-[0.3em] text-gold uppercase font-bold block mb-1">MOTO-BHAT SYSTEM ENGINE</span>
+                    <h3 class="font-display text-2xl md:text-3xl font-black uppercase text-white mb-2">INTELLIGENT DIAGNOSTIC ADVISOR</h3>
+                    <p class="text-neutral-400 text-xs font-light leading-relaxed">
+                        Access our proprietary assistant **Moto-Bhat**. Instantly diagnose erratic mechanical ticking noises, estimate specific torque spec repairs, or request express slots at the physical workshop site.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Instant Preset Questions -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                    ✦ Estimate Repair Cost
+                </button>
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                    ✦ WhatsApp Booking
+                </button>
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                    ✦ Location & Maps
+                </button>
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                    ✦ General Service Fees
+                </button>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-[9px] font-mono text-neutral-500">MOTO-BHAT DIAGNOSTIC ENGINE v2.4</span>
+                <button onclick="toggleMotoBhatConsole()" class="px-6 py-3 rounded-full bg-gold text-black text-[10px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase">
+                    START DIALOGUE CONSOLE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA PLATFORMS LINK CARD SYSTEM -->
+    <section class="relative py-24 px-4 bg-dark-950 z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-6xl mx-auto text-center">
+            <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">OUR DIGITAL GRID</span>
+            <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight mb-12">CONNECT WITH THE CHANNELS</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Instagram Card -->
+                <a href="https://www.instagram.com/aashaq_bike_point_villagam" target="_blank" rel="noopener noreferrer" class="bg-dark-900 border border-white/5 hover:border-gold/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors mb-4">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h4 class="font-display font-bold tracking-widest text-xs uppercase mb-1">Instagram</h4>
+                    <p class="text-[10px] text-neutral-500 font-mono flex items-center gap-1">@aashaq_bike_point_villagam <span>↗</span></p>
+                </a>
+
+                <!-- YouTube Card -->
+                <a href="https://youtube.com/@aashaqbikepoint" target="_blank" rel="noopener noreferrer" class="bg-dark-900 border border-white/5 hover:border-gold/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors mb-4">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h4 class="font-display font-bold tracking-widest text-xs uppercase mb-1">YouTube</h4>
+                    <p class="text-[10px] text-neutral-500 font-mono flex items-center gap-1">@aashaqbikepoint <span>↗</span></p>
+                </a>
+
+                <!-- Facebook Card -->
+                <a href="https://share.google/sfWdoUHd5DLgztnrU" target="_blank" rel="noopener noreferrer" class="bg-dark-900 border border-white/5 hover:border-gold/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors mb-4">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                    </div>
+                    <h4 class="font-display font-bold tracking-widest text-xs uppercase mb-1">Facebook</h4>
+                    <p class="text-[10px] text-neutral-500 font-mono flex items-center gap-1">Official Profile Page <span>↗</span></p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPOINTMENT RESERVATION REGISTRY -->
+    <section id="book" class="relative py-32 px-4 bg-[#080808] z-10 border-t border-white/5 transition-colors">
+        <div class="max-w-3xl mx-auto bg-black border border-white/5 p-6 md:p-12 rounded-3xl relative shadow-2xl">
+            <div class="text-center mb-12">
+                <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">RESERVATIONS REGISTRY</span>
+                <h2 class="font-display text-3xl font-black uppercase tracking-tight text-white">SCHEDULE WORKSHOP LAB TIME</h2>
+            </div>
+
+            <form onsubmit="handleRegistrationSubmit(event)" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Rider Name</label>
+                        <input type="text" required class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="e.g. Sartaj Ahmad">
+                    </div>
+                    <div>
+                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Contact Link</label>
+                        <input type="tel" required class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="e.g. +91 99065 84655">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Machine Model</label>
+                        <input type="text" required class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="e.g. Triumph Tiger 900">
+                    </div>
+                    <div>
+                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Target Calibration Range</label>
+                        <select class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all">
+                            <option>Desmodromic Valve Checkup</option>
+                            <option>Direct ECU Tuning & Map flash</option>
+                            <option>Complete Fork Oil Restructuring</option>
+                            <option>General Core Service Cycle</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Symptomatic Description / Notes</label>
+                    <textarea rows="4" class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="Please enter visual tracking details, erratic vibrations, or targets..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-xl bg-gold text-black text-[11px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase">
+                    SUBMIT TO QUEUE
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative py-16 bg-[#040404] border-t border-white/5 text-neutral-500 z-10 text-xs tracking-wider transition-colors">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 12 70 L 22 58 L 26 58 L 30 52 L 34 54 L 39 45 L 43 47 L 48 43 L 52 48 L 56 48 L 61 51 L 67 44 L 75 55 L 82 63 L 88 70 Z" fill="url(#gold-logo-grad)" />
+                    </svg>
+                    <h4 class="font-display font-extrabold text-white uppercase tracking-widest">Aashaq Bike Point</h4>
+                </div>
+                <p class="text-neutral-500 font-light leading-relaxed">
+                    Villagam, Handwara, Jammu & Kashmir.<br>
+                    High-end hardware adjustments, digital system calibrations, and general engine overhauls for premium machines.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="font-display font-extrabold text-white uppercase tracking-widest mb-4">Official Directories</h4>
+                <ul class="space-y-2">
+                    <li><a href="https://wa.me/919906584655" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">WhatsApp Service Desk</a></li>
+                    <li><a href="https://g.co/kgs/jH8xfRi" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Google Maps GPS coordinates</a></li>
+                    <li><span class="text-neutral-600">Operations: Mon - Sat (09:00 AM - 07:00 PM)</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-display font-extrabold text-white uppercase tracking-widest mb-4">LEGAL MATRIX</h4>
+                <p class="text-neutral-600 font-light leading-relaxed">
+                    Aashaq Bike Point is an independent engineering center. Manufacturer trademarks, models, and brand logos are ownership properties of their registered brands.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-neutral-600 text-[10px]">
+            <p>© 2026 AASHAQ BIKE POINT. ENGINEERING STANDARD METICULOUS.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition-colors">REGULATORY CODES</a>
+                <a href="#" class="hover:text-white transition-colors">OPERATION TERMS</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DUAL FLOATING ACTIONS CONTAINER: MOTO-BHAT & WHATSAPP WIDGETS -->
+    <div class="fixed bottom-6 right-6 z-[80] flex flex-col items-end gap-3">
+        
+        <!-- Floating WhatsApp Contact button [10] -->
+        <a href="https://wa.me/919906584655" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 group">
+            <div class="hidden md:block bg-dark-900 border border-emerald-500/30 px-3 py-1.5 rounded-2xl text-[10px] text-emerald-400 font-mono shadow-2xl tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                CHAT VIA WHATSAPP
+            </div>
+            <button class="w-14 h-14 rounded-full bg-gradient-to-tr from-black to-dark-900 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 shadow-2xl hover:scale-105 transition-all relative">
+                <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-black animate-ping"></span>
+                <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-black"></span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
+            </button>
+        </a>
+
+        <!-- Floating Moto-Bhat Button -->
+        <div class="flex items-center gap-2 group">
+            <div class="hidden md:block bg-dark-900 border border-gold/30 px-3 py-1.5 rounded-2xl text-[10px] text-gold font-mono shadow-2xl tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                ✦ OPEN MOTO-BHAT SYSTEM
+            </div>
+            <button onclick="toggleMotoBhatConsole()" class="w-16 h-16 rounded-full bg-gradient-to-tr from-black to-dark-900 border-2 border-gold flex items-center justify-center text-gold shadow-2xl hover:scale-105 transition-all">
+                <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- MOTO-BHAT CHATBASE DIALOGUE MODAL CONSOLE -->
+    <div id="motobhat-console" class="fixed inset-0 bg-black/95 z-[9999] hidden flex-col items-center justify-center p-4 backdrop-blur-md transition-all">
+        <div class="w-full max-w-4xl bg-dark-950 border border-gold/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col h-[90vh]">
+            
+            <!-- Modal Header bar -->
+            <div class="px-6 py-5 border-b border-white/5 bg-dark-900 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <svg class="w-8 h-8 filter drop-shadow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 12 70 L 22 58 L 26 58 L 30 52 L 34 54 L 39 45 L 43 47 L 48 43 L 52 48 L 56 48 L 61 51 L 67 44 L 75 55 L 82 63 L 88 70 Z" fill="url(#gold-logo-grad)" />
+                    </svg>
+                    <div>
+                        <h4 class="font-display font-extrabold uppercase tracking-widest text-white text-sm">Moto-Bhat Console</h4>
+                        <span class="text-[9px] text-gold font-mono tracking-widest block uppercase">Autonomous AI Workshop Advisor</span>
+                    </div>
+                </div>
+
+                <button onclick="toggleMotoBhatConsole()" class="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 hover:text-white transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Inside Grid layout split -->
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+                <!-- Left panel specs (Hidden on mobile) -->
+                <div class="lg:col-span-4 bg-dark-900 p-6 border-r border-white/5 overflow-y-auto hidden lg:block space-y-6">
+                    <div>
+                        <h5 class="text-[9px] tracking-[0.25em] text-neutral-500 uppercase font-bold mb-3">Instant Action Links</h5>
+                        <div class="space-y-2">
+                            <a href="https://wa.me/919906584655" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl bg-black border border-white/5 hover:border-emerald-500/30 text-[11px] text-neutral-300 transition-colors">
+                                WhatsApp Direct <span>→</span>
+                            </a>
+                            <a href="https://g.co/kgs/jH8xfRi" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-xl bg-black border border-white/5 hover:border-red-500/30 text-[11px] text-neutral-300 transition-colors">
+                                Maps Location <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="text-[9px] tracking-[0.25em] text-neutral-500 uppercase font-bold mb-3">AI Welcome Guideline</h5>
+                        <p class="text-[10px] text-neutral-400 leading-relaxed font-light">
+                            "👋 Assalamu Alaikum! I'm Moto-Bhat, your AI motorcycle assistant. I can help you book services, estimate repair costs, recommend maintenance, explain bike problems, and answer questions about Aashaq Bike Point."
+                        </p>
+                    </div>
+
+                    <div>
+                        <h5 class="text-[9px] tracking-[0.25em] text-neutral-500 uppercase font-bold mb-3">Sample Queries</h5>
+                        <ul class="space-y-2 text-[10px] text-neutral-400 font-light">
+                            <li>• "What is desmodromic valve setup?"</li>
+                            <li>• "Help me calculate tuning costs."</li>
+                            <li>• "What oils do you recommend for superbike units?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Chatbase Integration Frame -->
+                <div class="lg:col-span-8 bg-black flex flex-col relative h-full">
+                    <iframe 
+                        src="https://www.chatbase.co/chatbot-iframe/_D9Lr-gjC6jUo1fwGcAIi" 
+                        title="Moto-Bhat Digital Engine Advisor"
+                        width="100%" 
+                        height="100%" 
+                        class="flex-1 border-none bg-black"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT LOGIC BLOCK -->
+    <script>
+        // --- DUAL MODE THEME SWITCHER ENGINE ---
+        let currentTheme = 'dark';
+        function toggleThemeMode() {
+            const body = document.body;
+            const sunIcon = document.getElementById('theme-sun-icon');
+            const moonIcon = document.getElementById('theme-moon-icon');
+
+            if (currentTheme === 'dark') {
+                body.classList.add('theme-light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                currentTheme = 'light';
+            } else {
+                body.classList.remove('theme-light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                currentTheme = 'dark';
+            }
+        }
+
+        // --- RESTORATION DATABASE GRID MATRIX ---
+        const restorationProjects = {
+            rx100: {
+                title: "Yamaha RX 100 Restoration",
+                subtitle: "Classic 2-Stroke Rebuilt",
+                desc: "A legendary classic completely restored from an engine-seizure state. Features a full engine block re-bore, crankshaft balancing, original metallic wine-red paint detailing, custom alloy conversions, and heavy-duty chrome plating.",
+                specs: [
+                    "Full engine overhaul & crankshaft balancing",
+                    "Custom split-spoke alloys with updated disc brakes",
+                    "Electroplated chrome exhausts and crash-guards"
+                ],
+                beforeImg: "rx100-before.jpg",
+                afterImg: "rx100-after.jpg",
+                beforeText: "RAW WEATHERED CLASSIC",
+                afterText: "PRISTINE CHROMATIC MAROON"
+            },
+            splendor: {
+                title: "Hero Splendor Café-Racer Mod",
+                subtitle: "Commuter to Tracker Conversion",
+                desc: "Converting a weathered commuter skeleton into a sleek, aggressive custom scrambler tracker. Features a hand-brushed silver fuel cell tank, specialized subframe loop welding, low-profile performance tyres, and optimized gas shocks.",
+                specs: [
+                    "Custom fabricated rear frame loop and tuck-roll seat",
+                    "Brushed steel fuel tank with multi-coat ceramic sealer",
+                    "Upgraded rear suspension coils & performance intake exhaust"
+                ],
+                beforeImg: "splendor-before.jpg",
+                afterImg: "splendor-after.jpg",
+                beforeText: "WEATHERED DAILY COMMUTER",
+                afterText: "BRUSHED METALLIC TRACKER"
+            },
+            buraq: {
+                title: "Buraq Custom Sport-Build",
+                subtitle: "Structural Frame Alignment & Restructure",
+                desc: "A ground-up custom sport-commuter conversion. This project, named 'Buraq', received a complete laser frame alignment, custom red-silver-black graphics layout, red performance shock coils, and protective lower aerodynamic belly-pan shield.",
+                specs: [
+                    "Laser chassis frame alignment & welding structural upgrade",
+                    "Custom sporty red-silver-black paint finish",
+                    "Aerodynamic lower belly pan & shock performance tuning"
+                ],
+                beforeImg: "buraq-before.jpg",
+                afterImg: "buraq-after.jpg",
+                beforeText: "STRIPPED CHASSIS FRAME",
+                afterText: "AGGRESSIVE SPORT BURAQ"
+            }
+        };
+
+        function updateRestorationProject(projectId) {
+            const data = restorationProjects[projectId];
+            
+            // Text values cross-fade
+            gsap.to("#resto-text-container", {
+                opacity: 0,
+                y: -10,
+                duration: 0.3,
+                onComplete: () => {
+                    document.getElementById('resto-badge').innerText = data.subtitle;
+                    document.getElementById('resto-title').innerText = data.title;
+                    document.getElementById('resto-desc').innerText = data.desc;
+                    
+                    const specsList = document.getElementById('resto-specs-list');
+                    specsList.innerHTML = '';
+                    data.specs.forEach(spec => {
+                        const div = document.createElement('div');
+                        div.className = "flex items-center gap-3 text-xs text-neutral-300";
+                        div.innerHTML = `<span class="w-1.5 h-1.5 bg-gold rounded-full"></span> ${spec}`;
+                        specsList.appendChild(div);
+                    });
+                    
+                    gsap.to("#resto-text-container", { opacity: 1, y: 0, duration: 0.4 });
+                }
+            });
+
+            // Update Image paths and fallback labels
+            const afterBg = document.getElementById('slider-after-bg');
+            const beforeBg = document.getElementById('slider-before-bg');
+            const afterLabel = document.getElementById('slider-after-label');
+            const beforeLabel = document.getElementById('slider-before-label');
+
+            afterBg.style.backgroundImage = `url('${data.afterImg}')`;
+            beforeBg.style.backgroundImage = `url('${data.beforeImg}')`;
+            
+            afterLabel.innerText = data.afterText;
+            beforeLabel.innerText = data.beforeText;
+
+            // Reset tab highlights
+            const keys = ['rx100', 'splendor', 'buraq'];
+            keys.forEach(k => {
+                const btn = document.getElementById(`tab-${k}`);
+                if (k === projectId) {
+                    btn.className = "px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all";
+                } else {
+                    btn.className = "px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all";
+                }
+            });
+        }
+
+        // --- SYNTHESIZED ENGINE AUDIO MATRIX (WEB AUDIO API) ---
+        let audioCtx = null;
+        let pistonOsc = null;
+        let mechanicalOsc = null;
+        let exhaustLFO = null;
+        let mainVolume = null;
+        let isEngineRunning = false;
+
+        function enableSynthesizedAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            document.getElementById('loader-status').innerText = "AUDIO SYSTEM: ENGAGED";
+        }
+
+        function startEngineSynth() {
+            if (!audioCtx) return;
+            if (isEngineRunning) return;
+
+            pistonOsc = audioCtx.createOscillator();
+            pistonOsc.type = 'sawtooth';
+            pistonOsc.frequency.setValueAtTime(36, audioCtx.currentTime); 
+
+            mechanicalOsc = audioCtx.createOscillator();
+            mechanicalOsc.type = 'triangle';
+            mechanicalOsc.frequency.setValueAtTime(72, audioCtx.currentTime);
+
+            exhaustLFO = audioCtx.createOscillator();
+            exhaustLFO.type = 'square';
+            exhaustLFO.frequency.setValueAtTime(6.8, audioCtx.currentTime); 
+
+            const lfoGain = audioCtx.createGain();
+            lfoGain.gain.setValueAtTime(14, audioCtx.currentTime);
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(180, audioCtx.currentTime); 
+            filter.Q.setValueAtTime(5, audioCtx.currentTime);
+
+            mainVolume = audioCtx.createGain();
+            mainVolume.gain.setValueAtTime(0.0, audioCtx.currentTime); 
+
+            exhaustLFO.connect(lfoGain);
+            lfoGain.connect(pistonOsc.frequency);
+            
+            pistonOsc.connect(filter);
+            mechanicalOsc.connect(filter);
+            filter.connect(mainVolume);
+            mainVolume.connect(audioCtx.destination);
+
+            pistonOsc.start();
+            mechanicalOsc.start();
+            exhaustLFO.start();
+
+            mainVolume.gain.linearRampToValueAtTime(0.55, audioCtx.currentTime + 1.2);
+            isEngineRunning = true;
+
+            document.getElementById('mute-icon').classList.add('hidden');
+            document.getElementById('play-icon').classList.remove('hidden');
+        }
+
+        function stopEngineSynth() {
+            if (!isEngineRunning || !mainVolume) return;
+            mainVolume.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.5);
+            setTimeout(() => {
+                try {
+                    pistonOsc.stop();
+                    mechanicalOsc.stop();
+                    exhaustLFO.stop();
+                } catch(e) {}
+                isEngineRunning = false;
+            }, 600);
+
+            document.getElementById('mute-icon').classList.remove('hidden');
+            document.getElementById('play-icon').classList.add('hidden');
+        }
+
+        function toggleEngineSynth() {
+            if (!audioCtx) {
+                enableSynthesizedAudio();
+            }
+            if (isEngineRunning) {
+                stopEngineSynth();
+            } else {
+                startEngineSynth();
+            }
+        }
+
+        // --- FLUID GOLD FLOW-FIELD ANIMATION (BACKGROUND CANVAS) ---
+        const bgCanvas = document.getElementById('bg-fluid-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let bgWidth = bgCanvas.width = window.innerWidth;
+        let bgHeight = bgCanvas.height = window.innerHeight;
+
+        let mousePos = { x: bgWidth / 2, y: bgHeight / 2 };
+        window.addEventListener('mousemove', (e) => {
+            mousePos.x = e.clientX;
+            mousePos.y = e.clientY;
+        });
+
+        window.addEventListener('resize', () => {
+            bgWidth = bgCanvas.width = window.innerWidth;
+            bgHeight = bgCanvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * bgWidth;
+                this.y = bgHeight + Math.random() * 100; 
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedY = -(Math.random() * 1.2 + 0.4);
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.alpha = Math.random() * 0.6 + 0.1;
+                this.angle = Math.random() * Math.PI * 2;
+                this.angleSpeed = Math.random() * 0.02 - 0.01;
+                this.hue = 45; 
+            }
+            update() {
+                this.y += this.speedY;
+                this.angle += this.angleSpeed;
+                this.x += this.speedX + Math.sin(this.angle) * 0.3;
+
+                const dx = mousePos.x - this.x;
+                const dy = mousePos.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 250) {
+                    this.x += (dx / distance) * 0.4;
+                    this.y += (dy / distance) * 0.2;
+                }
+
+                if (this.y < -20 || this.x < -20 || this.x > bgWidth + 20) {
+                    this.reset();
+                }
+            }
+            draw() {
+                bgCtx.save();
+                bgCtx.globalAlpha = this.alpha;
+                bgCtx.fillStyle = `hsla(${this.hue}, 70%, 55%, ${this.alpha})`;
+                bgCtx.shadowBlur = this.size * 3;
+                bgCtx.shadowColor = '#D4AF37';
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bgCtx.fill();
+                bgCtx.restore();
+            }
+        }
+
+        const particleStack = [];
+        const maxParticles = 95; 
+        for (let i = 0; i < maxParticles; i++) {
+            particleStack.push(new Particle());
+        }
+
+        function drawFluidAnimation() {
+            const fillStyleStr = getComputedStyle(document.body).getPropertyValue('--smoke-clear').trim();
+            bgCtx.fillStyle = fillStyleStr || 'rgba(5, 5, 5, 0.12)';
+            bgCtx.fillRect(0, 0, bgWidth, bgHeight);
+
+            particleStack.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(drawFluidAnimation);
+        }
+        drawFluidAnimation();
+
+        // --- LUXURY LOADER SYSTEM SIMULATION ---
+        let currentProgress = 0;
+        const loaderInterval = setInterval(() => {
+            currentProgress += Math.floor(Math.random() * 8) + 3;
+            if (currentProgress >= 100) {
+                currentProgress = 100;
+                clearInterval(loaderInterval);
+                setTimeout(() => {
+                    gsap.to("#loader", {
+                        opacity: 0,
+                        duration: 1,
+                        ease: "power3.inOut",
+                        onComplete: () => {
+                            document.getElementById('loader').style.display = 'none';
+                            initScrollPhysics();
+                            initScrollAnimations();
+                        }
+                    });
+                }, 800);
+            }
+            document.getElementById('loader-progress').style.width = currentProgress + '%';
+            document.getElementById('loader-status').innerText = "SYSTEM SYNAPSE: " + currentProgress + "%";
+        }, 80);
+
+        // --- CUSTOM MAGNETIC CURSOR MOVEMENT ---
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const hoverTargets = document.querySelectorAll('a, button, select, input, textarea');
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => {
+                cursor.children[0].classList.add('scale-150', 'border-white');
+            });
+            target.addEventListener('mouseleave', () => {
+                cursor.children[0].classList.remove('scale-150', 'border-white');
+            });
+        });
+
+        // --- INTERACTIVE MECHANICAL STACK TAB SYSTEM ---
+        function switchStackTab(tabId) {
+            const stackContents = document.querySelectorAll('.stack-content');
+            stackContents.forEach(content => {
+                content.classList.add('hidden');
+                content.style.opacity = 0;
+            });
+
+            const buttons = [
+                document.getElementById('btn-engine-tab'),
+                document.getElementById('btn-electronics-tab'),
+                document.getElementById('btn-hydraulic-tab')
+            ];
+            buttons.forEach(btn => {
+                btn.className = "px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400";
+            });
+
+            const activeTab = document.getElementById(tabId);
+            const activeBtn = document.getElementById('btn-' + tabId);
+
+            activeTab.classList.remove('hidden');
+            activeBtn.className = "px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all";
+            
+            gsap.fromTo(activeTab, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+        }
+
+        // --- MOTO-BHAT SYSTEM DIALOGUE TOGGLE ---
+        function toggleMotoBhatConsole() {
+            const consoleBox = document.getElementById('motobhat-console');
+            if (consoleBox.classList.contains('hidden')) {
+                consoleBox.classList.remove('hidden');
+                consoleBox.classList.add('flex');
+                gsap.fromTo("#motobhat-console > div", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" });
+            } else {
+                gsap.to("#motobhat-console > div", { 
+                    scale: 0.9, 
+                    opacity: 0, 
+                    duration: 0.3, 
+                    onComplete: () => {
+                        consoleBox.classList.remove('flex');
+                        consoleBox.classList.add('hidden');
+                    } 
+                });
+            }
+        }
+
+        // --- BEFORE / AFTER COMPARE SLIDER LOGIC ---
+        const sliderInput = document.getElementById('slider-input');
+        const beforeOverlay = document.getElementById('before-overlay');
+        sliderInput.addEventListener('input', (e) => {
+            const percentage = e.target.value;
+            beforeOverlay.style.width = percentage + '%';
+        });
+
+        // --- INTERACTIVE MECHANICAL CANVAS ---
+        const canvas = document.getElementById('engine-canvas');
+        const ctx = canvas.getContext('2d');
+        let angle = 0;
+        let baseFrequencySpeed = 0.015;
+
+        let targetSpeed = 0.015;
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            targetSpeed = 0.005 + (x / rect.width) * 0.055;
+        });
+        canvas.addEventListener('mouseleave', () => {
+            targetSpeed = 0.015;
+        });
+
+        function drawSimulator() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            baseFrequencySpeed += (targetSpeed - baseFrequencySpeed) * 0.1;
+
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.06)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 110, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(angle);
+
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.25)";
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(0, 0, 90, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+            ctx.lineWidth = 1.5;
+            for (let i = 0; i < 8; i++) {
+                ctx.rotate(Math.PI / 4);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(0, -85);
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            const pistonDisplacement = centerY + Math.sin(angle * 2.2) * 28 - 25;
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.3)";
+            ctx.fillStyle = "rgba(10, 10, 10, 0.9)";
+            ctx.lineWidth = 1.5;
+
+            ctx.strokeRect(centerX - 30, centerY - 100, 60, 90);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX, pistonDisplacement + 20);
+            ctx.stroke();
+
+            ctx.fillRect(centerX - 25, pistonDisplacement, 50, 25);
+            ctx.strokeRect(centerX - 25, pistonDisplacement, 50, 25);
+
+            if (Math.sin(angle * 2.2) > 0.95) {
+                ctx.fillStyle = "#D4AF37";
+                ctx.beginPath();
+                ctx.arc(centerX, centerY - 105, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            angle += baseFrequencySpeed;
+            requestAnimationFrame(drawSimulator);
+        }
+        drawSimulator();
+
+        // --- SUBMIT SERVICE BOOKING QUEUE ---
+        function handleRegistrationSubmit(event) {
+            event.preventDefault();
+            alert("APPOINTMENT RECORD REGISTERED. Moto-Bhat digital system is organizing a priority response slot queue.");
+            event.target.reset();
+        }
+
+        // --- LENIS SMOOTH SCROLL INTEGRATION ---
+        function initScrollPhysics() {
+            const lenis = new Lenis({
+                duration: 1.4,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smoothWheel: true
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        }
+
+        // --- GSAP SCROLL REVEAL ANIMATIONS ---
+        function initScrollAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.from(".glass-panel", {
+                scrollTrigger: {
+                    trigger: "#services",
+                    start: "top 75%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+
+            gsap.from(".stat-box h3", {
+                scrollTrigger: {
+                    trigger: "#stat-1",
+                    start: "top 90%",
+                },
+                opacity: 0,
+                y: 20,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        }
+    </script>
+</body>
+  </html>
