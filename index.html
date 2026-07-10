@@ -14,7 +14,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=300;400;500;600;700&family=Inter:wght=200;300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -90,6 +90,27 @@
         .themed-text-100 { color: var(--text-100); }
         .themed-text-400 { color: var(--text-400); }
 
+        /* Form Contrast & Theme Integration Class */
+        .themed-input {
+            background-color: var(--bg-800) !important;
+            color: var(--text-100) !important;
+            border: 1px solid var(--border-color) !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .themed-input:focus {
+            border-color: var(--border-hard) !important;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.15) !important;
+            outline: none !important;
+        }
+        .themed-input::placeholder {
+            color: var(--text-500) !important;
+            opacity: 0.8;
+        }
+        select.themed-input option {
+            background-color: var(--bg-900-solid) !important;
+            color: var(--text-100) !important;
+        }
+
         /* Custom Premium Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -122,12 +143,17 @@
             border: 1px solid var(--border-color);
         }
 
+        /* Form Visual Indicator Styles */
+        .interactive-input:focus ~ .input-border-indicator {
+            width: 100%;
+        }
+
         /* Prevent default cursor on desktop to support the magnetic custom cursor */
         @media (min-width: 768px) {
             body {
                 cursor: none;
             }
-            a, button, select, input, textarea {
+            a, button, select, input, textarea, .service-option-card {
                 cursor: none;
             }
         }
@@ -224,10 +250,14 @@
             <a href="#canvas-lab" class="hover:text-white transition-colors">3D LAB</a>
             <a href="#gallery" class="hover:text-white transition-colors">GALLERY</a>
             <a href="#founder" class="hover:text-white transition-colors">FOUNDER</a>
-            <button onclick="toggleMotoBhatConsole()" class="hover:text-white transition-colors text-gold flex items-center gap-1.5">
-                ASK MOTO-BHAT 
-                <svg class="w-3.5 h-3.5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <button onclick="toggleMotoBhatConsole()" class="hover:text-white transition-colors text-gold flex items-center gap-1.5 font-bold">
+                MOTO-BHAT AI 
+                <span class="w-1.5 h-1.5 bg-gold rounded-full animate-ping"></span>
             </button>
+            <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors text-emerald-400 font-bold flex items-center gap-1.5">
+                TMR RIDE PORTAL
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
         </nav>
 
         <!-- Right Header Action Clusters (Includes Light Switcher and Sound Controller to prevent overlap) -->
@@ -273,13 +303,20 @@
                 We handle premium motorcycle restoration, complete Desmo valve rebuilding, precise ECU custom re-mapping, and high-tolerance chassis setups with absolute mechanical transparency.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md">
-                <a href="#book" class="px-8 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-widest hover:bg-gold hover:text-black transition-all duration-300 uppercase shadow-md">
+            <!-- TMR INTEGRATED HERO COMMAND CENTER BUTTON CLUSTERS (Location 1) -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-3xl">
+                <a href="#book" class="px-6 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-widest hover:bg-gold hover:text-black transition-all duration-300 uppercase shadow-md flex items-center justify-center">
                     Schedule Tuning
                 </a>
-                <button onclick="toggleMotoBhatConsole()" class="px-8 py-4 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md text-white font-semibold text-xs tracking-widest hover:border-gold transition-all duration-300 uppercase flex items-center justify-center gap-2">
+                <button onclick="toggleMotoBhatConsole()" class="px-6 py-4 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md text-gold font-semibold text-xs tracking-widest hover:border-gold transition-all duration-300 uppercase flex items-center justify-center gap-2">
                     Consult Moto-Bhat <span class="w-1.5 h-1.5 bg-gold rounded-full animate-ping"></span>
                 </button>
+                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-full border border-emerald-500/40 bg-emerald-950/20 backdrop-blur-md text-emerald-400 font-semibold text-xs tracking-widest hover:border-emerald-400 hover:text-white transition-all duration-300 uppercase flex items-center justify-center gap-2 group">
+                    TMR Ride Portal 
+                    <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
             </div>
         </div>
 
@@ -509,28 +546,28 @@
     </section>
 
     <!-- INTERACTIVE ENGINE & 3D WHEEL SIMULATOR -->
-    <section id="canvas-lab" class="relative py-32 px-4 bg-black z-10 border-t border-white/5 transition-colors">
+    <section class="relative py-32 px-4 bg-black z-10 border-t border-white/5 transition-colors">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
                 <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">MECHANICAL SIMULATOR</span>
                 <h2 class="font-display text-4xl md:text-5xl font-black tracking-tight uppercase mb-6">PHYSICS OF MOTION</h2>
                 <p class="text-neutral-400 text-sm leading-relaxed mb-8 font-light">
-                    The mechanical layout below simulates real-time crank displacement, piston movement, and magnetic rotor rotational cycles. Adjust the speed of combustion cycles via cursor movement over the simulator box to visualize cylinder pressure and stress.
+                    This interactive simulator mimics high-fidelity 4-stroke overhead valve combustion. Observe synchronous valve clearance, high-voltage spark arcing, and expanding thermodynamic flame fronts. Adjust speed using your cursor over the lab.
                 </p>
 
                 <div class="space-y-4">
                     <div class="flex items-center gap-4 bg-dark-900 border border-white/5 p-4 rounded-xl">
                         <div class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold font-mono text-xs">A</div>
                         <div>
-                            <h4 class="text-xs uppercase tracking-widest font-bold text-white">Cylinder Pressure Limit</h4>
-                            <p class="text-[10px] text-neutral-500">Maximum thermal stress is sustained through premium structural gaskets.</p>
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-white">4-Stroke Timing Sequence</h4>
+                            <p class="text-[10px] text-neutral-500">Perfect alignment between the crankshaft balance lobes and dual camshaft springs.</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-4 bg-dark-900 border border-white/5 p-4 rounded-xl">
                         <div class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold font-mono text-xs">B</div>
                         <div>
-                            <h4 class="text-xs uppercase tracking-widest font-bold text-white">Rotational Equilibrium</h4>
-                            <p class="text-[10px] text-neutral-500">Unbalanced mass loads are neutralized using high-accuracy flywheel machining.</p>
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-white">Ignition Flame Propagation</h4>
+                            <p class="text-[10px] text-neutral-500">A high-voltage spark fires at 360° top dead center, pushing the piston downwards rapidly.</p>
                         </div>
                     </div>
                 </div>
@@ -543,32 +580,57 @@
                     <canvas id="engine-canvas" width="400" height="400" class="w-full max-w-[350px] aspect-square relative z-10"></canvas>
                     
                     <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-mono tracking-[0.25em] text-neutral-500 bg-black/80 px-4 py-1.5 rounded-full border border-white/5">
-                        ACTIVE COMBUSTION FLUID DYNAMICS
+                        ACTIVE FOUR-STROKE SIMULATION
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WORKSHOP GALLERY (BEFORE / AFTER COMPARISON SLIDER - Clean Layout, Unobstructed Images) -->
+    <!-- WORKSHOP GALLERY (BEFORE / AFTER COMPARISON SLIDER) -->
     <section id="gallery" class="relative py-32 px-4 bg-dark-950 z-10 border-t border-white/5 transition-colors">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-10">
                 <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">METICULOUS RESTORATIONS</span>
-                <h2 class="font-display text-3xl md:text-5xl font-black tracking-tight uppercase">THE RESTORATION SUITE</h2>
+                <h2 class="font-display text-3xl md:text-5xl font-black tracking-tight uppercase themed-text-100">THE RESTORATION SUITE</h2>
             </div>
 
-            <!-- Project Selector Tabs -->
-            <div class="flex flex-wrap justify-center gap-2 mb-12">
-                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all">
-                    01 // YAMAHA RX 100
+            <!-- Highly visible, highly intuitive Segmented Card Selector grid [10] -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 max-w-4xl mx-auto">
+                
+                <!-- Card 01 - Yamaha RX 100 Tab -->
+                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="group relative text-left p-4 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-24 active-tab shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-[9px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 01</span>
+                        <span class="text-[8px] font-mono tracking-widest text-gold group-[.active-tab]:text-black bg-gold/10 group-[.active-tab]:bg-black/10 px-2.5 py-0.5 rounded-full uppercase font-bold">2-Stroke Overhaul</span>
+                    </div>
+                    <div class="relative z-10 mt-2">
+                        <h4 class="font-display font-black text-sm text-white group-[.active-tab]:text-black uppercase tracking-wider">YAMAHA RX 100</h4>
+                    </div>
                 </button>
-                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all">
-                    02 // HERO SPLENDOR
+
+                <!-- Card 02 - Hero Splendor Tab -->
+                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="group relative text-left p-4 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-24">
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-[9px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 02</span>
+                        <span class="text-[8px] font-mono tracking-widest text-gold group-[.active-tab]:text-black bg-gold/10 group-[.active-tab]:bg-black/10 px-2.5 py-0.5 rounded-full uppercase font-bold">Commuter Tracker</span>
+                    </div>
+                    <div class="relative z-10 mt-2">
+                        <h4 class="font-display font-black text-sm text-white group-[.active-tab]:text-black uppercase tracking-wider">HERO SPLENDOR</h4>
+                    </div>
                 </button>
-                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all">
-                    03 // BURAQ SPORT
+
+                <!-- Card 03 - Buraq Tab -->
+                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="group relative text-left p-4 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-24">
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-[9px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 03</span>
+                        <span class="text-[8px] font-mono tracking-widest text-gold group-[.active-tab]:text-black bg-gold/10 group-[.active-tab]:bg-black/10 px-2.5 py-0.5 rounded-full uppercase font-bold">Sport Alignment</span>
+                    </div>
+                    <div class="relative z-10 mt-2">
+                        <h4 class="font-display font-black text-sm text-white group-[.active-tab]:text-black uppercase tracking-wider">BURAQ SPORT</h4>
+                    </div>
                 </button>
+
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -715,8 +777,19 @@
             <div class="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-[50px]"></div>
 
             <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
-                <div class="w-16 h-16 rounded-2xl bg-gold/15 border border-gold/30 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-8 h-8 text-gold animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <!-- Glowing Unique Custom Aesthetic Button for AI MotoBhat [10] -->
+                <div class="relative flex-shrink-0">
+                    <button onclick="toggleMotoBhatConsole()" class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-black via-neutral-900 to-[#121212] border-2 border-gold flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.75)] hover:scale-105 transition-all duration-300 overflow-hidden">
+                        <svg class="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] opacity-60" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="42" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="14 10" fill="none"></circle>
+                            <circle cx="50" cy="50" r="34" stroke="#AA7C11" stroke-width="1" stroke-dasharray="6 6" fill="none"></circle>
+                        </svg>
+                        <div class="absolute w-10 h-10 rounded-full bg-gold/10 border border-gold/30 animate-[ping_2s_infinite] pointer-events-none"></div>
+                        <svg class="w-6 h-6 text-gold relative z-10 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </button>
+                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-gold rounded-full animate-ping"></span>
                 </div>
                 <div>
                     <span class="text-[9px] tracking-[0.3em] text-gold uppercase font-bold block mb-1">MOTO-BHAT SYSTEM ENGINE</span>
@@ -745,95 +818,441 @@
 
             <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <span class="text-[9px] font-mono text-neutral-500">MOTO-BHAT DIAGNOSTIC ENGINE v2.4</span>
-                <button onclick="toggleMotoBhatConsole()" class="px-6 py-3 rounded-full bg-gold text-black text-[10px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase">
-                    START DIALOGUE CONSOLE
+                <button onclick="toggleMotoBhatConsole()" class="px-6 py-3 rounded-full bg-gold text-black text-[10px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase font-mono">
+                    START DIALOGUE CONSOLE ⚡
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- SOCIAL MEDIA PLATFORMS LINK CARD SYSTEM -->
+    <!-- SOCIAL MEDIA PLATFORMS LINK CARD SYSTEM & MOST RECENT POST PREVIEWS -->
     <section class="relative py-24 px-4 bg-dark-950 z-10 border-t border-white/5 transition-colors">
-        <div class="max-w-6xl mx-auto text-center">
-            <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">OUR DIGITAL GRID</span>
-            <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight mb-12">CONNECT WITH THE CHANNELS</h2>
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">OUR DIGITAL GRID</span>
+                <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight">CONNECT WITH THE CHANNELS</h2>
+            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <!-- Instagram Card -->
-                <a href="https://www.instagram.com/aashaq_bike_point_villagam" target="_blank" rel="noopener noreferrer" class="bg-dark-900 border border-white/5 hover:border-gold/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors mb-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <!-- Highly Aesthetic grid integrating official links and detailed visual post previews [10] -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Instagram Channel Card & Recent Post -->
+                <div class="bg-dark-900 border border-white/5 p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:border-gold/40 relative overflow-hidden group">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold tracking-wider text-xs uppercase text-white">Instagram</h4>
+                                <span class="text-[8px] text-neutral-500 font-mono">@aashaq_bike_point</span>
+                            </div>
+                        </div>
+                        <a href="https://www.instagram.com/aashaq_bike_point_villagam" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1">
+                            Link <span>↗</span>
+                        </a>
                     </div>
-                    <h4 class="font-display font-bold tracking-widest text-xs uppercase mb-1">Instagram</h4>
-                    <p class="text-[10px] text-neutral-500 font-mono flex items-center gap-1">@aashaq_bike_point_villagam <span>↗</span></p>
-                </a>
 
-                <!-- YouTube Card -->
-                <a href="https://youtube.com/@aashaqbikepoint" target="_blank" rel="noopener noreferrer" class="bg-dark-900 border border-white/5 hover:border-gold/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors mb-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <!-- Visual Instagram Post Preview -->
+                    <div class="rounded-xl overflow-hidden border border-white/10 bg-black/60 p-2.5 space-y-3 relative group/post cursor-pointer">
+                        <div class="aspect-video w-full rounded-lg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=400" alt="Instagram Post Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover/post:scale-105">
+                            <span class="absolute top-2 left-2 bg-black/80 text-gold text-[7px] font-mono tracking-widest px-2 py-0.5 rounded-full">LATEST PHOTO</span>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="text-[10px] text-neutral-400 font-light leading-relaxed line-clamp-2">
+                                "Crankshaft balanced down to 0.01mm. This original metallic wine-red rebuild screams like new..."
+                            </p>
+                            <div class="flex justify-between items-center text-[8px] text-neutral-600 font-mono pt-1">
+                                <span>❤️ 412 Likes</span>
+                                <span>3 Days Ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="font-display font-bold tracking-widest text-xs uppercase mb-1">YouTube</h4>
-                    <p class="text-[10px] text-neutral-500 font-mono flex items-center gap-1">@aashaqbikepoint <span>↗</span></p>
-                </a>
+                </div>
 
-                <!-- Facebook Card -->
-                <a href="https://share.google/sfWdoUHd5DLgztnrU" target="_blank" rel="noopener noreferrer" class="bg-dark-900 border border-white/5 hover:border-gold/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors mb-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                <!-- YouTube Channel Card & Recent Video -->
+                <div class="bg-dark-900 border border-white/5 p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:border-red-500/40 relative overflow-hidden group">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-red-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold tracking-wider text-xs uppercase text-white">YouTube</h4>
+                                <span class="text-[8px] text-neutral-500 font-mono">@aashaqbikepoint</span>
+                            </div>
+                        </div>
+                        <a href="https://youtube.com/@aashaqbikepoint" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1">
+                            Channel <span>↗</span>
+                        </a>
                     </div>
-                    <h4 class="font-display font-bold tracking-widest text-xs uppercase mb-1">Facebook</h4>
-                    <p class="text-[10px] text-neutral-500 font-mono flex items-center gap-1">Official Profile Page <span>↗</span></p>
+
+                    <!-- Visual YouTube Video Preview -->
+                    <div class="rounded-xl overflow-hidden border border-white/10 bg-black/60 p-2.5 space-y-3 relative group/post cursor-pointer">
+                        <div class="aspect-video w-full rounded-lg overflow-hidden relative flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&q=80&w=400" alt="YouTube Post Thumbnail" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/post:scale-105">
+                            <div class="absolute inset-0 bg-black/40 group-hover/post:bg-black/20 transition-all duration-300"></div>
+                            <!-- Aesthetic pulsing play badge -->
+                            <div class="relative w-10 h-10 rounded-full bg-red-600/90 hover:bg-red-600 text-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover/post:scale-110">
+                                <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                            </div>
+                            <span class="absolute bottom-2 right-2 bg-black/85 text-white text-[8px] font-mono px-2 py-0.5 rounded">12:45</span>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="text-[10px] text-neutral-400 font-light leading-relaxed line-clamp-2">
+                                "Desmo Valve Check - Triumph Bonneville T120 Restoration Process [Full Vlog]"
+                            </p>
+                            <div class="flex justify-between items-center text-[8px] text-neutral-600 font-mono pt-1">
+                                <span>👁️ 1.2K Views</span>
+                                <span>1 Week Ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Facebook Channel Card & Recent Post -->
+                <div class="bg-dark-900 border border-white/5 p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:border-blue-500/40 relative overflow-hidden group">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-blue-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold tracking-wider text-xs uppercase text-white">Facebook</h4>
+                                <span class="text-[8px] text-neutral-500 font-mono">Official Profile</span>
+                            </div>
+                        </div>
+                        <a href="https://share.google/sfWdoUHd5DLgztnrU" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1">
+                            Link <span>↗</span>
+                        </a>
+                    </div>
+
+                    <!-- Visual Facebook Post Preview -->
+                    <div class="rounded-xl overflow-hidden border border-white/10 bg-black/60 p-2.5 space-y-3 relative group/post cursor-pointer">
+                        <div class="aspect-video w-full rounded-lg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=400" alt="Facebook Post Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover/post:scale-105">
+                            <span class="absolute top-2 left-2 bg-black/80 text-emerald-400 text-[7px] font-mono tracking-widest px-2 py-0.5 rounded-full">DIAGNOSTICS</span>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="text-[10px] text-neutral-400 font-light leading-relaxed line-clamp-2">
+                                "Sartaj's Triumph Bonneville T120 is officially cleared for departure. Dynamic alignment complete..."
+                            </p>
+                            <div class="flex justify-between items-center text-[8px] text-neutral-600 font-mono pt-1">
+                                <span>👍 86 Likes</span>
+                                <span>2 Weeks Ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TMR SYSTEM INTEGRATION PROMO CARD (Location 2) -->
+    <section class="relative py-12 px-4 bg-black z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-panel p-6 md:p-10 rounded-3xl border border-emerald-500/20 bg-gradient-to-r from-black/80 via-neutral-900/40 to-black relative overflow-hidden shadow-2xl flex flex-col lg:flex-row justify-between items-center gap-8">
+                <div class="absolute -right-16 -top-16 w-48 h-48 bg-emerald-500/5 rounded-full blur-[80px]"></div>
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0 animate-pulse">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="text-[8px] tracking-[0.3em] text-emerald-400 font-mono font-bold uppercase block mb-1">REAL-TIME TELEMETRY ENGINE</span>
+                        <h3 class="font-display text-lg md:text-xl font-black uppercase text-white mb-2">TRACK, LOG & MANAGE YOUR ACTIVE RIDES</h3>
+                        <p class="text-neutral-400 text-xs font-light leading-relaxed max-w-2xl">
+                            Synchronize your premium machine directly with the **TMR Portal**. View diagnostic performance logs, export high-speed telemetry profiles, and submit maintenance charts directly to Aashaq Bike Point.
+                        </p>
+                    </div>
+                </div>
+                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center gap-2 whitespace-nowrap shadow-[0_4px_15px_rgba(16,185,129,0.25)] font-mono">
+                    Launch TMR Console ↗
                 </a>
             </div>
         </div>
     </section>
 
     <!-- APPOINTMENT RESERVATION REGISTRY -->
-    <section id="book" class="relative py-32 px-4 bg-[#080808] z-10 border-t border-white/5 transition-colors">
-        <div class="max-w-3xl mx-auto bg-black border border-white/5 p-6 md:p-12 rounded-3xl relative shadow-2xl">
-            <div class="text-center mb-12">
+    <section id="book" class="relative py-32 px-4 themed-bg-950 z-10 border-t border-white/5 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
                 <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">RESERVATIONS REGISTRY</span>
-                <h2 class="font-display text-3xl font-black uppercase tracking-tight text-white">SCHEDULE WORKSHOP LAB TIME</h2>
+                <h2 class="font-display text-3xl md:text-5xl font-black uppercase tracking-tight themed-text-100">SCHEDULE WORKSHOP LAB TIME</h2>
             </div>
 
-            <form onsubmit="handleRegistrationSubmit(event)" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Rider Name</label>
-                        <input type="text" required class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="e.g. Sartaj Ahmad">
-                    </div>
-                    <div>
-                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Contact Link</label>
-                        <input type="tel" required class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="e.g. +91 99065 84655">
-                    </div>
+            <!-- Enhanced Split Layout Screen -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                <!-- Left Hand Interactive Form Container (7 Columns) -->
+                <div class="lg:col-span-7 bg-black/40 backdrop-blur-md border border-white/5 p-6 md:p-10 rounded-3xl relative shadow-2xl">
+                    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+                    
+                    <form onsubmit="handleRegistrationSubmit(event)" id="booking-form" class="space-y-6">
+                        <!-- Rider Information Cluster -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="relative">
+                                <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">01 // RIDER NAME</label>
+                                <input type="text" id="rider-name" required class="w-full text-xs px-4 py-3.5 rounded-xl transition-all interactive-input font-sans themed-input" placeholder="e.g. Sartaj Ahmad">
+                                <div class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-gold transition-all duration-300 input-border-indicator"></div>
+                            </div>
+                            <div class="relative">
+                                <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">02 // CONTACT LINK</label>
+                                <input type="tel" id="rider-contact" required class="w-full text-xs px-4 py-3.5 rounded-xl transition-all interactive-input font-sans themed-input" placeholder="e.g. +91 99065 84655">
+                                <div class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-gold transition-all duration-300 input-border-indicator"></div>
+                            </div>
+                        </div>
+
+                        <!-- Machine Detail Cluster -->
+                        <div class="relative">
+                            <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">03 // MACHINE MODEL</label>
+                            <input type="text" id="rider-machine" required class="w-full text-xs px-4 py-3.5 rounded-xl transition-all interactive-input font-sans themed-input" placeholder="e.g. Triumph Tiger 900">
+                            <div class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-gold transition-all duration-300 input-border-indicator"></div>
+                        </div>
+
+                        <!-- Interactive Service Package Selection Grid (Synchronized to Standard hidden Select Form element) -->
+                        <div>
+                            <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-3 font-mono">04 // CALIBRATION SPECIFICATION PACKAGE</label>
+                            
+                            <!-- Kept exact original Select options in a hidden dropdown to preserve standard submit mechanics -->
+                            <select id="rider-calibration-select" class="hidden">
+                                <option value="Desmodromic Valve Checkup" data-price="12500" data-time="6 hrs">Desmodromic Valve Checkup</option>
+                                <option value="Direct ECU Tuning & Map flash" data-price="8000" data-time="3 hrs">Direct ECU Tuning & Map flash</option>
+                                <option value="Complete Fork Oil Restructuring" data-price="4500" data-time="4 hrs" selected>Complete Fork Oil Restructuring</option>
+                                <option value="General Core Service Cycle" data-price="3500" data-time="2.5 hrs">General Core Service Cycle</option>
+                            </select>
+
+                            <!-- Beautiful visual grid blocks that bind directly to select options -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div onclick="selectServicePackage('Desmodromic Valve Checkup', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                    <div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[8px] font-mono tracking-widest text-gold bg-gold/10 px-2 py-0.5 rounded-full">SPEC PRO</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~6 Hrs</span>
+                                        </div>
+                                        <h4 class="text-xs font-bold text-white mt-2">Desmodromic Valve Checkup</h4>
+                                    </div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹12,500</div>
+                                </div>
+
+                                <div onclick="selectServicePackage('Direct ECU Tuning & Map flash', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                    <div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[8px] font-mono tracking-widest text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">DIAGNOSTIC</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~3 Hrs</span>
+                                        </div>
+                                        <h4 class="text-xs font-bold text-white mt-2">Direct ECU Tuning & Map flash</h4>
+                                    </div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹8,000</div>
+                                </div>
+
+                                <div onclick="selectServicePackage('Complete Fork Oil Restructuring', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative active-pkg-card">
+                                    <div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[8px] font-mono tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">CHASSIS</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~4 Hrs</span>
+                                        </div>
+                                        <h4 class="text-xs font-bold text-white mt-2">Complete Fork Oil Restructuring</h4>
+                                    </div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹4,500</div>
+                                </div>
+
+                                <div onclick="selectServicePackage('General Core Service Cycle', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                    <div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[8px] font-mono tracking-widest text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">MAINTENANCE</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~2.5 Hrs</span>
+                                        </div>
+                                        <h4 class="text-xs font-bold text-white mt-2">General Core Service Cycle</h4>
+                                    </div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹3,500</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Date and Time interactive slot selectors -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">05 // WORKSHOP TARGET DATE</label>
+                                <div class="flex gap-2" id="date-selector-group">
+                                    <button type="button" onclick="selectDate('Today', this)" class="flex-1 py-2 bg-neutral-950 border border-gold/40 text-[10px] font-mono font-bold text-gold rounded-lg transition-all">Today</button>
+                                    <button type="button" onclick="selectDate('Tomorrow', this)" class="flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">Tomorrow</button>
+                                    <button type="button" onclick="selectDate('Next Day', this)" class="flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">Next Day</button>
+                                </div>
+                                <input type="hidden" id="selected-booking-date" value="Today">
+                            </div>
+                            <div>
+                                <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">06 // ESTIMATED WORKSHOP ARRIVAL</label>
+                                <div class="grid grid-cols-3 gap-2" id="time-selector-group">
+                                    <button type="button" onclick="selectTime('09:00 AM', this)" class="py-2 bg-neutral-950 border border-gold/40 text-[9px] font-mono font-bold text-gold rounded-lg transition-all">09:00 AM</button>
+                                    <button type="button" onclick="selectTime('12:00 PM', this)" class="py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">12:00 PM</button>
+                                    <button type="button" onclick="selectTime('03:30 PM', this)" class="py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">03:30 PM</button>
+                                </div>
+                                <input type="hidden" id="selected-booking-time" value="09:00 AM">
+                            </div>
+                        </div>
+
+                        <!-- Core Notes/Symptom Textarea -->
+                        <div>
+                            <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">07 // SYMPTOMATIC DESCRIPTION / WORKSHOP TRACKING NOTES</label>
+                            <textarea id="rider-notes" rows="3" class="w-full text-xs px-4 py-3.5 rounded-xl transition-all font-sans themed-input" placeholder="Please enter visual tracking details, erratic vibrations, or specific targets..."></textarea>
+                        </div>
+
+                        <!-- Form Submission CTA Clusters -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button type="submit" class="py-4 rounded-xl bg-gold text-black text-[11px] font-bold tracking-widest hover:bg-white hover:scale-[1.02] transition-all duration-300 uppercase shadow-[0_4px_20px_rgba(212,175,55,0.25)] font-mono">
+                                SUBMIT TO QUEUE
+                            </button>
+                            <button type="button" onclick="sendFormToWhatsApp()" class="py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold tracking-widest hover:scale-[1.02] transition-all duration-300 uppercase flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(16,185,129,0.2)] font-mono">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
+                                DIRECT TO WHATSAPP
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Machine Model</label>
-                        <input type="text" required class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="e.g. Triumph Tiger 900">
+                <!-- Right Hand Visual Job Card Receipt Summary (5 Columns) -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-neutral-950 to-neutral-900 border border-gold/20 p-6 md:p-8 rounded-3xl relative shadow-2xl flex flex-col justify-between overflow-hidden">
+                    <div class="absolute inset-0 carbon-pattern opacity-10 pointer-events-none"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+                    <!-- Receipt Header -->
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start border-b border-white/10 pb-4 mb-4">
+                            <div>
+                                <h3 class="font-display font-extrabold text-xs text-white uppercase tracking-widest">DIGITAL JOB CARD</h3>
+                                <p class="text-[8px] font-mono text-gold tracking-widest mt-1">AASHAQ BIKE POINT LABS</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[10px] font-mono text-neutral-400 block" id="ticket-id">ABP-5849</span>
+                                <span class="text-[8px] font-mono text-neutral-600 block">SYSTEM QUEUE</span>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Metadata Parameters List -->
+                        <div class="space-y-4 text-xs font-mono">
+                            <div class="flex justify-between items-center py-1.5 border-b border-white/5">
+                                <span class="text-neutral-500 uppercase text-[9px]">RIDER REFERENCE</span>
+                                <span class="text-white font-medium text-[11px]" id="meta-rider-name">Sartaj Ahmad</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-white/5">
+                                <span class="text-neutral-500 uppercase text-[9px]">CONTACT REFERENCE</span>
+                                <span class="text-white text-[11px]" id="meta-rider-contact">+91 99065 84655</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-white/5">
+                                <span class="text-neutral-500 uppercase text-[9px]">ASSIGNED MACHINE</span>
+                                <span class="text-white font-medium text-[11px]" id="meta-rider-machine">Triumph Tiger 900</span>
+                            </div>
+                            <div class="flex justify-between items-start py-1.5 border-b border-white/5">
+                                <span class="text-neutral-500 uppercase text-[9px]">CALIBRATION TYPE</span>
+                                <span class="text-gold font-medium text-[11px] text-right max-w-[200px]" id="meta-calibration">Complete Fork Oil Restructuring</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-white/5">
+                                <span class="text-neutral-500 uppercase text-[9px]">ESTIMATED COMPLETION</span>
+                                <span class="text-white text-[11px]" id="meta-duration">4 hrs</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-white/5">
+                                <span class="text-neutral-500 uppercase text-[9px]">SCHEDULED TIMEFRAME</span>
+                                <span class="text-emerald-400 text-[11px] font-bold" id="meta-datetime">Today @ 09:00 AM</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Target Calibration Range</label>
-                        <select class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all">
-                            <option>Desmodromic Valve Checkup</option>
-                            <option>Direct ECU Tuning & Map flash</option>
-                            <option>Complete Fork Oil Restructuring</option>
-                            <option>General Core Service Cycle</option>
-                        </select>
+
+                    <!-- Dynamic Financial Estimation Table -->
+                    <div class="relative z-10 mt-8 pt-6 border-t border-dashed border-white/20">
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="flex justify-between text-neutral-400">
+                                <span>BASE SERVICE FEE</span>
+                                <span id="meta-base-price">₹4,500</span>
+                            </div>
+                            <div class="flex justify-between text-neutral-400">
+                                <span>INSTRUMENT LEVY & SOLVENTS</span>
+                                <span>₹500</span>
+                            </div>
+                            <div class="flex justify-between text-neutral-400">
+                                <span>DIGITAL REPORT SETUP</span>
+                                <span class="text-emerald-500">FREE</span>
+                            </div>
+                            <div class="flex justify-between text-white font-bold text-sm pt-4 border-t border-white/10">
+                                <span class="text-gold">ESTIMATED TOTAL</span>
+                                <span id="meta-total-price" class="text-gold">₹5,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Barcode Simulation for aesthetic and industrial finish -->
+                        <div class="mt-8 flex flex-col items-center gap-1 opacity-60">
+                            <div class="w-full h-8 flex justify-center items-stretch gap-[1.5px] overflow-hidden">
+                                <div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[3px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[4px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[3px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[4px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[3px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[4px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[3px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[2px] bg-white"></div><div class="w-[1px] bg-white"></div><div class="w-[4px] bg-white"></div>
+                            </div>
+                            <span class="text-[7px] font-mono text-neutral-500 tracking-[0.5em] uppercase">VERIFY REPAIR SYSTEM DELTA</span>
+                        </div>
                     </div>
+
                 </div>
 
-                <div>
-                    <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2">Symptomatic Description / Notes</label>
-                    <textarea rows="4" class="w-full bg-dark-900 border border-white/5 focus:border-gold/50 focus:outline-none text-xs text-white px-4 py-3.5 rounded-xl transition-all" placeholder="Please enter visual tracking details, erratic vibrations, or targets..."></textarea>
-                </div>
+            </div>
+        </div>
+    </section>
 
-                <button type="submit" class="w-full py-4 rounded-xl bg-gold text-black text-[11px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase">
-                    SUBMIT TO QUEUE
+    <!-- SUCCESS BOOKING RECEIPT TICKET EXPORT MODAL -->
+    <div id="booking-success-modal" class="fixed inset-0 bg-black/95 z-[10000] hidden flex-col items-center justify-center p-4 backdrop-blur-md">
+        <div class="w-full max-w-md bg-neutral-900 border border-gold/30 p-8 rounded-3xl relative shadow-2xl text-center space-y-6">
+            <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+            
+            <div class="w-16 h-16 rounded-full bg-gold/15 border-2 border-gold flex items-center justify-center text-gold mx-auto">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+
+            <div>
+                <h4 class="font-display font-black uppercase text-xl text-white tracking-wider">TICKET QUEUED SUCCESSFULLY</h4>
+                <p class="text-neutral-400 text-xs mt-2 leading-relaxed">
+                    Aashaq Bike Point labs system has recorded your service ticket parameters. Our master craftsman will coordinate the arrival validation.
+                </p>
+            </div>
+
+            <!-- Export Actions -->
+            <div class="bg-neutral-950 p-4 rounded-2xl border border-white/5 space-y-2 text-left font-mono text-xs">
+                <div class="flex justify-between"><span class="text-neutral-500">RECORD ID</span><span class="text-gold font-bold" id="success-id">#ABP-XXXX</span></div>
+                <div class="flex justify-between"><span class="text-neutral-500">MACHINE</span><span class="text-white" id="success-machine">-</span></div>
+                <div class="flex justify-between"><span class="text-neutral-500">SERVICE PACK</span><span class="text-white text-right max-w-[180px] truncate" id="success-service">-</span></div>
+                <div class="flex justify-between"><span class="text-neutral-500">TOTAL EST</span><span class="text-gold" id="success-total">-</span></div>
+            </div>
+
+            <div class="space-y-3">
+                <button id="success-whatsapp-btn" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs tracking-widest transition-all uppercase flex items-center justify-center gap-2 font-mono">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
+                    DIRECT DISPATCH TO WHATSAPP DESK
                 </button>
-            </form>
+                <button onclick="closeSuccessModal()" class="w-full py-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white font-medium text-xs tracking-widest transition-all uppercase font-mono">
+                    RETURN TO WORKSPACE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE TMR END-OF-PAGE TELEMETRY LINK CONTAINER (Location 3) -->
+    <section class="relative py-24 px-4 bg-gradient-to-b from-[#090909] to-black border-t border-white/5 z-10 transition-colors">
+        <div class="max-w-5xl mx-auto glass-panel border border-emerald-500/20 p-8 md:p-12 rounded-3xl relative overflow-hidden text-center flex flex-col items-center">
+            <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="absolute -top-12 -right-12 w-64 h-64 bg-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <span class="text-[9px] tracking-[0.4em] text-emerald-400 font-mono font-bold uppercase block mb-3">SYNCHRONIZED SYSTEMS</span>
+            <h2 class="font-display text-2xl md:text-4xl font-black uppercase text-white max-w-2xl leading-tight mb-4">
+                AASHAQ WORKSHOP & <span class="text-emerald-400">TMR MOTORCYCLE LOGS</span>
+            </h2>
+            <p class="text-neutral-400 text-xs font-light leading-relaxed max-w-xl mb-8">
+                Access your cloud-saved service charts, track route telemetry maps, log continuous RPM levels, and schedule live performance reviews using the linked ride dashboard portal.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(16,185,129,0.2)] font-mono">
+                    Access Telemetry Dashboard ↗
+                </a>
+                <button onclick="toggleMotoBhatConsole()" class="px-8 py-3.5 rounded-full border border-gold/30 hover:border-gold bg-black/50 text-gold text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center justify-center gap-2 font-mono">
+                    Launch Diagnostic AI Core
+                </button>
+            </div>
         </div>
     </section>
 
@@ -894,13 +1313,23 @@
             </button>
         </a>
 
-        <!-- Floating Moto-Bhat Button -->
+        <!-- Floating Moto-Bhat Highly Aesthetic Cybernetic Button Trigger -->
         <div class="flex items-center gap-2 group">
-            <div class="hidden md:block bg-dark-900 border border-gold/30 px-3 py-1.5 rounded-2xl text-[10px] text-gold font-mono shadow-2xl tracking-widest opacity-0 group-hover:opacity-100 transition-all">
-                ✦ OPEN MOTO-BHAT SYSTEM
+            <div class="hidden md:block bg-dark-900 border border-gold/40 px-3 py-1.5 rounded-2xl text-[9px] text-gold font-mono shadow-2xl tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300">
+                ✦ ENGINE AI CORE
             </div>
-            <button onclick="toggleMotoBhatConsole()" class="w-16 h-16 rounded-full bg-gradient-to-tr from-black to-dark-900 border-2 border-gold flex items-center justify-center text-gold shadow-2xl hover:scale-105 transition-all">
-                <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <button onclick="toggleMotoBhatConsole()" class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-black via-neutral-900 to-[#121212] border-2 border-gold flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.75)] hover:scale-105 transition-all duration-300 overflow-hidden">
+                <!-- Outer Spin Wheel -->
+                <svg class="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] opacity-60" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="42" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="14 10" fill="none"></circle>
+                    <circle cx="50" cy="50" r="34" stroke="#AA7C11" stroke-width="1" stroke-dasharray="6 6" fill="none"></circle>
+                </svg>
+                <!-- Outer Spark Wave -->
+                <div class="absolute w-10 h-10 rounded-full bg-gold/10 border border-gold/30 animate-[ping_2s_infinite] pointer-events-none"></div>
+                <!-- Spark bolt icon -->
+                <svg class="w-6 h-6 text-gold relative z-10 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
             </button>
         </div>
     </div>
@@ -975,11 +1404,11 @@
 
     <!-- MAIN JAVASCRIPT LOGIC BLOCK -->
     <script>
-        // Explicitly bind stack tab switcher to global window scope with strict checks [10]
+        // Bulletproof dynamic display tab switching to eliminate Tailwind display conflicts [10]
         window.switchStackTab = function(tabId) {
             const stackContents = document.querySelectorAll(".stack-content");
             stackContents.forEach(function(content) {
-                content.classList.add("hidden");
+                content.style.display = "none";
                 content.style.opacity = "0";
             });
 
@@ -1002,7 +1431,7 @@
 
             const activeTab = document.getElementById(tabId);
             if (activeTab) {
-                activeTab.classList.remove("hidden");
+                activeTab.style.display = "grid";
                 gsap.fromTo(activeTab, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
             }
         };
@@ -1139,15 +1568,15 @@
             afterBadge.innerText = data.afterText;
             beforeBadge.innerText = data.beforeText;
 
-            // Align active tabs
+            // Align active tabs with elegant Segmented Card highlights [10]
             const keys = ["rx100", "splendor", "buraq"];
             keys.forEach(function(k) {
                 const btn = document.getElementById("tab-" + k);
                 if (btn) {
                     if (k === projectId) {
-                        btn.className = "px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all";
+                        btn.className = "group relative text-left p-4 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-24 active-tab shadow-[0_0_15px_rgba(212,175,55,0.25)]";
                     } else {
-                        btn.className = "px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all";
+                        btn.className = "group relative text-left p-4 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-24";
                     }
                 }
             });
@@ -1342,8 +1771,14 @@
                             initScrollPhysics();
                             initScrollAnimations();
                             initLeftScrollWheel();
+                            // Force initialize stack tab layout engine parameters immediately (Fixes cylinder head bug) [10]
+                            switchStackTab('engine-tab');
                             // Trigger initial image preloading configuration [10]
                             updateRestorationProject("rx100");
+                            // Set initial random ticket ID
+                            generateRandomTicketID();
+                            // Set initial active state highlights on booking visualizer
+                            initBookingVisualizerSync();
                         }
                     });
                 }, 800);
@@ -1359,7 +1794,7 @@
             cursor.style.top = e.clientY + "px";
         });
 
-        const hoverTargets = document.querySelectorAll("a, button, select, input, textarea");
+        const hoverTargets = document.querySelectorAll("a, button, select, input, textarea, .service-option-card");
         hoverTargets.forEach(function(target) {
             target.addEventListener("mouseenter", function() {
                 cursor.children[0].classList.add("scale-150", "border-white");
@@ -1409,21 +1844,24 @@
             syncSliderImagesWidth();
         });
 
-        // --- INTERACTIVE MECHANICAL CANVAS ---
+        // --- INTERACTIVE ENGINE (HIGH-FIDELITY 4-STROKE ENGINE VISUALIZER) ---
         const canvas = document.getElementById("engine-canvas");
         const ctx = canvas.getContext("2d");
-        let angle = 0;
+        let crankAngle = 0;
         let baseFrequencySpeed = 0.015;
-
         let targetSpeed = 0.015;
+
         canvas.addEventListener("mousemove", function(e) {
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
-            targetSpeed = 0.005 + (x / rect.width) * 0.055;
+            targetSpeed = 0.005 + (x / rect.width) * 0.065;
         });
         canvas.addEventListener("mouseleave", function() {
             targetSpeed = 0.015;
         });
+
+        // Exhaust smoke puff container array
+        const engineParticles = [];
 
         function drawSimulator() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1431,66 +1869,440 @@
             const centerY = canvas.height / 2;
 
             baseFrequencySpeed += (targetSpeed - baseFrequencySpeed) * 0.1;
+            crankAngle += baseFrequencySpeed;
 
-            ctx.strokeStyle = "rgba(212, 175, 55, 0.06)";
+            // Map crank angle over 720 degrees (2 full crank rotations per 4-stroke cycle)
+            const cycleAngle = crankAngle % (Math.PI * 4);
+            let strokeName = "";
+            let p_psi = 14.7;
+
+            // Determine active cycle strokes
+            if (cycleAngle >= 0 && cycleAngle < Math.PI) {
+                strokeName = "INTAKE STROKE";
+                p_psi = 14.7 - Math.sin(cycleAngle) * 4.0;
+            } else if (cycleAngle >= Math.PI && cycleAngle < Math.PI * 2) {
+                strokeName = "COMPRESSION STROKE";
+                p_psi = 14.7 + Math.pow(Math.sin(cycleAngle - Math.PI), 2) * 160.0;
+            } else if (cycleAngle >= Math.PI * 2 && cycleAngle < Math.PI * 3) {
+                strokeName = "POWER STROKE";
+                const phase = cycleAngle - Math.PI * 2;
+                if (phase < 0.2) {
+                    p_psi = 650.0;
+                } else {
+                    p_psi = 650.0 - Math.sin(phase) * 500.0;
+                }
+            } else {
+                strokeName = "EXHAUST STROKE";
+                p_psi = 18.2;
+            }
+
+            // Draw Background Engine Sleeve Geometry
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.08)";
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.arc(centerX, centerY, 110, 0, Math.PI * 2);
+            ctx.arc(centerX, centerY, 120, 0, Math.PI * 2);
             ctx.stroke();
 
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.rotate(angle);
+            // Piston dynamics (Top dead center & bottom dead center limits)
+            const strokeMultiplier = Math.sin(crankAngle * 2 + Math.PI / 2);
+            const pistonDisplacement = centerY - 20 + strokeMultiplier * 25;
 
-            ctx.strokeStyle = "rgba(212, 175, 55, 0.25)";
-            ctx.lineWidth = 4;
-            ctx.beginPath();
-            ctx.arc(0, 0, 90, 0, Math.PI * 2);
-            ctx.stroke();
-
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-            ctx.lineWidth = 1.5;
-            for (let i = 0; i < 8; i++) {
-                ctx.rotate(Math.PI / 4);
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.lineTo(0, -85);
-                ctx.stroke();
+            // Draw Exhaust soot particulate release physics
+            if (strokeName === "EXHAUST STROKE" && strokeMultiplier < 0 && Math.random() < 0.3) {
+                engineParticles.push({
+                    x: centerX + 32,
+                    y: centerY - 105,
+                    vx: Math.random() * 2 + 1,
+                    vy: -Math.random() * 2 - 1,
+                    alpha: 1,
+                    size: Math.random() * 4 + 2
+                });
             }
-            ctx.restore();
 
-            const pistonDisplacement = centerY + Math.sin(angle * 2.2) * 28 - 25;
-            ctx.strokeStyle = "rgba(212, 175, 55, 0.3)";
+            // Draw Intake fuel spray vapor
+            if (strokeName === "INTAKE STROKE" && strokeMultiplier > 0 && Math.random() < 0.3) {
+                engineParticles.push({
+                    x: centerX - 60,
+                    y: centerY - 105,
+                    vx: Math.random() * 2 + 1,
+                    vy: Math.random() * 1.5,
+                    alpha: 1,
+                    size: Math.random() * 3 + 1,
+                    isFuel: true
+                });
+            }
+
+            // Update & Render Engine particles
+            for (let i = engineParticles.length - 1; i >= 0; i--) {
+                const p = engineParticles[i];
+                if (p.isFuel) {
+                    p.x += (centerX - 10 - p.x) * 0.1;
+                    p.y += (pistonDisplacement - 20 - p.y) * 0.1;
+                    p.alpha -= 0.015;
+                } else {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= 0.02;
+                }
+                if (p.alpha <= 0) {
+                    engineParticles.splice(i, 1);
+                } else {
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.isFuel ? "rgba(212, 175, 55, 0.6)" : "rgba(120, 120, 120, 0.5)";
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            // --- Draw Cylinder Head Body & Gaskets ---
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
             ctx.fillStyle = "rgba(10, 10, 10, 0.9)";
-            ctx.lineWidth = 1.5;
-
-            ctx.strokeRect(centerX - 30, centerY - 100, 60, 90);
-
+            ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(centerX, pistonDisplacement + 20);
+            ctx.rect(centerX - 45, centerY - 110, 90, 85);
+            ctx.stroke();
+            ctx.fill();
+
+            // Intake/Exhaust Manifold Ports
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+            ctx.lineWidth = 2;
+            // Left port
+            ctx.beginPath();
+            ctx.moveTo(centerX - 45, centerY - 100);
+            ctx.lineTo(centerX - 75, centerY - 105);
+            ctx.lineTo(centerX - 75, centerY - 85);
+            ctx.lineTo(centerX - 45, centerY - 85);
+            ctx.stroke();
+            // Right port
+            ctx.beginPath();
+            ctx.moveTo(centerX + 45, centerY - 100);
+            ctx.lineTo(centerX + 75, centerY - 105);
+            ctx.lineTo(centerX + 75, centerY - 85);
+            ctx.lineTo(centerX + 45, centerY - 85);
             ctx.stroke();
 
-            ctx.fillRect(centerX - 25, pistonDisplacement, 50, 25);
-            ctx.strokeRect(centerX - 25, pistonDisplacement, 50, 25);
+            // --- Draw Valves ---
+            // Valve guides
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
+            ctx.lineWidth = 2;
+            // Intake Valve (Open during Intake stroke)
+            let inValveOffset = 0;
+            if (strokeName === "INTAKE STROKE") inValveOffset = 8;
+            ctx.beginPath();
+            ctx.moveTo(centerX - 24, centerY - 115 + inValveOffset);
+            ctx.lineTo(centerX - 24, centerY - 95 + inValveOffset);
+            ctx.moveTo(centerX - 32, centerY - 95 + inValveOffset);
+            ctx.lineTo(centerX - 16, centerY - 95 + inValveOffset);
+            ctx.stroke();
 
-            if (Math.sin(angle * 2.2) > 0.95) {
-                ctx.fillStyle = "#D4AF37";
-                ctx.beginPath();
-                ctx.arc(centerX, centerY - 105, 5, 0, Math.PI * 2);
-                ctx.fill();
+            // Exhaust Valve (Open during Exhaust stroke)
+            let exValveOffset = 0;
+            if (strokeName === "EXHAUST STROKE") exValveOffset = 8;
+            ctx.beginPath();
+            ctx.moveTo(centerX + 24, centerY - 115 + exValveOffset);
+            ctx.lineTo(centerX + 24, centerY - 95 + exValveOffset);
+            ctx.moveTo(centerX + 16, centerY - 95 + exValveOffset);
+            ctx.lineTo(centerX + 32, centerY - 95 + exValveOffset);
+            ctx.stroke();
+
+            // --- Spark Plug ---
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - 120);
+            ctx.lineTo(centerX, centerY - 110);
+            ctx.stroke();
+
+            // Power Stroke Combustion Flash and Electrical Spark Arc
+            if (strokeName === "POWER STROKE") {
+                const phase = cycleAngle - Math.PI * 2;
+                if (phase < 0.5) {
+                    // Draw Electric spark plug arc
+                    ctx.strokeStyle = "#5de3f4";
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(centerX - 3, centerY - 108);
+                    ctx.lineTo(centerX + (Math.random() * 4 - 2), centerY - 105);
+                    ctx.lineTo(centerX + 3, centerY - 108);
+                    ctx.stroke();
+
+                    // Expanding radial compression flame front
+                    const radGlow = ctx.createRadialGradient(centerX, centerY - 105, 2, centerX, centerY - 70, 42);
+                    radGlow.addColorStop(0, "rgba(255, 240, 180, 0.95)");
+                    radGlow.addColorStop(0.3, "rgba(212, 175, 55, 0.85)");
+                    radGlow.addColorStop(0.7, "rgba(220, 80, 20, 0.5)");
+                    radGlow.addColorStop(1, "rgba(10, 10, 10, 0.0)");
+                    ctx.fillStyle = radGlow;
+                    ctx.beginPath();
+                    ctx.rect(centerX - 42, centerY - 105, 84, pistonDisplacement - (centerY - 105));
+                    ctx.fill();
+                }
             }
 
-            angle += baseFrequencySpeed;
+            // --- Draw Reciprocating Piston Head Block ---
+            ctx.fillStyle = "rgba(45, 45, 45, 0.95)";
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.5)";
+            ctx.lineWidth = 2;
+            ctx.fillRect(centerX - 40, pistonDisplacement - 25, 80, 25);
+            ctx.strokeRect(centerX - 40, pistonDisplacement - 25, 80, 25);
+
+            // Wrist Pin and Ring slots
+            ctx.fillStyle = "rgba(10, 10, 10, 0.8)";
+            ctx.beginPath();
+            ctx.arc(centerX, pistonDisplacement - 12, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // --- Crank Shaft Balance Lobe & Connecting Rod ---
+            const crankX = centerX + Math.cos(crankAngle * 2 + Math.PI / 2) * 32;
+            const crankY = centerY + 80 + Math.sin(crankAngle * 2 + Math.PI / 2) * 32;
+
+            // Draw connecting rod linkage
+            ctx.strokeStyle = "rgba(160, 160, 160, 0.8)";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(centerX, pistonDisplacement - 12);
+            ctx.lineTo(crankX, crankY);
+            ctx.stroke();
+
+            // Draw crankshaft counterweight
+            ctx.fillStyle = "rgba(25, 25, 25, 0.95)";
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.3)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY + 80, 18, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = "#D4AF37";
+            ctx.beginPath();
+            ctx.arc(crankX, crankY, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // --- Canvas HUD Overlay Data ---
+            ctx.fillStyle = "rgba(212, 175, 55, 0.75)";
+            ctx.font = "9px monospace";
+            ctx.fillText(`STROKE: ${strokeName}`, 12, 22);
+            ctx.fillText(`EST SPEED: ${(baseFrequencySpeed * 12000).toFixed(0)} RPM`, 12, 34);
+            ctx.fillText(`PRESSURE: ${p_psi.toFixed(1)} PSI`, 12, 46);
+
             requestAnimationFrame(drawSimulator);
         }
         drawSimulator();
 
-        // --- SUBMIT SERVICE BOOKING QUEUE ---
+        // --- SUBMIT SERVICE BOOKING QUEUE (Enhanced Interaction Overlay) ---
         function handleRegistrationSubmit(event) {
             event.preventDefault();
-            alert("APPOINTMENT RECORD REGISTERED. Moto-Bhat digital system is organizing a priority response slot queue.");
-            event.target.reset();
+            
+            // Generate visual ticket elements for receipt modal display
+            const riderNameVal = document.getElementById("rider-name").value || "Anonymous Rider";
+            const contactVal = document.getElementById("rider-contact").value || "N/A";
+            const machineVal = document.getElementById("rider-machine").value || "N/A";
+            const calibrationSelect = document.getElementById("rider-calibration-select");
+            const selectedPackage = calibrationSelect.value;
+            
+            const activeOption = calibrationSelect.options[calibrationSelect.selectedIndex];
+            const price = parseInt(activeOption.getAttribute("data-price") || "0");
+            const finalCalculatedSum = price + 500; // Base tool & instruments levy set to 500
+
+            const finalTicketId = document.getElementById("ticket-id").innerText;
+
+            // Map values dynamically to modal
+            document.getElementById("success-id").innerText = finalTicketId;
+            document.getElementById("success-machine").innerText = machineVal;
+            document.getElementById("success-service").innerText = selectedPackage;
+            document.getElementById("success-total").innerText = "₹" + finalCalculatedSum.toLocaleString();
+
+            // Setup direct messaging dispatch parameters
+            const whatsappText = `Assalamu Alaikum Aashaq Bike Point. I have scheduled a calibration reservation ticket:\n\n` +
+                                 `• Ticket Ref: ${finalTicketId}\n` +
+                                 `• Rider: ${riderNameVal}\n` +
+                                 `• Contact: ${contactVal}\n` +
+                                 `• Machine: ${machineVal}\n` +
+                                 `• Service: ${selectedPackage}\n` +
+                                 `• Schedule: ${document.getElementById("selected-booking-date").value} @ ${document.getElementById("selected-booking-time").value}\n` +
+                                 `• Est. Total: ₹${finalCalculatedSum.toLocaleString()}`;
+
+            const encodedMsg = encodeURIComponent(whatsappText);
+            document.getElementById("success-whatsapp-btn").onclick = function() {
+                window.open(`https://wa.me/919906584655?text=${encodedMsg}`, "_blank");
+            };
+
+            // Trigger structural modal visual entry
+            const successModal = document.getElementById("booking-success-modal");
+            successModal.classList.remove("hidden");
+            successModal.classList.add("flex");
+            gsap.fromTo("#booking-success-modal > div", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" });
+
+            // Kept active console logs to maintain original working logic parameters
+            console.log("APPOINTMENT RECORD REGISTERED. Moto-Bhat digital system is organizing a priority response slot queue.");
+        }
+
+        window.closeSuccessModal = function() {
+            gsap.to("#booking-success-modal > div", {
+                scale: 0.85,
+                opacity: 0,
+                duration: 0.3,
+                onComplete: function() {
+                    document.getElementById("booking-success-modal").classList.add("hidden");
+                    document.getElementById("booking-success-modal").classList.remove("flex");
+                    document.getElementById("booking-form").reset();
+                    generateRandomTicketID();
+                    initBookingVisualizerSync();
+                }
+            });
+        };
+
+        // --- SUBMIT COMPLETED FORM DIRECT TO WHATSAPP NUMBER (+91 99065 84655) ---
+        window.sendFormToWhatsApp = function() {
+            const riderNameVal = document.getElementById("rider-name").value || "";
+            const contactVal = document.getElementById("rider-contact").value || "";
+            const machineVal = document.getElementById("rider-machine").value || "";
+            const calibrationSelect = document.getElementById("rider-calibration-select");
+            const selectedPackage = calibrationSelect.value;
+            const activeOption = calibrationSelect.options[calibrationSelect.selectedIndex];
+            const price = parseInt(activeOption.getAttribute("data-price") || "0");
+            const finalCalculatedSum = price + 500; // Base tool & instruments levy set to 500
+            const targetDate = document.getElementById("selected-booking-date").value;
+            const targetTime = document.getElementById("selected-booking-time").value;
+            const notesVal = document.getElementById("rider-notes").value || "No specific tracking notes.";
+            const ticketId = document.getElementById("ticket-id").innerText;
+
+            if (!riderNameVal || !contactVal || !machineVal) {
+                alert("Please fill in Name, Contact, and Machine Model parameters before direct WhatsApp dispatch.");
+                return;
+            }
+
+            const structuredMessage = 
+`🏍️ *AASHAQ BIKE POINT - WORKSHOP BOOKING* 🏍️
+-----------------------------------------
+🎟️ *TICKET ID:* ${ticketId}
+👤 *RIDER:* ${riderNameVal}
+📞 *CONTACT:* ${contactVal}
+🛠️ *MACHINE:* ${machineVal}
+⚙️ *CALIBRATION:* ${selectedPackage}
+📅 *DATE:* ${targetDate}
+🕒 *TIME:* ${targetTime}
+📝 *NOTES:* ${notesVal}
+
+*ESTIMATED INVOICE:*
+-----------------------------------------
+• Base Service Charge: ₹${price.toLocaleString()}
+• Lab Levy & Solvents: ₹500
+• *ESTIMATED TOTAL:* ₹${finalCalculatedSum.toLocaleString()}
+
+_Please confirm my slot in the priority workshop queue._`;
+
+            const encodedMsg = encodeURIComponent(structuredMessage);
+            window.open(`https://wa.me/919906584655?text=${encodedMsg}`, "_blank");
+        };
+
+        // --- DYNAMIC BOOKING SYSTEM REAL-TIME CALCULATION & INTERACTIVE SYNC ---
+        function generateRandomTicketID() {
+            const randHex = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("ticket-id").innerText = "ABP-" + randHex;
+        }
+
+        function initBookingVisualizerSync() {
+            // Setup listeners on inputs to instantly map parameters to visual ticket card
+            const nameIn = document.getElementById("rider-name");
+            const contactIn = document.getElementById("rider-contact");
+            const machineIn = document.getElementById("rider-machine");
+
+            const updateFields = () => {
+                document.getElementById("meta-rider-name").innerText = nameIn.value || "Sartaj Ahmad";
+                document.getElementById("meta-rider-contact").innerText = contactIn.value || "+91 99065 84655";
+                document.getElementById("meta-rider-machine").innerText = machineIn.value || "Triumph Tiger 900";
+            };
+
+            nameIn.addEventListener("input", updateFields);
+            contactIn.addEventListener("input", updateFields);
+            machineIn.addEventListener("input", updateFields);
+
+            // Execute base visual synchronization mapping on initial trigger
+            syncVisualInvoiceValues();
+        }
+
+        window.selectServicePackage = function(packageName, cardElement) {
+            // Highlight visual option block transitions
+            const cards = document.querySelectorAll(".service-option-card");
+            cards.forEach(c => {
+                c.classList.remove("border-gold", "border-gold/40", "bg-neutral-900/50", "active-pkg-card");
+                c.style.boxShadow = "none";
+            });
+
+            cardElement.classList.add("active-pkg-card");
+            gsap.fromTo(cardElement, { scale: 0.97 }, { scale: 1, duration: 0.2, ease: "power1.out" });
+
+            // Set standard underlying form selection parameter value
+            const selEl = document.getElementById("rider-calibration-select");
+            selEl.value = packageName;
+
+            // Trigger programmatic synchronization engine
+            syncVisualInvoiceValues();
+        };
+
+        window.selectDate = function(dateLabel, btnElement) {
+            // Update selected parameter
+            document.getElementById("selected-booking-date").value = dateLabel;
+
+            // Update UI styling configuration states
+            const buttons = document.querySelectorAll("#date-selector-group button");
+            buttons.forEach(btn => {
+                btn.className = "flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all";
+            });
+
+            btnElement.className = "flex-1 py-2 bg-neutral-950 border border-gold/40 text-[10px] font-mono font-bold text-gold rounded-lg transition-all";
+            syncVisualInvoiceValues();
+        };
+
+        window.selectTime = function(timeLabel, btnElement) {
+            // Update selected parameter
+            document.getElementById("selected-booking-time").value = timeLabel;
+
+            // Update UI styling configuration states
+            const buttons = document.querySelectorAll("#time-selector-group button");
+            buttons.forEach(btn => {
+                btn.className = "py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all";
+            });
+
+            btnElement.className = "py-2 bg-neutral-950 border border-gold/40 text-[9px] font-mono font-bold text-gold rounded-lg transition-all";
+            syncVisualInvoiceValues();
+        };
+
+        function syncVisualInvoiceValues() {
+            const selectElement = document.getElementById("rider-calibration-select");
+            const selectedOpt = selectElement.options[selectElement.selectedIndex];
+            
+            const pkgName = selectElement.value;
+            const price = parseInt(selectedOpt.getAttribute("data-price") || "0");
+            const duration = selectedOpt.getAttribute("data-time") || "N/A";
+            
+            const targetDate = document.getElementById("selected-booking-date").value;
+            const targetTime = document.getElementById("selected-booking-time").value;
+
+            // Update DOM parameters elegantly
+            document.getElementById("meta-calibration").innerText = pkgName;
+            document.getElementById("meta-duration").innerText = duration;
+            document.getElementById("meta-datetime").innerText = `${targetDate} @ ${targetTime}`;
+            
+            document.getElementById("meta-base-price").innerText = "₹" + price.toLocaleString();
+            const calculatedTotal = price + 500; // Base tool & instruments levy set to 500
+            document.getElementById("meta-total-price").innerText = "₹" + calculatedTotal.toLocaleString();
+
+            // Refresh styling loops on options cards to match selection status
+            const cards = document.querySelectorAll(".service-option-card");
+            cards.forEach(c => {
+                if (c.querySelector("h4").innerText === pkgName) {
+                    c.style.borderColor = "#D4AF37";
+                    c.style.backgroundColor = "rgba(212, 175, 55, 0.05)";
+                } else {
+                    c.style.borderColor = "rgba(255, 255, 255, 0.05)";
+                    c.style.backgroundColor = "rgba(10, 10, 10, 0.5)";
+                }
+            });
         }
 
         // --- LENIS SMOOTH SCROLL INTEGRATION ---
@@ -1564,4 +2376,4 @@
         }
     </script>
 </body>
-    </html>
+            </html>
