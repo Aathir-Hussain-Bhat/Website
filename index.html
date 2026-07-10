@@ -349,6 +349,7 @@
     </section>
 
     <!-- CORE SERVICES / DEMONSTRATIVE MECHANICAL STACK LAB -->
+    <!-- Fully reconstructed into an Interactive Calibration Diagnostics HUD Workspace [10] -->
     <section id="services" class="relative py-32 px-4 themed-bg-900 z-10 border-b border-white/5 transition-colors duration-500">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16">
@@ -357,7 +358,7 @@
                     <h2 class="font-display text-3xl md:text-6xl font-black tracking-tight uppercase themed-text-100">OUR MECHANICAL STACK</h2>
                 </div>
                 <p class="text-neutral-400 max-w-md mt-6 lg:mt-0 text-xs md:text-sm tracking-wide font-light leading-relaxed themed-text-400">
-                    Interactive engineering dashboard. Select vectors to demonstrate dynamic structural diagnostics under variable workloads.
+                    Active Diagnostic Workspace. Interact with system calibration sliders on the left to see calculated telemetry variables populate real-time in the HUD console.
                 </p>
             </div>
 
@@ -374,174 +375,134 @@
                 </button>
             </div>
 
-            <!-- Tab Content 1: Engine -->
-            <div id="engine-tab" class="stack-content grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-300">
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">INLET VALVES</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Shim Clearance Optimization</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">We balance shims down to ±0.01mm. Prevents high temperature exhaust flow leaks and ensures mechanical sealing.</p>
-                        
-                        <!-- Interactive demonstration element -->
-                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
-                            <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Micro Shim Scale</span> <span class="text-gold" id="shim-val">0.12mm</span></div>
-                            <input type="range" min="5" max="25" value="12" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('shim-val').innerText = (this.value/100).toFixed(2) + 'mm'">
+            <!-- Double Column Layout combining interactive cards with Live Diagnostics HUD [10] -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Side Tab Content Space (8 columns) -->
+                <div class="lg:col-span-8">
+                    <!-- Tab Content 1: Engine -->
+                    <div id="engine-tab" class="stack-content grid grid-cols-1 md:grid-cols-2 gap-6 transition-opacity duration-300">
+                        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[260px] hover:border-gold/30 transition-all">
+                            <div>
+                                <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">INLET VALVES</span>
+                                <h4 class="font-display text-sm font-bold mb-2 themed-text-100">Shim Clearance Optimization</h4>
+                                <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">We balance shims down to ±0.01mm to ensure tight mechanical seals under thermal load.</p>
+                                
+                                <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                                    <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Micro Shim Scale</span> <span class="text-gold" id="shim-val">0.12mm</span></div>
+                                    <input type="range" min="5" max="25" value="12" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('shim-val').innerText = (this.value/100).toFixed(2) + 'mm'; updateTelemetryHUD('SHIM Clearance', (this.value/100).toFixed(2) + 'mm', (100 - Math.abs(12 - this.value) * 1.5).toFixed(1) + '%', this.value < 9 ? 'CRITICAL' : 'OPTIMUM', 100 - Math.abs(12 - this.value) * 3)">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>TARGET SPEC:</span> <span>0.10mm - 0.15mm</span>
-                    </div>
-                </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">EXHAUST CORRIDORS</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Backpressure Equilibrium</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Exhaust breathing flows must remain aligned to prevent pressure delta disruptions inside primary header pipes.</p>
-                        
-                        <!-- Interactive bar indicator -->
-                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
-                            <span class="text-[9px] font-mono text-neutral-400 themed-text-400 block">Exhaust Scavenging Efficiency</span>
-                            <div class="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gold w-[88%] animate-pulse"></div>
+                        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[260px] hover:border-gold/30 transition-all">
+                            <div>
+                                <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">EXHAUST CORRIDORS</span>
+                                <h4 class="font-display text-sm font-bold mb-2 themed-text-100">Backpressure Equilibrium</h4>
+                                <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Exhaust breathing flows must remain aligned to prevent pressure disruptions inside header pipes.</p>
+                                
+                                <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                                    <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Scavenging Power</span> <span class="text-gold" id="scavenge-val">88%</span></div>
+                                    <input type="range" min="50" max="100" value="88" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('scavenge-val').innerText = this.value + '%'; updateTelemetryHUD('Backpressure Node', this.value + '%', (this.value * 1.1).toFixed(1) + '%', this.value < 70 ? 'UNBALANCED' : 'Normal', this.value)">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>FLOW MARGIN:</span> <span>96.4% Optimum</span>
-                    </div>
-                </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">COMPRESSION CORE</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Piston-to-Bore Alignment</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">High pressure wall seals prevent intake charge bypass leaks. We test using chemical vacuum gauges.</p>
-                        
-                        <!-- Mini numerical diagnostic -->
-                        <div class="bg-black/10 p-3 rounded-lg border border-white/5 font-mono text-[10px] space-y-1">
-                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Chamber Seals</span> <span class="text-emerald-500">Nominal</span></div>
-                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Leak Down Loss</span> <span class="text-gold">&lt; 2.5%</span></div>
+                    <!-- Tab Content 2: Electronics -->
+                    <div id="electronics-tab" class="stack-content grid grid-cols-1 md:grid-cols-2 gap-6 transition-opacity duration-300 hidden">
+                        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[260px] hover:border-gold/30 transition-all">
+                            <div>
+                                <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">LAMBDA PROFILES</span>
+                                <h4 class="font-display text-sm font-bold mb-2 themed-text-100">Air-Fuel Ratio Mapping</h4>
+                                <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Configuring timing thresholds to smooth power delivery and eliminate erratic torque flat spots.</p>
+                                
+                                <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                                    <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Lambda Goal</span> <span class="text-gold" id="lambda-val">13.2 AFR</span></div>
+                                    <input type="range" min="110" max="150" value="132" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('lambda-val').innerText = (this.value/10).toFixed(1) + ' AFR'; updateTelemetryHUD('ECU Air-Fuel Map', (this.value/10).toFixed(1) + ' AFR', (95 - Math.abs(132 - this.value) * 1.2).toFixed(1) + '%', this.value > 142 ? 'LEAN MIXTURE' : 'OPTIMUM', 100 - Math.abs(132 - this.value) * 2.5)">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>PRESSURE SPEC:</span> <span>185 PSI Target</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Tab Content 2: Electronics -->
-            <div id="electronics-tab" class="stack-content grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-300 hidden">
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">LAMBDA PROFILES</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Air-Fuel Ratio Mapping</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Configuring timing thresholds to smooth power delivery and eliminate erratic torque flat spots.</p>
-                        
-                        <!-- Interactive slider -->
-                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
-                            <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Lambda Goal</span> <span class="text-gold" id="lambda-val">13.2 AFR</span></div>
-                            <input type="range" min="110" max="150" value="132" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('lambda-val').innerText = (this.value/10).toFixed(1) + ' AFR'">
-                        </div>
-                    </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>CRUISING AFR:</span> <span>14.7 : 1 Balanced</span>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">IGNITION TIMING</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Spark Advance Curves</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Determines precise millisecond advance angles relative to piston top dead center under various engine RPM loads.</p>
-                        
-                        <!-- Dynamic spark curve bar -->
-                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
-                            <span class="text-[9px] font-mono text-neutral-400 themed-text-400 block">Spark Propagation Speed</span>
-                            <div class="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gold w-[74%]"></div>
+                        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[260px] hover:border-gold/30 transition-all">
+                            <div>
+                                <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">IGNITION TIMING</span>
+                                <h4 class="font-display text-sm font-bold mb-2 themed-text-100">Spark Advance Curves</h4>
+                                <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Determines precise millisecond advance angles relative to piston top dead center under various RPM loads.</p>
+                                
+                                <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                                    <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Advance Spark Angle</span> <span class="text-gold" id="spark-val">22° BTDC</span></div>
+                                    <input type="range" min="8" max="34" value="22" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('spark-val').innerText = this.value + '° BTDC'; updateTelemetryHUD('Spark Ignition', this.value + '° BTDC', (100 - Math.abs(22 - this.value) * 2.5).toFixed(1) + '%', this.value > 30 ? 'HIGH ADVT' : 'Normal', 100 - Math.abs(22 - this.value) * 3)">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>ADVANCE RANGE:</span> <span>8° - 34° Advanced</span>
-                    </div>
-                </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">VACUUM BALANCE</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Throttle Body Sync</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Aligning separate intake cylinders to prevent engine shaking at low-rev deceleration ranges.</p>
-                        
-                        <!-- Numerical status -->
-                        <div class="bg-black/10 p-3 rounded-lg border border-white/5 font-mono text-[10px] space-y-1">
-                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Cylinder 1 Vacuum</span> <span class="text-gold">220 mmHg</span></div>
-                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Cylinder 2 Vacuum</span> <span class="text-gold">220 mmHg</span></div>
+                    <!-- Tab Content 3: Hydraulics -->
+                    <div id="hydraulic-tab" class="stack-content grid grid-cols-1 md:grid-cols-2 gap-6 transition-opacity duration-300 hidden">
+                        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[260px] hover:border-gold/30 transition-all">
+                            <div>
+                                <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">FORK DYNAMICS</span>
+                                <h4 class="font-display text-sm font-bold mb-2 themed-text-100">Sag & Compression Tuning</h4>
+                                <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Altering internal spring pre-loads to align static suspension geometry with the rider's active gear weight.</p>
+                                
+                                <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                                    <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Rider Preload</span> <span class="text-gold" id="sag-val">38mm</span></div>
+                                    <input type="range" min="20" max="60" value="38" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('sag-val').innerText = this.value + 'mm'; updateTelemetryHUD('Suspension Sag', this.value + 'mm', (100 - Math.abs(35 - this.value) * 1.8).toFixed(1) + '%', this.value > 50 ? 'BOTTOMING RISK' : 'PERFECT', 100 - Math.abs(35 - this.value) * 3)">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>TOLERANCE DELTA:</span> <span>&lt; 2 mmHg</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Tab Content 3: Hydraulics -->
-            <div id="hydraulic-tab" class="stack-content grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-300 hidden">
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">FORK DYNAMICS</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Sag & Compression Tuning</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Altering internal spring pre-loads to align static suspension geometry with the rider's active gear weight.</p>
-                        
-                        <!-- Interactive slider -->
-                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
-                            <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Rider Preload</span> <span class="text-gold" id="sag-val">38mm</span></div>
-                            <input type="range" min="20" max="60" value="38" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('sag-val').innerText = this.value + 'mm'">
-                        </div>
-                    </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>OPTIMUM SAG:</span> <span>30mm - 40mm</span>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">HYDRAULIC VALVE</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Fluid Rebound Rates</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Controls fork return speeds to prevent suspension bounce-back when leaned over corners.</p>
-                        
-                        <!-- Rebound scale progress bar -->
-                        <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
-                            <span class="text-[9px] font-mono text-neutral-400 themed-text-400 block">Damping Valve Speed</span>
-                            <div class="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gold w-[63%]"></div>
+                        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[260px] hover:border-gold/30 transition-all">
+                            <div>
+                                <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">HYDRAULIC VALVE</span>
+                                <h4 class="font-display text-sm font-bold mb-2 themed-text-100">Fluid Rebound Rates</h4>
+                                <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Controls fork return speeds to prevent suspension bounce-back when leaned over corners.</p>
+                                
+                                <div class="space-y-2 bg-black/10 p-3 rounded-lg border border-white/5">
+                                    <div class="flex justify-between text-[10px] font-mono text-neutral-400"><span class="themed-text-400">Damping Valve Speed</span> <span class="text-gold" id="damp-val">63%</span></div>
+                                    <input type="range" min="30" max="95" value="63" class="w-full accent-gold bg-neutral-800 h-1 rounded" oninput="document.getElementById('damp-val').innerText = this.value + '%'; updateTelemetryHUD('Hydraulic Damping', this.value + '%', (this.value * 1.05).toFixed(1) + '%', this.value < 45 ? 'UNDER-DAMPED' : 'Normal', this.value)">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>FLUID VISCOSITY:</span> <span>SAE 5W Premium</span>
-                    </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-[380px] hover:border-gold/30 transition-all">
-                    <div>
-                        <span class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase block mb-3">CALIPER PISTONS</span>
-                        <h4 class="font-display text-base font-bold mb-2 themed-text-100">Braking Hydraulic Seal</h4>
-                        <p class="text-neutral-400 text-xs font-light leading-relaxed mb-4 themed-text-400">Aligning hydraulic pressure delivery parameters to prevent caliper dragging or sudden lever fading under extreme heat loads.</p>
+                <!-- Right Side Live Telemetry Console HUD (4 columns) -->
+                <div class="lg:col-span-4">
+                    <div class="glass-panel p-6 rounded-3xl border border-gold/20 bg-neutral-950/60 relative overflow-hidden flex flex-col justify-between h-[260px] md:h-[260px] lg:h-[260px] shadow-2xl">
+                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-gold/5 rounded-full blur-[40px] pointer-events-none"></div>
                         
-                        <!-- Seals diagnostic status list -->
-                        <div class="bg-black/10 p-3 rounded-lg border border-white/5 font-mono text-[10px] space-y-1">
-                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Lever Pressure</span> <span class="text-emerald-500">Perfect</span></div>
-                            <div class="flex justify-between text-neutral-400"><span class="themed-text-400">Caliper Seals</span> <span class="text-gold">Checked</span></div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                                <span class="text-[9px] font-mono tracking-widest text-gold font-bold">LIVE TELEMETRY MONITOR</span>
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            </div>
+                            
+                            <div class="space-y-2 font-mono text-[11px]">
+                                <div class="flex justify-between"><span class="text-neutral-500 uppercase">DIAGNOSTIC TARGET</span> <span id="hud-target-name" class="text-white">SHIM Clearance</span></div>
+                                <div class="flex justify-between"><span class="text-neutral-500 uppercase">CURRENT READOUT</span> <span id="hud-readout-val" class="text-gold font-bold">0.12mm</span></div>
+                                <div class="flex justify-between"><span class="text-neutral-500 uppercase">SYSTEM EFFICIENCY</span> <span id="hud-efficiency" class="text-emerald-400 font-bold">98.2%</span></div>
+                                <div class="flex justify-between"><span class="text-neutral-500 uppercase">CALIBRATION STRESS</span> <span id="hud-stress" class="text-emerald-400 font-bold">Normal</span></div>
+                            </div>
+                            
+                            <!-- Dynamic Graph Visualizer (CSS Bars) -->
+                            <div class="space-y-1.5 pt-3 border-t border-white/5">
+                                <span class="text-[9px] font-mono text-neutral-500">TUNE EXPANSION MATRIX</span>
+                                <div class="w-full h-3 bg-neutral-900 rounded overflow-hidden relative">
+                                    <div id="hud-compression-bar" class="h-full bg-gradient-to-r from-gold/50 to-gold w-[92%] transition-all duration-300"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="font-mono text-[8px] text-neutral-600 flex justify-between items-center pt-4 border-t border-white/5">
+                            <span>AASHAQ DIAGNOSTIC CORE v4.1</span>
+                            <span class="animate-pulse">HUD ACTIVE</span>
                         </div>
                     </div>
-                    <div class="pt-4 border-t border-white/5 font-mono text-[9px] text-gold flex justify-between themed-border-color">
-                        <span>BOILING TEMP LIMIT:</span> <span>310°C / 590°F</span>
-                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </section>
 
@@ -595,69 +556,73 @@
                 <h2 class="font-display text-3xl md:text-5xl font-black tracking-tight uppercase themed-text-100">THE RESTORATION SUITE</h2>
             </div>
 
-            <!-- Highly visible, highly intuitive Segmented Card Selector grid [10] -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 max-w-4xl mx-auto">
+            <!-- Highly visible, highly intuitive Segmented Card Selector Grid [10] -->
+            <!-- Expanded to include TVS XL100, ZR 125, FZ V1, R15 V1, R15 V2 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 max-w-5xl mx-auto">
                 
                 <!-- Card 01 - Yamaha RX 100 Tab -->
-                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="group relative text-left p-4 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-24 active-tab shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-                    <div class="relative z-10 flex justify-between items-start w-full">
-                        <span class="text-[9px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 01</span>
-                        <span class="text-[8px] font-mono tracking-widest text-gold group-[.active-tab]:text-black bg-gold/10 group-[.active-tab]:bg-black/10 px-2.5 py-0.5 rounded-full uppercase font-bold">2-Stroke Overhaul</span>
-                    </div>
-                    <div class="relative z-10 mt-2">
-                        <h4 class="font-display font-black text-sm text-white group-[.active-tab]:text-black uppercase tracking-wider">YAMAHA RX 100</h4>
-                    </div>
+                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="group relative text-left p-3 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-20 active-tab shadow-[0_0_15px_rgba(212,175,55,0.25)]">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 01</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">YAMAHA RX 100</h4>
                 </button>
 
-                <!-- Card 02 - Hero Splendor Tab -->
-                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="group relative text-left p-4 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-24">
-                    <div class="relative z-10 flex justify-between items-start w-full">
-                        <span class="text-[9px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 02</span>
-                        <span class="text-[8px] font-mono tracking-widest text-gold group-[.active-tab]:text-black bg-gold/10 group-[.active-tab]:bg-black/10 px-2.5 py-0.5 rounded-full uppercase font-bold">Commuter Tracker</span>
-                    </div>
-                    <div class="relative z-10 mt-2">
-                        <h4 class="font-display font-black text-sm text-white group-[.active-tab]:text-black uppercase tracking-wider">HERO SPLENDOR</h4>
-                    </div>
+                <!-- Card 02 - TVS XL100 Tab -->
+                <button onclick="updateRestorationProject('xl100')" id="tab-xl100" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 02</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">TVS XL100</h4>
                 </button>
 
-                <!-- Card 03 - Buraq Tab -->
-                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="group relative text-left p-4 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-24">
-                    <div class="relative z-10 flex justify-between items-start w-full">
-                        <span class="text-[9px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 03</span>
-                        <span class="text-[8px] font-mono tracking-widest text-gold group-[.active-tab]:text-black bg-gold/10 group-[.active-tab]:bg-black/10 px-2.5 py-0.5 rounded-full uppercase font-bold">Sport Alignment</span>
-                    </div>
-                    <div class="relative z-10 mt-2">
-                        <h4 class="font-display font-black text-sm text-white group-[.active-tab]:text-black uppercase tracking-wider">BURAQ SPORT</h4>
-                    </div>
+                <!-- Card 03 - ZR 125 Tab -->
+                <button onclick="updateRestorationProject('zr125')" id="tab-zr125" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 03</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">ZR 125</h4>
+                </button>
+
+                <!-- Card 04 - FZ V1 Tab -->
+                <button onclick="updateRestorationProject('fzv1')" id="tab-fzv1" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 04</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">FZ V1</h4>
+                </button>
+
+                <!-- Card 05 - R15 V1 Tab -->
+                <button onclick="updateRestorationProject('r15v1')" id="tab-r15v1" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 05</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">R15 V1</h4>
+                </button>
+
+                <!-- Card 06 - R15 V2 Tab -->
+                <button onclick="updateRestorationProject('r15v2')" id="tab-r15v2" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 06</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">R15 V2</h4>
+                </button>
+
+                <!-- Card 07 - Hero Splendor Tab -->
+                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 07</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">HERO SPLENDOR</h4>
+                </button>
+
+                <!-- Card 08 - Buraq Tab -->
+                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                    <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 08</span>
+                    <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">BURAQ SPORT</h4>
                 </button>
 
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <!-- Left dynamic text panel -->
-                <div class="lg:col-span-5 space-y-6" id="resto-text-container">
-                    <span id="resto-badge" class="px-3 py-1 border border-gold/30 bg-gold/5 text-gold text-[9px] tracking-widest rounded-full uppercase">Classic 2-Stroke Rebuild</span>
-                    <h3 id="resto-title" class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight text-white">Yamaha RX 100 Resto-Mod</h3>
-                    <p id="resto-desc" class="text-neutral-400 text-sm font-light leading-relaxed">
-                        A legendary classic completely restored from an engine-seizure state. Features a full engine block re-bore, crankshaft balancing, original metallic wine-red paint detailing, custom alloy conversions, and heavy-duty chrome plating.
-                    </p>
-
-                    <div class="space-y-3 pt-4 border-t border-white/5 themed-border-color" id="resto-specs-list">
-                        <div class="flex items-center gap-3 text-xs text-neutral-300">
-                            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Full engine overhaul & crankshaft balancing
-                        </div>
-                        <div class="flex items-center gap-3 text-xs text-neutral-300">
-                            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Custom split-spoke alloys with updated disc brakes
-                        </div>
-                        <div class="flex items-center gap-3 text-xs text-neutral-300">
-                            <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Electroplated chrome exhausts and crash-guards
-                        </div>
-                    </div>
+            <!-- Highly sorted Restoration layout: 1. Name -> 2. Images (Before/After) -> 3. About [10] -->
+            <!-- Modified to replace standard input range with glowing visual divider drag handle [10] -->
+            <div class="max-w-5xl mx-auto space-y-8 bg-neutral-900/20 p-6 md:p-10 rounded-3xl border border-white/5 relative">
+                
+                <!-- 1. NAME (Title & Badges) -->
+                <div class="text-center border-b border-white/5 pb-6">
+                    <span id="resto-badge" class="px-4 py-1.5 border border-gold/30 bg-gold/5 text-gold text-[10px] tracking-widest rounded-full uppercase font-mono font-bold">Classic 2-Stroke Rebuild</span>
+                    <h3 id="resto-title" class="font-display text-3xl md:text-5xl font-black uppercase tracking-tight text-white mt-4">Yamaha RX 100 Resto-Mod</h3>
                 </div>
 
-                <!-- Before/After Compare Slider Container (100% Unobstructed Image Layout) -->
-                <div class="lg:col-span-7">
-                    <div id="slider-container" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl select-none bg-neutral-950">
+                <!-- 2. IMAGES (Before/After comparison slider center-stage) -->
+                <div class="w-full">
+                    <div id="slider-container" class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 shadow-2xl select-none bg-neutral-950">
                         
                         <!-- AFTER IMAGE (Renders at 100% full opacity with no dark overlay) -->
                         <div id="slider-after-bg" class="absolute inset-0 bg-cover bg-center transition-all duration-300"></div>
@@ -685,13 +650,44 @@
                             <span id="slider-before-badge" class="text-[9px] font-mono text-neutral-400 tracking-[0.25em] uppercase">BEFORE // RAW UTILITY</span>
                         </div>
                         <div class="absolute top-4 right-4 z-30 bg-black/60 backdrop-blur-md border border-gold/30 px-3 py-1.5 rounded-full pointer-events-none">
-                            <span id="slider-after-badge" class="text-[9px] font-mono text-gold tracking-[0.25em] uppercase font-bold">AFTER // RESTORED PRO</span>
+                            <span id="slider-after-badge" class="text-[9px] font-mono text-gold tracking-[0.25em] uppercase font-bold font-mono">AFTER // RESTORED PRO</span>
                         </div>
 
-                        <!-- Drag slider input -->
-                        <input type="range" min="0" max="100" value="50" id="slider-input" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-40">
+                        <!-- Tactile Glowing Divider Line with Custom Center Drag handle (Resolves scroll interception bugs) [10] -->
+                        <div id="slider-handle" class="absolute inset-y-0 z-30 w-[3px] bg-gold flex items-center justify-center" style="left: 50%;">
+                            <div class="w-8 h-8 rounded-full bg-black border-2 border-gold flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.6)] cursor-ew-resize">
+                                <svg class="w-4 h-4 text-gold select-none pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 3. ABOUT (Description details & specs checklist) -->
+                <div id="resto-text-container" class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-6 border-t border-white/5 items-start">
+                    <div class="md:col-span-7 space-y-4">
+                        <h4 class="text-[10px] tracking-[0.25em] text-neutral-500 uppercase font-bold font-mono">01 // PROJECT OVERVIEW & METRICS</h4>
+                        <p id="resto-desc" class="text-neutral-400 text-sm font-light leading-relaxed">
+                            A legendary classic completely restored from an engine-seizure state. Features a full engine block re-bore, crankshaft balancing, original metallic wine-red paint detailing, custom alloy conversions, and heavy-duty chrome plating.
+                        </p>
+                    </div>
+                    <div class="md:col-span-5 space-y-3">
+                        <h4 class="text-[10px] tracking-[0.25em] text-neutral-500 uppercase font-bold font-mono">02 // ALIGNMENT SPECS</h4>
+                        <div class="space-y-2" id="resto-specs-list">
+                            <div class="flex items-center gap-3 text-xs text-neutral-300">
+                                <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Full engine overhaul & crankshaft balancing
+                            </div>
+                            <div class="flex items-center gap-3 text-xs text-neutral-300">
+                                <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Custom split-spoke alloys with updated disc brakes
+                            </div>
+                            <div class="flex items-center gap-3 text-xs text-neutral-300">
+                                <span class="w-1.5 h-1.5 bg-gold rounded-full"></span> Electroplated chrome exhausts and crash-guards
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1012,61 +1008,62 @@
                         </div>
 
                         <!-- Interactive Service Package Selection Grid (Synchronized to Standard hidden Select Form element) -->
+                        <!-- Prices and hours updated exactly to: Valve Checkup (₹300, 30min), ECU Tuning (₹1500, 1.5 hr), Fork Oil (₹600, 3hr), General (₹1200, 2hr) [10] -->
                         <div>
                             <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-3 font-mono">04 // CALIBRATION SPECIFICATION PACKAGE</label>
                             
                             <!-- Kept exact original Select options in a hidden dropdown to preserve standard submit mechanics -->
                             <select id="rider-calibration-select" class="hidden">
-                                <option value="Desmodromic Valve Checkup" data-price="12500" data-time="6 hrs">Desmodromic Valve Checkup</option>
-                                <option value="Direct ECU Tuning & Map flash" data-price="8000" data-time="3 hrs">Direct ECU Tuning & Map flash</option>
-                                <option value="Complete Fork Oil Restructuring" data-price="4500" data-time="4 hrs" selected>Complete Fork Oil Restructuring</option>
-                                <option value="General Core Service Cycle" data-price="3500" data-time="2.5 hrs">General Core Service Cycle</option>
+                                <option value="Valve Checkup" data-price="300" data-time="30 min">Valve Checkup</option>
+                                <option value="ECU Tuning" data-price="1500" data-time="1.5 hr">ECU Tuning</option>
+                                <option value="Fork Oil Calibration" data-price="600" data-time="3 hr" selected>Fork Oil Calibration</option>
+                                <option value="General Maintenance" data-price="1200" data-time="2 hr">General Maintenance</option>
                             </select>
 
                             <!-- Beautiful visual grid blocks that bind directly to select options -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div onclick="selectServicePackage('Desmodromic Valve Checkup', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                <div onclick="selectServicePackage('Valve Checkup', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
                                     <div>
                                         <div class="flex justify-between items-center">
-                                            <span class="text-[8px] font-mono tracking-widest text-gold bg-gold/10 px-2 py-0.5 rounded-full">SPEC PRO</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~6 Hrs</span>
+                                            <span class="text-[8px] font-mono tracking-widest text-gold bg-gold/10 px-2 py-0.5 rounded-full">VALVE SET</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~30 Min</span>
                                         </div>
-                                        <h4 class="text-xs font-bold text-white mt-2">Desmodromic Valve Checkup</h4>
+                                        <h4 class="text-xs font-bold text-white mt-2">Valve Checkup</h4>
                                     </div>
-                                    <div class="text-right text-gold text-xs font-mono font-bold">₹12,500</div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹300</div>
                                 </div>
 
-                                <div onclick="selectServicePackage('Direct ECU Tuning & Map flash', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                <div onclick="selectServicePackage('ECU Tuning', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
                                     <div>
                                         <div class="flex justify-between items-center">
                                             <span class="text-[8px] font-mono tracking-widest text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">DIAGNOSTIC</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~3 Hrs</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~1.5 Hr</span>
                                         </div>
-                                        <h4 class="text-xs font-bold text-white mt-2">Direct ECU Tuning & Map flash</h4>
+                                        <h4 class="text-xs font-bold text-white mt-2">ECU Tuning</h4>
                                     </div>
-                                    <div class="text-right text-gold text-xs font-mono font-bold">₹8,000</div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹1,500</div>
                                 </div>
 
-                                <div onclick="selectServicePackage('Complete Fork Oil Restructuring', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative active-pkg-card">
+                                <div onclick="selectServicePackage('Fork Oil Calibration', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative active-pkg-card">
                                     <div>
                                         <div class="flex justify-between items-center">
                                             <span class="text-[8px] font-mono tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">CHASSIS</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~4 Hrs</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~3 Hr</span>
                                         </div>
-                                        <h4 class="text-xs font-bold text-white mt-2">Complete Fork Oil Restructuring</h4>
+                                        <h4 class="text-xs font-bold text-white mt-2">Fork Oil Calibration</h4>
                                     </div>
-                                    <div class="text-right text-gold text-xs font-mono font-bold">₹4,500</div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹600</div>
                                 </div>
 
-                                <div onclick="selectServicePackage('General Core Service Cycle', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                <div onclick="selectServicePackage('General Maintenance', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
                                     <div>
                                         <div class="flex justify-between items-center">
                                             <span class="text-[8px] font-mono tracking-widest text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">MAINTENANCE</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~2.5 Hrs</span>
+                                            <span class="text-[9px] font-mono text-neutral-500">~2 Hr</span>
                                         </div>
-                                        <h4 class="text-xs font-bold text-white mt-2">General Core Service Cycle</h4>
+                                        <h4 class="text-xs font-bold text-white mt-2">General Maintenance</h4>
                                     </div>
-                                    <div class="text-right text-gold text-xs font-mono font-bold">₹3,500</div>
+                                    <div class="text-right text-gold text-xs font-mono font-bold">₹1,200</div>
                                 </div>
                             </div>
                         </div>
@@ -1113,6 +1110,7 @@
                 </div>
 
                 <!-- Right Hand Visual Job Card Receipt Summary (5 Columns) -->
+                <!-- Updated instrument levy and solvents base fee to ₹500 [10] -->
                 <div class="lg:col-span-5 bg-gradient-to-br from-neutral-950 to-neutral-900 border border-gold/20 p-6 md:p-8 rounded-3xl relative shadow-2xl flex flex-col justify-between overflow-hidden">
                     <div class="absolute inset-0 carbon-pattern opacity-10 pointer-events-none"></div>
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
@@ -1146,11 +1144,11 @@
                             </div>
                             <div class="flex justify-between items-start py-1.5 border-b border-white/5">
                                 <span class="text-neutral-500 uppercase text-[9px]">CALIBRATION TYPE</span>
-                                <span class="text-gold font-medium text-[11px] text-right max-w-[200px]" id="meta-calibration">Complete Fork Oil Restructuring</span>
+                                <span class="text-gold font-medium text-[11px] text-right max-w-[200px]" id="meta-calibration">Fork Oil Calibration</span>
                             </div>
                             <div class="flex justify-between items-center py-1.5 border-b border-white/5">
                                 <span class="text-neutral-500 uppercase text-[9px]">ESTIMATED COMPLETION</span>
-                                <span class="text-white text-[11px]" id="meta-duration">4 hrs</span>
+                                <span class="text-white text-[11px]" id="meta-duration">3 hr</span>
                             </div>
                             <div class="flex justify-between items-center py-1.5 border-b border-white/5">
                                 <span class="text-neutral-500 uppercase text-[9px]">SCHEDULED TIMEFRAME</span>
@@ -1164,7 +1162,7 @@
                         <div class="space-y-2 text-xs font-mono">
                             <div class="flex justify-between text-neutral-400">
                                 <span>BASE SERVICE FEE</span>
-                                <span id="meta-base-price">₹4,500</span>
+                                <span id="meta-base-price">₹600</span>
                             </div>
                             <div class="flex justify-between text-neutral-400">
                                 <span>INSTRUMENT LEVY & SOLVENTS</span>
@@ -1176,7 +1174,7 @@
                             </div>
                             <div class="flex justify-between text-white font-bold text-sm pt-4 border-t border-white/10">
                                 <span class="text-gold">ESTIMATED TOTAL</span>
-                                <span id="meta-total-price" class="text-gold">₹5,000</span>
+                                <span id="meta-total-price" class="text-gold">₹1,100</span>
                             </div>
                         </div>
 
@@ -1191,67 +1189,6 @@
 
                 </div>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- SUCCESS BOOKING RECEIPT TICKET EXPORT MODAL -->
-    <div id="booking-success-modal" class="fixed inset-0 bg-black/95 z-[10000] hidden flex-col items-center justify-center p-4 backdrop-blur-md">
-        <div class="w-full max-w-md bg-neutral-900 border border-gold/30 p-8 rounded-3xl relative shadow-2xl text-center space-y-6">
-            <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
-            
-            <div class="w-16 h-16 rounded-full bg-gold/15 border-2 border-gold flex items-center justify-center text-gold mx-auto">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-
-            <div>
-                <h4 class="font-display font-black uppercase text-xl text-white tracking-wider">TICKET QUEUED SUCCESSFULLY</h4>
-                <p class="text-neutral-400 text-xs mt-2 leading-relaxed">
-                    Aashaq Bike Point labs system has recorded your service ticket parameters. Our master craftsman will coordinate the arrival validation.
-                </p>
-            </div>
-
-            <!-- Export Actions -->
-            <div class="bg-neutral-950 p-4 rounded-2xl border border-white/5 space-y-2 text-left font-mono text-xs">
-                <div class="flex justify-between"><span class="text-neutral-500">RECORD ID</span><span class="text-gold font-bold" id="success-id">#ABP-XXXX</span></div>
-                <div class="flex justify-between"><span class="text-neutral-500">MACHINE</span><span class="text-white" id="success-machine">-</span></div>
-                <div class="flex justify-between"><span class="text-neutral-500">SERVICE PACK</span><span class="text-white text-right max-w-[180px] truncate" id="success-service">-</span></div>
-                <div class="flex justify-between"><span class="text-neutral-500">TOTAL EST</span><span class="text-gold" id="success-total">-</span></div>
-            </div>
-
-            <div class="space-y-3">
-                <button id="success-whatsapp-btn" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs tracking-widest transition-all uppercase flex items-center justify-center gap-2 font-mono">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
-                    DIRECT DISPATCH TO WHATSAPP DESK
-                </button>
-                <button onclick="closeSuccessModal()" class="w-full py-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white font-medium text-xs tracking-widest transition-all uppercase font-mono">
-                    RETURN TO WORKSPACE
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- THE TMR END-OF-PAGE TELEMETRY LINK CONTAINER (Location 3) -->
-    <section class="relative py-24 px-4 bg-gradient-to-b from-[#090909] to-black border-t border-white/5 z-10 transition-colors">
-        <div class="max-w-5xl mx-auto glass-panel border border-emerald-500/20 p-8 md:p-12 rounded-3xl relative overflow-hidden text-center flex flex-col items-center">
-            <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none"></div>
-            <div class="absolute -top-12 -right-12 w-64 h-64 bg-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
-            
-            <span class="text-[9px] tracking-[0.4em] text-emerald-400 font-mono font-bold uppercase block mb-3">SYNCHRONIZED SYSTEMS</span>
-            <h2 class="font-display text-2xl md:text-4xl font-black uppercase text-white max-w-2xl leading-tight mb-4">
-                AASHAQ WORKSHOP & <span class="text-emerald-400">TMR MOTORCYCLE LOGS</span>
-            </h2>
-            <p class="text-neutral-400 text-xs font-light leading-relaxed max-w-xl mb-8">
-                Access your cloud-saved service charts, track route telemetry maps, log continuous RPM levels, and schedule live performance reviews using the linked ride dashboard portal.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(16,185,129,0.2)] font-mono">
-                    Access Telemetry Dashboard ↗
-                </a>
-                <button onclick="toggleMotoBhatConsole()" class="px-8 py-3.5 rounded-full border border-gold/30 hover:border-gold bg-black/50 text-gold text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center justify-center gap-2 font-mono">
-                    Launch Diagnostic AI Core
-                </button>
             </div>
         </div>
     </section>
@@ -1456,7 +1393,7 @@
             }
         };
 
-        // Complete Restoration Projects Map Grid
+        // Expanded Restoration Projects Map Grid to include newly requested vehicles [10]
         const restorationProjects = {
             rx100: {
                 title: "Yamaha RX 100 Restoration",
@@ -1471,6 +1408,76 @@
                 afterImg: "rx100-after.jpg",
                 beforeText: "CLASSIC RX 100 // BEFORE",
                 afterText: "CLASSIC RX 100 // AFTER"
+            },
+            xl100: {
+                title: "TVS XL100 Utility Overhaul",
+                subtitle: "Heavy-Duty Frame Align & Restoration",
+                desc: "A full frame and chassis restoration on a hard-working utility vehicle. Features high-tensile structural welding, rust-preventive heavy multi-coat primer sealing, reinforced dual rear shock configurations, and updated drum brake setups.",
+                specs: [
+                    "Reinforced subframe & cargo platform struts",
+                    "Rust-chem stripping and multi-coat high-gloss paint finish",
+                    "Heavy-duty dual rear coil configuration"
+                ],
+                beforeImg: "xl100-before.jpg",
+                afterImg: "xl100-after.jpg",
+                beforeText: "TVS XL100 // BEFORE",
+                afterText: "TVS XL100 // AFTER"
+            },
+            zr125: {
+                title: "Yamaha Ray ZR 125 Tuning",
+                subtitle: "Scooter Variator & Clutch Alignment",
+                desc: "An aggregate of custom styling and continuous variator pulley alignment. Features upgraded sporty neon graphics layout, complete exhaust manifold decarbonizing, high-speed clutch shoe resurfacing, and stiffened front hydraulic seals.",
+                specs: [
+                    "Variator roller replacement & clutch adjustment",
+                    "Gloss black paint with dynamic neon detailing",
+                    "Upgraded performance air filter elements"
+                ],
+                beforeImg: "zr125-before.jpg",
+                afterImg: "zr125-after.jpg",
+                beforeText: "ZR 125 // BEFORE",
+                afterText: "ZR 125 // AFTER"
+            },
+            fzv1: {
+                title: "Yamaha FZ V1 Classic Rebuild",
+                subtitle: "Naked Streetfighter Resto-Mod",
+                desc: "Bringing Yamaha's iconic first naked streetfighter back to life. Includes full chassis laser realigning, complete dual-piston front caliper rebuild, carburetor sonic clearing, and complete matte-black block powder coating.",
+                specs: [
+                    "Front hydraulic fork oil overhaul & seals replacement",
+                    "Sonic cylinder chamber clearing & jet-needle tuning",
+                    "Premium matte-black block thermal paint detailing"
+                ],
+                beforeImg: "fzv1-before.jpg",
+                afterImg: "fzv1-after.jpg",
+                beforeText: "FZ V1 // BEFORE",
+                afterText: "FZ V1 // AFTER"
+            },
+            r15v1: {
+                title: "Yamaha R15 V1 Classic Restoration",
+                subtitle: "Liquid-Cooled Deltabox Restructure",
+                desc: "A full restoration of the machine that redefined Indian sport biking. Features a complete Deltabox chassis alignment check, cylinder head replacement, dynamic cooling pump rebuild, and original racing-blue paint restoration.",
+                specs: [
+                    "Precision Deltabox frame geometry calibration",
+                    "Original Racing Blue decal & panel restructuring",
+                    "Water pump assembly overhaul & radiator core flush"
+                ],
+                beforeImg: "r15v1-before.jpg",
+                afterImg: "r15v1-after.jpg",
+                beforeText: "R15 V1 // BEFORE",
+                afterText: "R15 V1 // AFTER"
+            },
+            r15v2: {
+                title: "Yamaha R15 V2 Track Rebuild",
+                subtitle: "High-Performance Split-Seat Custom Rebuild",
+                desc: "The iconic R15 V2 updated with track-day level components. Features rear aluminum swingarm alignment check, complete fuel-injector dynamic ultrasonic clearing, custom carbon-fiber visual overlays, and progressive ECU mapping.",
+                specs: [
+                    "Ultrasonic fuel injector flush & throttle valve sync",
+                    "Track-aligned rear aluminum swingarm alignment",
+                    "Carbon-fiber visual finish & custom decals"
+                ],
+                beforeImg: "r15v2-before.jpg",
+                afterImg: "r15v2-after.jpg",
+                beforeText: "R15 V2 // BEFORE",
+                afterText: "R15 V2 // AFTER"
             },
             splendor: {
                 title: "Hero Splendor Café-Racer Mod",
@@ -1568,15 +1575,25 @@
             afterBadge.innerText = data.afterText;
             beforeBadge.innerText = data.beforeText;
 
+            // Reset dynamic comparison slider and custom handle positions back to 50% on project swap [10]
+            const handle = document.getElementById("slider-handle");
+            const beforeOverlay = document.getElementById("before-overlay");
+            if (handle && beforeOverlay) {
+                handle.style.left = "50%";
+                beforeOverlay.style.width = "50%";
+                syncSliderImagesWidth();
+            }
+
             // Align active tabs with elegant Segmented Card highlights [10]
-            const keys = ["rx100", "splendor", "buraq"];
+            // Expanded to support all 8 active restoration projects
+            const keys = ["rx100", "xl100", "zr125", "fzv1", "r15v1", "r15v2", "splendor", "buraq"];
             keys.forEach(function(k) {
                 const btn = document.getElementById("tab-" + k);
                 if (btn) {
                     if (k === projectId) {
-                        btn.className = "group relative text-left p-4 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-24 active-tab shadow-[0_0_15px_rgba(212,175,55,0.25)]";
+                        btn.className = "group relative text-left p-3 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-20 active-tab shadow-[0_0_15px_rgba(212,175,55,0.25)]";
                     } else {
-                        btn.className = "group relative text-left p-4 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-24";
+                        btn.className = "group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20";
                     }
                 }
             });
@@ -1779,6 +1796,8 @@
                             generateRandomTicketID();
                             // Set initial active state highlights on booking visualizer
                             initBookingVisualizerSync();
+                            // Initialize interactive drag comparison slider
+                            initInteractiveRestorationSlider();
                         }
                     });
                 }, 800);
@@ -1824,25 +1843,113 @@
             }
         };
 
-        // --- BEFORE / AFTER COMPARE SLIDER LOGIC WITH SQUISH PREVENTION ---
-        const sliderInput = document.getElementById("slider-input");
-        const beforeOverlay = document.getElementById("before-overlay");
-        const sliderContainer = document.getElementById("slider-container");
-        const sliderBeforeBg = document.getElementById("slider-before-bg");
+        // --- BEFORE / AFTER COMPARTMENT DRAG SLIDER LOGIC WITH SCROLL BYPASS ---
+        // Solves mobile vertical scrolling locks while retaining full side drag capability [10]
+        function initInteractiveRestorationSlider() {
+            const container = document.getElementById("slider-container");
+            const handle = document.getElementById("slider-handle");
+            const beforeOverlay = document.getElementById("before-overlay");
+
+            if (!container || !handle || !beforeOverlay) return;
+
+            let isDragging = false;
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let isScrubbingHorizontally = false;
+
+            function processPositionUpdate(clientX) {
+                const rect = container.getBoundingClientRect();
+                let x = clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                const percentage = (x / rect.width) * 100;
+                beforeOverlay.style.width = percentage + "%";
+                handle.style.left = percentage + "%";
+                syncSliderImagesWidth();
+            }
+
+            // Mouse Event Listeners
+            handle.addEventListener("mousedown", function(e) {
+                isDragging = true;
+                e.preventDefault();
+            });
+
+            window.addEventListener("mousemove", function(e) {
+                if (!isDragging) return;
+                processPositionUpdate(e.clientX);
+            });
+
+            window.addEventListener("mouseup", function() {
+                isDragging = false;
+            });
+
+            // Touch Event Listeners (Bypasses vertical scroll lock)
+            handle.addEventListener("touchstart", function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                isScrubbingHorizontally = true;
+            }, { passive: true });
+
+            window.addEventListener("touchmove", function(e) {
+                if (!isScrubbingHorizontally) return;
+                const diffX = Math.abs(e.touches[0].clientX - touchStartX);
+                const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+
+                // Scrub horizontally if X movement is greater than vertical Y displacement
+                if (diffX > diffY) {
+                    if (e.cancelable) e.preventDefault();
+                    processPositionUpdate(e.touches[0].clientX);
+                }
+            }, { passive: false });
+
+            window.addEventListener("touchend", function() {
+                isScrubbingHorizontally = false;
+            });
+
+            // Tap/Click snap action across container
+            container.addEventListener("click", function(e) {
+                if (e.target === handle || handle.contains(e.target)) return;
+                processPositionUpdate(e.clientX);
+            });
+        }
 
         // Dynamic width synchronization to prevent image warping [10]
         function syncSliderImagesWidth() {
-            if (sliderContainer && sliderBeforeBg) {
-                sliderBeforeBg.style.width = sliderContainer.offsetWidth + "px";
+            const container = document.getElementById("slider-container");
+            const sliderBeforeBg = document.getElementById("slider-before-bg");
+            if (container && sliderBeforeBg) {
+                sliderBeforeBg.style.width = container.offsetWidth + "px";
             }
         }
         window.addEventListener("resize", syncSliderImagesWidth);
-        // Sync width immediately as slide interaction triggers
-        sliderInput.addEventListener("input", function(e) {
-            const percentage = e.target.value;
-            beforeOverlay.style.width = percentage + "%";
-            syncSliderImagesWidth();
-        });
+
+        // --- INTERACTIVE ACTIVE TELEMETRY DIAGNOSTICS HUD ENGINE ---
+        // Dynamically processes slider adjustments and recalculates mechanical outputs [10]
+        window.updateTelemetryHUD = function(targetName, value, efficiency, stress, barPercentage) {
+            const hudName = document.getElementById("hud-target-name");
+            const hudVal = document.getElementById("hud-readout-val");
+            const hudEff = document.getElementById("hud-efficiency");
+            const hudStress = document.getElementById("hud-stress");
+            const hudBar = document.getElementById("hud-compression-bar");
+
+            if (hudName) hudName.innerText = targetName;
+            if (hudVal) hudVal.innerText = value;
+            if (hudEff) hudEff.innerText = efficiency;
+            
+            if (hudStress) {
+                hudStress.innerText = stress;
+                if (stress === "CRITICAL" || stress === "UNBALANCED" || stress === "LEAN MIXTURE" || stress === "BOTTOMING RISK") {
+                    hudStress.className = "text-red-500 font-bold animate-pulse";
+                } else if (stress === "OPTIMUM" || stress === "Normal" || stress === "PERFECT") {
+                    hudStress.className = "text-emerald-400 font-bold";
+                } else {
+                    hudStress.className = "text-white font-medium";
+                }
+            }
+            if (hudBar) {
+                hudBar.style.width = barPercentage + "%";
+            }
+        };
 
         // --- INTERACTIVE ENGINE (HIGH-FIDELITY 4-STROKE ENGINE VISUALIZER) ---
         const canvas = document.getElementById("engine-canvas");
@@ -1972,14 +2079,12 @@
             // Left port
             ctx.beginPath();
             ctx.moveTo(centerX - 45, centerY - 100);
-            ctx.lineTo(centerX - 75, centerY - 105);
             ctx.lineTo(centerX - 75, centerY - 85);
             ctx.lineTo(centerX - 45, centerY - 85);
             ctx.stroke();
             // Right port
             ctx.beginPath();
             ctx.moveTo(centerX + 45, centerY - 100);
-            ctx.lineTo(centerX + 75, centerY - 105);
             ctx.lineTo(centerX + 75, centerY - 85);
             ctx.lineTo(centerX + 45, centerY - 85);
             ctx.stroke();
@@ -2376,4 +2481,4 @@ _Please confirm my slot in the priority workshop queue._`;
         }
     </script>
 </body>
-            </html>
+    </html>
