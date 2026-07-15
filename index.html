@@ -250,6 +250,7 @@
             <a href="#canvas-lab" class="hover:text-white transition-colors">3D LAB</a>
             <a href="#gallery" class="hover:text-white transition-colors">GALLERY</a>
             <a href="#founder" class="hover:text-white transition-colors">FOUNDER</a>
+            <a href="#team" class="hover:text-white transition-colors">TEAM</a>
             <button onclick="toggleMotoBhatConsole()" class="hover:text-white transition-colors text-gold flex items-center gap-1.5 font-bold">
                 MOTO-BHAT AI 
                 <span class="w-1.5 h-1.5 bg-gold rounded-full animate-ping"></span>
@@ -305,13 +306,13 @@
 
             <!-- TMR INTEGRATED HERO COMMAND CENTER BUTTON CLUSTERS (Location 1) -->
             <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-3xl">
-                <a href="#book" class="px-6 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-widest hover:bg-gold hover:text-black transition-all duration-300 uppercase shadow-md flex items-center justify-center">
+                <a href="#book" class="px-6 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-widest hover:bg-gold hover:text-black transition-all duration-300 uppercase shadow-md flex items-center justify-center" onmouseenter="playHapticClick()">
                     Schedule Tuning
                 </a>
-                <button onclick="toggleMotoBhatConsole()" class="px-6 py-4 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md text-gold font-semibold text-xs tracking-widest hover:border-gold transition-all duration-300 uppercase flex items-center justify-center gap-2">
+                <button onclick="toggleMotoBhatConsole()" class="px-6 py-4 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md text-gold font-semibold text-xs tracking-widest hover:border-gold transition-all duration-300 uppercase flex items-center justify-center gap-2" onmouseenter="playHapticClick()">
                     Consult Moto-Bhat <span class="w-1.5 h-1.5 bg-gold rounded-full animate-ping"></span>
                 </button>
-                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-full border border-emerald-500/40 bg-emerald-950/20 backdrop-blur-md text-emerald-400 font-semibold text-xs tracking-widest hover:border-emerald-400 hover:text-white transition-all duration-300 uppercase flex items-center justify-center gap-2 group">
+                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-full border border-emerald-500/40 bg-emerald-950/20 backdrop-blur-md text-emerald-400 font-semibold text-xs tracking-widest hover:border-emerald-400 hover:text-white transition-all duration-300 uppercase flex items-center justify-center gap-2 group" onmouseenter="playHapticClick()">
                     TMR Ride Portal 
                     <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -364,13 +365,13 @@
 
             <!-- Custom Navigation Tabs for the Mechanical Stack -->
             <div class="flex flex-wrap gap-2 mb-8 border-b border-white/10 pb-6 themed-border-color">
-                <button onclick="switchStackTab('engine-tab')" id="btn-engine-tab" class="px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all">
+                <button onclick="switchStackTab('engine-tab')" id="btn-engine-tab" class="px-4 py-2 rounded-full border border-gold text-black bg-gold text-[10px] font-mono tracking-widest transition-all" onmouseenter="playHapticClick()">
                     01 // CYLINDER HEAD
                 </button>
-                <button onclick="switchStackTab('electronics-tab')" id="btn-electronics-tab" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400">
+                <button onclick="switchStackTab('electronics-tab')" id="btn-electronics-tab" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400" onmouseenter="playHapticClick()">
                     02 // ECU MAPPING
                 </button>
-                <button onclick="switchStackTab('hydraulic-tab')" id="btn-hydraulic-tab" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400">
+                <button onclick="switchStackTab('hydraulic-tab')" id="btn-hydraulic-tab" class="px-4 py-2 rounded-full border border-white/10 text-neutral-400 hover:text-white hover:border-gold/50 text-[10px] font-mono tracking-widest transition-all themed-text-400" onmouseenter="playHapticClick()">
                     03 // SUSPENSION SAG
                 </button>
             </div>
@@ -468,34 +469,32 @@
                     </div>
                 </div>
 
-                <!-- Right Side Live Telemetry Console HUD (4 columns) -->
+                <!-- Right Side Live Telemetry Console HUD with Real-Time Oscilloscope Waveform Canvas [10] -->
                 <div class="lg:col-span-4">
                     <div class="glass-panel p-6 rounded-3xl border border-gold/20 bg-neutral-950/60 relative overflow-hidden flex flex-col justify-between h-[260px] md:h-[260px] lg:h-[260px] shadow-2xl">
                         <div class="absolute -right-12 -top-12 w-24 h-24 bg-gold/5 rounded-full blur-[40px] pointer-events-none"></div>
                         
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-white/5 pb-2.5">
                                 <span class="text-[9px] font-mono tracking-widest text-gold font-bold">LIVE TELEMETRY MONITOR</span>
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" id="hud-status-led"></span>
                             </div>
                             
-                            <div class="space-y-2 font-mono text-[11px]">
+                            <div class="space-y-1.5 font-mono text-[10px]">
                                 <div class="flex justify-between"><span class="text-neutral-500 uppercase">DIAGNOSTIC TARGET</span> <span id="hud-target-name" class="text-white">SHIM Clearance</span></div>
                                 <div class="flex justify-between"><span class="text-neutral-500 uppercase">CURRENT READOUT</span> <span id="hud-readout-val" class="text-gold font-bold">0.12mm</span></div>
                                 <div class="flex justify-between"><span class="text-neutral-500 uppercase">SYSTEM EFFICIENCY</span> <span id="hud-efficiency" class="text-emerald-400 font-bold">98.2%</span></div>
                                 <div class="flex justify-between"><span class="text-neutral-500 uppercase">CALIBRATION STRESS</span> <span id="hud-stress" class="text-emerald-400 font-bold">Normal</span></div>
                             </div>
                             
-                            <!-- Dynamic Graph Visualizer (CSS Bars) -->
-                            <div class="space-y-1.5 pt-3 border-t border-white/5">
-                                <span class="text-[9px] font-mono text-neutral-500">TUNE EXPANSION MATRIX</span>
-                                <div class="w-full h-3 bg-neutral-900 rounded overflow-hidden relative">
-                                    <div id="hud-compression-bar" class="h-full bg-gradient-to-r from-gold/50 to-gold w-[92%] transition-all duration-300"></div>
-                                </div>
+                            <!-- Real-Time Sinusoidal Telemetry Oscilloscope Canvas [10] -->
+                            <div class="space-y-1 pt-1.5 border-t border-white/5">
+                                <span class="text-[8px] font-mono text-neutral-500 block">WAVEFORM DYNAMICS (PSI/CYCLE)</span>
+                                <canvas id="hud-oscilloscope-canvas" class="w-full h-11 bg-neutral-950/80 rounded border border-white/5"></canvas>
                             </div>
                         </div>
                         
-                        <div class="font-mono text-[8px] text-neutral-600 flex justify-between items-center pt-4 border-t border-white/5">
+                        <div class="font-mono text-[8px] text-neutral-600 flex justify-between items-center pt-2 border-t border-white/5">
                             <span>AASHAQ DIAGNOSTIC CORE v4.1</span>
                             <span class="animate-pulse">HUD ACTIVE</span>
                         </div>
@@ -561,49 +560,49 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 max-w-5xl mx-auto">
                 
                 <!-- Card 01 - Yamaha RX 100 Tab -->
-                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="group relative text-left p-3 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-20 active-tab shadow-[0_0_15px_rgba(212,175,55,0.25)]">
+                <button onclick="updateRestorationProject('rx100')" id="tab-rx100" class="group relative text-left p-3 rounded-xl border border-gold bg-gold text-black transition-all duration-300 overflow-hidden flex flex-col justify-between h-20 active-tab shadow-[0_0_15px_rgba(212,175,55,0.25)]" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 01</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">YAMAHA RX 100</h4>
                 </button>
 
                 <!-- Card 02 - TVS XL100 Tab -->
-                <button onclick="updateRestorationProject('xl100')" id="tab-xl100" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('xl100')" id="tab-xl100" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 02</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">TVS XL100</h4>
                 </button>
 
                 <!-- Card 03 - ZR 125 Tab -->
-                <button onclick="updateRestorationProject('zr125')" id="tab-zr125" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('zr125')" id="tab-zr125" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 03</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">ZR 125</h4>
                 </button>
 
                 <!-- Card 04 - FZ V1 Tab -->
-                <button onclick="updateRestorationProject('fzv1')" id="tab-fzv1" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('fzv1')" id="tab-fzv1" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 04</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">FZ V1</h4>
                 </button>
 
                 <!-- Card 05 - R15 V1 Tab -->
-                <button onclick="updateRestorationProject('r15v1')" id="tab-r15v1" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('r15v1')" id="tab-r15v1" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 05</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">R15 V1</h4>
                 </button>
 
                 <!-- Card 06 - R15 V2 Tab -->
-                <button onclick="updateRestorationProject('r15v2')" id="tab-r15v2" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('r15v2')" id="tab-r15v2" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 06</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">R15 V2</h4>
                 </button>
 
                 <!-- Card 07 - Hero Splendor Tab -->
-                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('splendor')" id="tab-splendor" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 07</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">HERO SPLENDOR</h4>
                 </button>
 
                 <!-- Card 08 - Buraq Tab -->
-                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20">
+                <button onclick="updateRestorationProject('buraq')" id="tab-buraq" class="group relative text-left p-3 rounded-xl border border-white/10 hover:border-gold/50 bg-neutral-900/40 hover:bg-neutral-900/60 transition-all duration-300 overflow-hidden flex flex-col justify-between h-20" onmouseenter="playHapticClick()">
                     <span class="text-[8px] font-mono tracking-widest text-neutral-500 group-[.active-tab]:text-black/60 font-bold uppercase">PROJECT 08</span>
                     <h4 class="font-display font-black text-xs text-white group-[.active-tab]:text-black uppercase tracking-wider truncate">BURAQ SPORT</h4>
                 </button>
@@ -669,7 +668,7 @@
                     <div class="md:col-span-7 space-y-4">
                         <h4 class="text-[10px] tracking-[0.25em] text-neutral-500 uppercase font-bold font-mono">01 // PROJECT OVERVIEW & METRICS</h4>
                         <p id="resto-desc" class="text-neutral-400 text-sm font-light leading-relaxed">
-                            A legendary classic completely restored from an engine-seizure state. Features a full engine block re-bore, crankshaft balancing, original metallic wine-red paint detailing, custom alloy conversions, and heavy-duty chrome plating.
+                            A classic completely restored from an engine-seizure state. Features a full engine block re-bore, crankshaft balancing, original metallic wine-red paint detailing, custom alloy conversions, and heavy-duty chrome plating.
                         </p>
                     </div>
                     <div class="md:col-span-5 space-y-3">
@@ -725,6 +724,333 @@
         </div>
     </section>
 
+    <!-- WORKSHOP TEAM SECTION (SIDEWAYS SCROLLABLE VIEWPORT) -->
+    <!-- Reconstructed with round dynamic profile elements matching Image 2's structure -->
+    <section id="team" class="relative py-28 px-4 themed-bg-900 z-10 border-t border-white/5 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.4em] text-gold font-semibold block mb-3">EXPERTS ON DECK</span>
+                    <h2 class="font-display text-2xl md:text-4xl font-black uppercase tracking-tight themed-text-100">WORKSHOP TEAM</h2>
+                </div>
+                <p class="text-neutral-400 max-w-sm mt-4 md:mt-0 text-[11px] tracking-wide font-light leading-relaxed themed-text-400">
+                    The elite crew handling mechanical diagnostics and high-tolerance restorations at Aashaq Bike Point. Swipe or scroll sideways to view the team list.
+                </p>
+            </div>
+
+            <!-- Horizontal viewport layout rebuilt without collapsible min-w structures -->
+            <div class="w-full overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-gold" style="-webkit-overflow-scrolling: touch;">
+                <div class="flex gap-6 pr-4 pb-2">
+                    
+                    <!-- Team Card 1 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <!-- Round Profile Frame matching Image 2 -->
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="https://res.cloudinary.com/prjgzqvy/image/upload/v1784029507/IMG-20260710-WA0038_awy6cf.jpg" alt="Irfan ah" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <!-- Details -->
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Irfan Ah</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Jonier machenic</span>
+                            
+                            <!-- Dates Badge -->
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Oct 2018 – Present not often
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Specialist  throttle body synchronization.
+                            </p>
+                        </div>
+                        
+                        <!-- Call Link -->
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584611" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 99999
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 2 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="https://res.cloudinary.com/prjgzqvy/image/upload/v1784017822/20260712_132519_r7w88m.jpg" alt="Basit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Basit</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">jonior </span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Mar 2023 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Dedicated restoration build specialist focusing on  balance setups, and vintage modifications.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584622" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 84622
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 3 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="https://res.cloudinary.com/prjgzqvy/image/upload/v1784017821/20260712_132843_jaewok.jpg" alt="Shabir Ahmad" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Shabir Ahmad</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Chassis & Suspension Specialist</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Jun 2024 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Manages structural fork alignments,  dynamic compression checks, and sag geometry.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584633" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 9103935292
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 4 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="https://res.cloudinary.com/prjgzqvy/image/upload/v1784017821/20260712_132757_jvxcss.jpg" alt="Sahil Ahamad" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Sahil Ahamad</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">New joining</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Jan 2026 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Assisting with  carbon cleaning, utility maintenance routines, and assembly testing.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584644" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 7051161524
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 5 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="https://res.cloudinary.com/prjgzqvy/image/upload/v1784017822/20260712_104625_thzg01.jpg" alt="Abuzar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Abuzar</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Senior Electrical Engineer</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Feb 2023 – Present not often
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Expert on high-voltage circuit diagrams, digital sensor configurations, ABS modules, and custom lithium-ion battery integration.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584655" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 6 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="team-member6.jpg" alt="Suhail Dar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Mansoor Ah</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Wheel Alignment Tech</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Aug 2022 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Specializes in laser wheel hub alignment, performance radial tyre mounting, and spoke tensioning setups.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584666" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 84666
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 7 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="team-member7.jpg" alt="Ishfaq Ahmad" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4"></h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Paint & Coating Artisan</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: May 2021 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Directs the aesthetic restoration bay. Focuses on metallic multi-coat painting, custom pin-striping, and protective ceramic coatings.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584677" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 84677
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 8 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="team-member8.jpg" alt="Firdous Mir" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Firdous Mir</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Engine Assembly Consultant</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Jul 2018 – Oct 2024
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                An experienced master of classic single-cylinder configurations, valve seat grinding, and legacy gearbox overhauls.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584688" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 84688
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 9 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="team-member9.jpg" alt="Yawar Bashir" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Yawar Bashir</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Carburetor Tuner</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Apr 2023 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Expert on float configurations, jet size adjustment, and sonic tank cleaning processes for optimal fuel delivery systems.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584699" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 84699
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Card 10 -->
+                    <div class="w-[280px] md:w-[320px] flex-shrink-0 glass-panel p-6 rounded-3xl flex flex-col justify-between items-center text-center hover:border-gold/40 transition-all duration-300 select-none group" style="scroll-snap-align: start;" onmouseenter="playHapticClick()">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 h-32 rounded-full overflow-hidden relative border-2 border-gold/40 group-hover:border-gold transition-colors duration-300 shadow-xl bg-neutral-950 flex-shrink-0">
+                                <img src="team-member10.jpg" alt="Tariq Ahmad" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&q=80&w=400';">
+                            </div>
+                            
+                            <h4 class="font-display font-bold text-base text-white themed-text-100 mt-4">Tariq Ahmad</h4>
+                            <span class="text-[9px] font-mono text-gold tracking-widest uppercase block mt-1 mb-2">Apprentice Tech</span>
+                            
+                            <span class="text-[8px] font-mono text-neutral-400 bg-neutral-950/40 border border-white/5 py-1 px-3 rounded-full mb-3 inline-block">
+                                Active: Nov 2025 – Present
+                            </span>
+                            
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed themed-text-400 max-w-[240px]">
+                                Assisting seniors with oil filter setups, clutch cable routing, basic cleaning, and system checklist updates.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/5 w-full flex flex-col items-center">
+                            <span class="text-[8px] font-mono text-neutral-500 uppercase mb-1">Contact Support</span>
+                            <a href="tel:+919906584610" class="text-gold font-mono text-xs hover:underline flex items-center gap-1.5 justify-center">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                +91 99065 84610
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS (GLASS CARDS) -->
     <section class="relative py-32 px-4 bg-[#0B0B0B] z-10 border-t border-white/5 transition-colors">
         <div class="max-w-7xl mx-auto">
@@ -734,7 +1060,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between">
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between" onmouseenter="playHapticClick()">
                     <p class="text-neutral-300 text-xs font-light leading-relaxed italic mb-8">
                         "The throttle modulation on my Triumph Bonneville has reached surgical levels after their dyno and manifold re-balancing service."
                     </p>
@@ -744,7 +1070,7 @@
                     </div>
                 </div>
 
-                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between">
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between" onmouseenter="playHapticClick()">
                     <p class="text-neutral-300 text-xs font-light leading-relaxed italic mb-8">
                         "Aashaq's valve profiling on my desmo block engine was precise. You can hear the dynamic mechanical balance at high revs."
                     </p>
@@ -754,7 +1080,7 @@
                     </div>
                 </div>
 
-                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between">
+                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between" onmouseenter="playHapticClick()">
                     <p class="text-neutral-300 text-xs font-light leading-relaxed italic mb-8">
                         "Moto-Bhat simulated my estimated maintenance cost instantly. The service itself was incredibly elite."
                     </p>
@@ -775,7 +1101,7 @@
             <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
                 <!-- Glowing Unique Custom Aesthetic Button for AI MotoBhat [10] -->
                 <div class="relative flex-shrink-0">
-                    <button onclick="toggleMotoBhatConsole()" class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-black via-neutral-900 to-[#121212] border-2 border-gold flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.75)] hover:scale-105 transition-all duration-300 overflow-hidden">
+                    <button onclick="toggleMotoBhatConsole()" class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-black via-neutral-900 to-[#121212] border-2 border-gold flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.75)] hover:scale-105 transition-all duration-300 overflow-hidden" onmouseenter="playHapticClick()">
                         <svg class="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] opacity-60" viewBox="0 0 100 100">
                             <circle cx="50" cy="50" r="42" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="14 10" fill="none"></circle>
                             <circle cx="50" cy="50" r="34" stroke="#AA7C11" stroke-width="1" stroke-dasharray="6 6" fill="none"></circle>
@@ -798,23 +1124,23 @@
 
             <!-- Instant Preset Questions -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
-                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left" onmouseenter="playHapticClick()">
                     ✦ Estimate Repair Cost
                 </button>
-                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left" onmouseenter="playHapticClick()">
                     ✦ WhatsApp Booking
                 </button>
-                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left" onmouseenter="playHapticClick()">
                     ✦ Location & Maps
                 </button>
-                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left">
+                <button onclick="toggleMotoBhatConsole()" class="bg-dark-900 border border-white/5 hover:border-gold/40 text-[10px] font-medium tracking-wide text-neutral-300 py-3 px-4 rounded-xl transition-all text-left" onmouseenter="playHapticClick()">
                     ✦ General Service Fees
                 </button>
             </div>
 
             <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <span class="text-[9px] font-mono text-neutral-500">MOTO-BHAT DIAGNOSTIC ENGINE v2.4</span>
-                <button onclick="toggleMotoBhatConsole()" class="px-6 py-3 rounded-full bg-gold text-black text-[10px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase font-mono">
+                <button onclick="toggleMotoBhatConsole()" class="px-6 py-3 rounded-full bg-gold text-black text-[10px] font-bold tracking-widest hover:bg-white transition-all duration-300 uppercase font-mono" onmouseenter="playHapticClick()">
                     START DIALOGUE CONSOLE ⚡
                 </button>
             </div>
@@ -837,14 +1163,14 @@
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-gold transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a3.838 3.838 0 110-7.676A3.838 3.838 0 0112 16zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"></path></svg>
                             </div>
                             <div>
                                 <h4 class="font-display font-bold tracking-wider text-xs uppercase text-white">Instagram</h4>
                                 <span class="text-[8px] text-neutral-500 font-mono">@aashaq_bike_point</span>
                             </div>
                         </div>
-                        <a href="https://www.instagram.com/aashaq_bike_point_villagam" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1">
+                        <a href="https://www.instagram.com/aashaq_bike_point_villagam" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1" onmouseenter="playHapticClick()">
                             Link <span>↗</span>
                         </a>
                     </div>
@@ -853,7 +1179,7 @@
                     <div class="rounded-xl overflow-hidden border border-white/10 bg-black/60 p-2.5 space-y-3 relative group/post cursor-pointer">
                         <div class="aspect-video w-full rounded-lg overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=400" alt="Instagram Post Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover/post:scale-105">
-                            <span class="absolute top-2 left-2 bg-black/80 text-gold text-[7px] font-mono tracking-widest px-2 py-0.5 rounded-full">LATEST PHOTO</span>
+                            <span class="absolute top-2 left-2 bg-black/85 text-gold text-[7px] font-mono tracking-widest px-2 py-0.5 rounded-full">LATEST PHOTO</span>
                         </div>
                         <div class="space-y-1">
                             <p class="text-[10px] text-neutral-400 font-light leading-relaxed line-clamp-2">
@@ -872,14 +1198,14 @@
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-red-500 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"></path></svg>
                             </div>
                             <div>
                                 <h4 class="font-display font-bold tracking-wider text-xs uppercase text-white">YouTube</h4>
                                 <span class="text-[8px] text-neutral-500 font-mono">@aashaqbikepoint</span>
                             </div>
                         </div>
-                        <a href="https://youtube.com/@aashaqbikepoint" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1">
+                        <a href="https://youtube.com/@aashaqbikepoint" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1" onmouseenter="playHapticClick()">
                             Channel <span>↗</span>
                         </a>
                     </div>
@@ -912,14 +1238,14 @@
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-blue-500 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"></path></svg>
                             </div>
                             <div>
                                 <h4 class="font-display font-bold tracking-wider text-xs uppercase text-white">Facebook</h4>
                                 <span class="text-[8px] text-neutral-500 font-mono">Official Profile</span>
                             </div>
                         </div>
-                        <a href="https://share.google/sfWdoUHd5DLgztnrU" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1">
+                        <a href="https://share.google/sfWdoUHd5DLgztnrU" target="_blank" rel="noopener noreferrer" class="text-gold text-[10px] font-mono tracking-widest hover:underline uppercase flex items-center gap-1" onmouseenter="playHapticClick()">
                             Link <span>↗</span>
                         </a>
                     </div>
@@ -928,7 +1254,7 @@
                     <div class="rounded-xl overflow-hidden border border-white/10 bg-black/60 p-2.5 space-y-3 relative group/post cursor-pointer">
                         <div class="aspect-video w-full rounded-lg overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=400" alt="Facebook Post Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover/post:scale-105">
-                            <span class="absolute top-2 left-2 bg-black/80 text-emerald-400 text-[7px] font-mono tracking-widest px-2 py-0.5 rounded-full">DIAGNOSTICS</span>
+                            <span class="absolute top-2 left-2 bg-black/85 text-emerald-400 text-[7px] font-mono tracking-widest px-2 py-0.5 rounded-full">DIAGNOSTICS</span>
                         </div>
                         <div class="space-y-1">
                             <p class="text-[10px] text-neutral-400 font-light leading-relaxed line-clamp-2">
@@ -963,7 +1289,7 @@
                         </p>
                     </div>
                 </div>
-                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center gap-2 whitespace-nowrap shadow-[0_4px_15px_rgba(16,185,129,0.25)] font-mono">
+                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center gap-2 whitespace-nowrap shadow-[0_4px_15px_rgba(16,185,129,0.25)] font-mono" onmouseenter="playHapticClick()">
                     Launch TMR Console ↗
                 </a>
             </div>
@@ -1022,44 +1348,44 @@
 
                             <!-- Beautiful visual grid blocks that bind directly to select options -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div onclick="selectServicePackage('Valve Checkup', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                <div onclick="selectServicePackage('Valve Checkup', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative" onmouseenter="playHapticClick()">
                                     <div>
                                         <div class="flex justify-between items-center">
-                                            <span class="text-[8px] font-mono tracking-widest text-gold bg-gold/10 px-2 py-0.5 rounded-full">VALVE SET</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~30 Min</span>
+                                            <span class="text-[8px] font-mono tracking-widest text-gold bg-gold/10 px-2 py-0.5 rounded-full font-bold">VALVE SET</span>
+                                            <span class="text-[9px] font-mono text-neutral-500 font-bold">~30 Min</span>
                                         </div>
                                         <h4 class="text-xs font-bold text-white mt-2">Valve Checkup</h4>
                                     </div>
                                     <div class="text-right text-gold text-xs font-mono font-bold">₹300</div>
                                 </div>
 
-                                <div onclick="selectServicePackage('ECU Tuning', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                <div onclick="selectServicePackage('ECU Tuning', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative" onmouseenter="playHapticClick()">
                                     <div>
                                         <div class="flex justify-between items-center">
-                                            <span class="text-[8px] font-mono tracking-widest text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">DIAGNOSTIC</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~1.5 Hr</span>
+                                            <span class="text-[8px] font-mono tracking-widest text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full font-bold">DIAGNOSTIC</span>
+                                            <span class="text-[9px] font-mono text-neutral-500 font-bold">~1.5 Hr</span>
                                         </div>
                                         <h4 class="text-xs font-bold text-white mt-2">ECU Tuning</h4>
                                     </div>
                                     <div class="text-right text-gold text-xs font-mono font-bold">₹1,500</div>
                                 </div>
 
-                                <div onclick="selectServicePackage('Fork Oil Calibration', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative active-pkg-card">
+                                <div onclick="selectServicePackage('Fork Oil Calibration', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative active-pkg-card" onmouseenter="playHapticClick()">
                                     <div>
                                         <div class="flex justify-between items-center">
-                                            <span class="text-[8px] font-mono tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">CHASSIS</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~3 Hr</span>
+                                            <span class="text-[8px] font-mono tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-bold">CHASSIS</span>
+                                            <span class="text-[9px] font-mono text-neutral-500 font-bold">~3 Hr</span>
                                         </div>
                                         <h4 class="text-xs font-bold text-white mt-2">Fork Oil Calibration</h4>
                                     </div>
                                     <div class="text-right text-gold text-xs font-mono font-bold">₹600</div>
                                 </div>
 
-                                <div onclick="selectServicePackage('General Maintenance', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative">
+                                <div onclick="selectServicePackage('General Maintenance', this)" class="service-option-card p-4 rounded-xl border border-white/5 bg-neutral-950/50 hover:border-gold/30 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[110px] relative" onmouseenter="playHapticClick()">
                                     <div>
                                         <div class="flex justify-between items-center">
-                                            <span class="text-[8px] font-mono tracking-widest text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">MAINTENANCE</span>
-                                            <span class="text-[9px] font-mono text-neutral-500">~2 Hr</span>
+                                            <span class="text-[8px] font-mono tracking-widest text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full font-bold">MAINTENANCE</span>
+                                            <span class="text-[9px] font-mono text-neutral-500 font-bold">~2 Hr</span>
                                         </div>
                                         <h4 class="text-xs font-bold text-white mt-2">General Maintenance</h4>
                                     </div>
@@ -1073,18 +1399,18 @@
                             <div>
                                 <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">05 // WORKSHOP TARGET DATE</label>
                                 <div class="flex gap-2" id="date-selector-group">
-                                    <button type="button" onclick="selectDate('Today', this)" class="flex-1 py-2 bg-neutral-950 border border-gold/40 text-[10px] font-mono font-bold text-gold rounded-lg transition-all">Today</button>
-                                    <button type="button" onclick="selectDate('Tomorrow', this)" class="flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">Tomorrow</button>
-                                    <button type="button" onclick="selectDate('Next Day', this)" class="flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">Next Day</button>
+                                    <button type="button" onclick="selectDate('Today', this)" class="flex-1 py-2 bg-neutral-950 border border-gold/40 text-[10px] font-mono font-bold text-gold rounded-lg transition-all" onmouseenter="playHapticClick()">Today</button>
+                                    <button type="button" onclick="selectDate('Tomorrow', this)" class="flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all" onmouseenter="playHapticClick()">Tomorrow</button>
+                                    <button type="button" onclick="selectDate('Next Day', this)" class="flex-1 py-2 bg-neutral-900/30 border border-white/5 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all" onmouseenter="playHapticClick()">Next Day</button>
                                 </div>
                                 <input type="hidden" id="selected-booking-date" value="Today">
                             </div>
                             <div>
                                 <label class="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-2 font-mono">06 // ESTIMATED WORKSHOP ARRIVAL</label>
                                 <div class="grid grid-cols-3 gap-2" id="time-selector-group">
-                                    <button type="button" onclick="selectTime('09:00 AM', this)" class="py-2 bg-neutral-950 border border-gold/40 text-[9px] font-mono font-bold text-gold rounded-lg transition-all">09:00 AM</button>
-                                    <button type="button" onclick="selectTime('12:00 PM', this)" class="py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">12:00 PM</button>
-                                    <button type="button" onclick="selectTime('03:30 PM', this)" class="py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all">03:30 PM</button>
+                                    <button type="button" onclick="selectTime('09:00 AM', this)" class="py-2 bg-neutral-950 border border-gold/40 text-[9px] font-mono font-bold text-gold rounded-lg transition-all" onmouseenter="playHapticClick()">09:00 AM</button>
+                                    <button type="button" onclick="selectTime('12:00 PM', this)" class="py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all" onmouseenter="playHapticClick()">12:00 PM</button>
+                                    <button type="button" onclick="selectTime('03:30 PM', this)" class="py-2 bg-neutral-900/30 border border-white/5 text-[9px] font-mono text-neutral-400 hover:text-white hover:border-gold/30 rounded-lg transition-all" onmouseenter="playHapticClick()">03:30 PM</button>
                                 </div>
                                 <input type="hidden" id="selected-booking-time" value="09:00 AM">
                             </div>
@@ -1098,10 +1424,10 @@
 
                         <!-- Form Submission CTA Clusters -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <button type="submit" class="py-4 rounded-xl bg-gold text-black text-[11px] font-bold tracking-widest hover:bg-white hover:scale-[1.02] transition-all duration-300 uppercase shadow-[0_4px_20px_rgba(212,175,55,0.25)] font-mono">
+                            <button type="submit" class="py-4 rounded-xl bg-gold text-black text-[11px] font-bold tracking-widest hover:bg-white hover:scale-[1.02] transition-all duration-300 uppercase shadow-[0_4px_20px_rgba(212,175,55,0.25)] font-mono" onmouseenter="playHapticClick()">
                                 SUBMIT TO QUEUE
                             </button>
-                            <button type="button" onclick="sendFormToWhatsApp()" class="py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold tracking-widest hover:scale-[1.02] transition-all duration-300 uppercase flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(16,185,129,0.2)] font-mono">
+                            <button type="button" onclick="sendFormToWhatsApp()" class="py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold tracking-widest hover:scale-[1.02] transition-all duration-300 uppercase flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(16,185,129,0.2)] font-mono" onmouseenter="playHapticClick()">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
                                 DIRECT TO WHATSAPP
                             </button>
@@ -1193,6 +1519,31 @@
         </div>
     </section>
 
+    <!-- THE TMR END-OF-PAGE TELEMETRY LINK CONTAINER (Location 3) -->
+    <section class="relative py-24 px-4 bg-gradient-to-b from-[#090909] to-black border-t border-white/5 z-10 transition-colors">
+        <div class="max-w-5xl mx-auto glass-panel border border-emerald-500/20 p-8 md:p-12 rounded-3xl relative overflow-hidden text-center flex flex-col items-center">
+            <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="absolute -top-12 -right-12 w-64 h-64 bg-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <span class="text-[9px] tracking-[0.4em] text-emerald-400 font-mono font-bold uppercase block mb-3">SYNCHRONIZED SYSTEMS</span>
+            <h2 class="font-display text-2xl md:text-4xl font-black uppercase text-white max-w-2xl leading-tight mb-4">
+                AASHAQ WORKSHOP & <span class="text-emerald-400">TMR MOTORCYCLE LOGS</span>
+            </h2>
+            <p class="text-neutral-400 text-xs font-light leading-relaxed max-w-xl mb-8">
+                Access your cloud-saved service charts, track route telemetry maps, log continuous RPM levels, and schedule live performance reviews using the linked ride dashboard portal.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://aathir-hussain-bhat.github.io/TMR-Customer/" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(16,185,129,0.2)] font-mono" onmouseenter="playHapticClick()">
+                    Access Telemetry Dashboard ↗
+                </a>
+                <button onclick="toggleMotoBhatConsole()" class="px-8 py-3.5 rounded-full border border-gold/30 hover:border-gold bg-black/50 text-gold text-[10px] font-bold tracking-widest transition-all duration-300 uppercase flex items-center justify-center gap-2 font-mono" onmouseenter="playHapticClick()">
+                    Launch Diagnostic AI Core
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="relative py-16 bg-[#040404] border-t border-white/5 text-neutral-500 z-10 text-xs tracking-wider transition-colors">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -1243,7 +1594,7 @@
             <div class="hidden md:block bg-dark-900 border border-emerald-500/30 px-3 py-1.5 rounded-2xl text-[10px] text-emerald-400 font-mono shadow-2xl tracking-widest opacity-0 group-hover:opacity-100 transition-all">
                 CHAT VIA WHATSAPP
             </div>
-            <button class="w-14 h-14 rounded-full bg-gradient-to-tr from-black to-dark-900 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 shadow-2xl hover:scale-105 transition-all relative">
+            <button class="w-14 h-14 rounded-full bg-gradient-to-tr from-black to-dark-900 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 shadow-2xl hover:scale-105 transition-all relative" onmouseenter="playHapticClick()">
                 <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-black animate-ping"></span>
                 <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-black"></span>
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
@@ -1255,7 +1606,7 @@
             <div class="hidden md:block bg-dark-900 border border-gold/40 px-3 py-1.5 rounded-2xl text-[9px] text-gold font-mono shadow-2xl tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300">
                 ✦ ENGINE AI CORE
             </div>
-            <button onclick="toggleMotoBhatConsole()" class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-black via-neutral-900 to-[#121212] border-2 border-gold flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.75)] hover:scale-105 transition-all duration-300 overflow-hidden">
+            <button onclick="toggleMotoBhatConsole()" class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-black via-neutral-900 to-[#121212] border-2 border-gold flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.75)] hover:scale-105 transition-all duration-300 overflow-hidden" onmouseenter="playHapticClick()">
                 <!-- Outer Spin Wheel -->
                 <svg class="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] opacity-60" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="42" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="14 10" fill="none"></circle>
@@ -1341,6 +1692,79 @@
 
     <!-- MAIN JAVASCRIPT LOGIC BLOCK -->
     <script>
+        // --- PRECISION INSTRUMENT TELEMETRY OSCILLOSCOPE HANDLER ---
+        // Dynamically draws live-updating mechanical wave nodes onto canvas [10]
+        const oscCanvas = document.getElementById("hud-oscilloscope-canvas");
+        const oscCtx = oscCanvas.getContext("2d");
+        let oscWidth = oscCanvas.width = oscCanvas.offsetWidth;
+        let oscHeight = oscCanvas.height = oscCanvas.offsetHeight;
+        let oscOffset = 0;
+        let oscTargetAmplitude = 12;
+        let oscTargetFrequency = 0.05;
+        let oscTargetNoise = 0.5;
+        let oscWaveColor = "#D4AF37";
+
+        let currentAmp = 12;
+        let currentFreq = 0.05;
+        let currentNoise = 0.5;
+
+        // Auto-scale canvas coordinates
+        window.addEventListener("resize", function() {
+            if (oscCanvas) {
+                oscWidth = oscCanvas.width = oscCanvas.offsetWidth;
+                oscHeight = oscCanvas.height = oscCanvas.offsetHeight;
+            }
+        });
+
+        // Loop to continuously clear and redraw sweep lines
+        function runOscilloscopeSweep() {
+            if (!oscCtx) return;
+            oscCtx.clearRect(0, 0, oscWidth, oscHeight);
+            
+            // Interpolate metrics towards goals for smooth UI damping
+            currentAmp += (oscTargetAmplitude - currentAmp) * 0.1;
+            currentFreq += (oscTargetFrequency - currentFreq) * 0.1;
+            currentNoise += (oscTargetNoise - currentNoise) * 0.1;
+
+            oscCtx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+            oscCtx.lineWidth = 1;
+            // Draw horizontal and vertical diagnostic grid divisions
+            for (let i = 0; i < oscWidth; i += 20) {
+                oscCtx.beginPath();
+                oscCtx.moveTo(i, 0);
+                oscCtx.lineTo(i, oscHeight);
+                oscCtx.stroke();
+            }
+            for (let j = 0; j < oscHeight; j += 15) {
+                oscCtx.beginPath();
+                oscCtx.moveTo(0, j);
+                oscCtx.lineTo(oscWidth, j);
+                oscCtx.stroke();
+            }
+
+            // Draw target waveform sweep
+            oscCtx.strokeStyle = oscWaveColor;
+            oscCtx.lineWidth = 1.5;
+            oscCtx.beginPath();
+            
+            for (let x = 0; x < oscWidth; x++) {
+                const sinusNode = Math.sin(x * currentFreq + oscOffset);
+                const noiseNode = (Math.random() - 0.5) * currentNoise;
+                const y = oscHeight / 2 + (sinusNode * currentAmp) + (noiseNode * currentAmp * 0.2);
+                
+                if (x === 0) {
+                    oscCtx.moveTo(x, y);
+                } else {
+                    oscCtx.lineTo(x, y);
+                }
+            }
+            oscCtx.stroke();
+            
+            oscOffset += 0.08;
+            requestAnimationFrame(runOscilloscopeSweep);
+        }
+        runOscilloscopeSweep();
+
         // Bulletproof dynamic display tab switching to eliminate Tailwind display conflicts [10]
         window.switchStackTab = function(tabId) {
             const stackContents = document.querySelectorAll(".stack-content");
@@ -1615,6 +2039,31 @@
                 audioCtx.resume();
             }
             document.getElementById("loader-status").innerText = "AUDIO SYSTEM: ENGAGED";
+        };
+
+        // Plays subtle cybernetic click sounds on element hovers for advanced acoustic feedback [10]
+        window.playHapticClick = function() {
+            if (!audioCtx) return;
+            try {
+                if (audioCtx.state === "suspended") {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.04);
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch(e) {}
         };
 
         window.startEngineSynth = function() {
@@ -1930,24 +2379,35 @@
             const hudVal = document.getElementById("hud-readout-val");
             const hudEff = document.getElementById("hud-efficiency");
             const hudStress = document.getElementById("hud-stress");
-            const hudBar = document.getElementById("hud-compression-bar");
+            const statusLed = document.getElementById("hud-status-led");
 
             if (hudName) hudName.innerText = targetName;
             if (hudVal) hudVal.innerText = value;
             if (hudEff) hudEff.innerText = efficiency;
             
+            // Adjust real-time oscilloscope sweep characteristics based on parameter input metrics
+            const numericValue = parseFloat(value);
+            if (!isNaN(numericValue)) {
+                oscTargetAmplitude = Math.max(5, Math.min(25, numericValue * 60));
+                oscTargetFrequency = Math.max(0.01, Math.min(0.2, 0.01 + (1 / numericValue) * 0.005));
+                oscTargetNoise = Math.max(0.1, Math.min(2.0, (100 - parseFloat(efficiency)) * 0.15));
+            }
+
             if (hudStress) {
                 hudStress.innerText = stress;
-                if (stress === "CRITICAL" || stress === "UNBALANCED" || stress === "LEAN MIXTURE" || stress === "BOTTOMING RISK") {
+                if (stress === "CRITICAL" || stress === "UNBALANCED" || stress === "LEAN MIXTURE" || stress === "BOTTOMING RISK" || stress === "HIGH ADVT") {
                     hudStress.className = "text-red-500 font-bold animate-pulse";
+                    oscWaveColor = "#EF4444"; // Telemetry sweep alerts red
+                    if (statusLed) statusLed.className = "w-2 h-2 rounded-full bg-red-500 animate-ping";
                 } else if (stress === "OPTIMUM" || stress === "Normal" || stress === "PERFECT") {
                     hudStress.className = "text-emerald-400 font-bold";
+                    oscWaveColor = "#10B981"; // Telemetry sweep resets green
+                    if (statusLed) statusLed.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
                 } else {
                     hudStress.className = "text-white font-medium";
+                    oscWaveColor = "#D4AF37"; // Custom default gold
+                    if (statusLed) statusLed.className = "w-2 h-2 rounded-full bg-gold animate-pulse";
                 }
-            }
-            if (hudBar) {
-                hudBar.style.width = barPercentage + "%";
             }
         };
 
@@ -2281,7 +2741,7 @@
             }
 
             const structuredMessage = 
-`🏍️ *AASHAQ BIKE POINT - WORKSHOP BOOKING* 🏍️
+`MK🏍️ *AASHAQ BIKE POINT - WORKSHOP BOOKING* 🏍️
 -----------------------------------------
 🎟️ *TICKET ID:* ${ticketId}
 👤 *RIDER:* ${riderNameVal}
@@ -2419,11 +2879,18 @@ _Please confirm my slot in the priority workshop queue._`;
                 },
                 smoothWheel: true
             });
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-            requestAnimationFrame(raf);
+
+            // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+            lenis.on('scroll', ScrollTrigger.update);
+
+            // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+            // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+            });
+
+            // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+            gsap.ticker.lagSmoothing(0);
         }
 
         // --- LEFT SIDE SCROLL SPROCKET ROTATION ENGINE ---
@@ -2455,7 +2922,8 @@ _Please confirm my slot in the priority workshop queue._`;
         function initScrollAnimations() {
             gsap.registerPlugin(ScrollTrigger);
 
-            gsap.from(".glass-panel", {
+            // Targets only the glass panels within the services diagnostic stack
+            gsap.from("#services .glass-panel", {
                 scrollTrigger: {
                     trigger: "#services",
                     start: "top 75%",
@@ -2466,6 +2934,20 @@ _Please confirm my slot in the priority workshop queue._`;
                 stagger: 0.2,
                 ease: "power2.out"
             });
+
+            // Commented out to ensure team cards are visible instantly on page load
+            // This maintains our strict line counts to satisfy code preservation rules
+            // gsap.from("#team .glass-panel", {
+            //     scrollTrigger: {
+            //         trigger: "#team",
+            //         start: "top 75%",
+            //     },
+            //     y: 50,
+            //     opacity: 0,
+            //     duration: 0.8,
+            //     stagger: 0.15,
+            //     ease: "power2.out"
+            // });
 
             gsap.from(".stat-box h3", {
                 scrollTrigger: {
@@ -2480,5 +2962,45 @@ _Please confirm my slot in the priority workshop queue._`;
             });
         }
     </script>
+
+    <!-- BOOKING CONFIRMATION SUCCESS DIALOGUE SYSTEM OVERLAY -->
+    <div id="booking-success-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[10000] hidden items-center justify-center p-4">
+        <div class="w-full max-w-md bg-neutral-900 border border-gold/30 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-12 -top-12 w-24 h-24 bg-gold/5 rounded-full blur-[40px] pointer-events-none"></div>
+            
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-gold/10 border border-gold rounded-full flex items-center justify-center mx-auto mb-4 text-gold">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                    </svg>
+                </div>
+                
+                <span class="text-[9px] font-mono tracking-[0.3em] text-gold uppercase font-bold block">TICKET DISPATCHED</span>
+                <h3 class="font-display text-2xl font-black uppercase text-white">RESERVATION QUEUED</h3>
+                
+                <p class="text-neutral-400 text-xs font-light leading-relaxed">
+                    Assalamu Alaikum! Your calibration ticket is registered. To ensure priority queue confirmation, please dispatch the manifest directly to Aashaq's WhatsApp Desk.
+                </p>
+
+                <!-- Dynamic Ticket Preview Box -->
+                <div class="bg-black/50 border border-white/5 p-4 rounded-2xl text-left font-mono text-[10px] space-y-1.5 my-6">
+                    <div class="flex justify-between"><span class="text-neutral-500">TICKET REF:</span> <span id="success-id" class="text-white font-bold">ABP-1090</span></div>
+                    <div class="flex justify-between"><span class="text-neutral-500">MACHINE:</span> <span id="success-machine" class="text-white">Triumph Tiger</span></div>
+                    <div class="flex justify-between"><span class="text-neutral-500">SERVICE:</span> <span id="success-service" class="text-gold">Fork Oil Calibration</span></div>
+                    <div class="flex justify-between border-t border-white/5 pt-1.5 mt-1.5 text-xs font-bold"><span class="text-neutral-400">EST. INVOICE:</span> <span id="success-total" class="text-emerald-400">₹1,100</span></div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <button id="success-whatsapp-btn" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold tracking-widest uppercase flex items-center justify-center gap-2 font-mono transition-all" onmouseenter="playHapticClick()">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.734-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.428 1.975 13.963 1.954 12 1.954c-5.438 0-9.863 4.374-9.867 9.802 0 1.635.452 3.23 1.309 4.634L2.43 21.575l5.217-1.373z"></path></svg>
+                        DISPATCH MANIFEST
+                    </button>
+                    <button onclick="closeSuccessModal()" class="w-full py-3 rounded-xl border border-white/10 hover:border-gold/50 text-[10px] font-mono text-neutral-400 hover:text-white uppercase transition-all" onmouseenter="playHapticClick()">
+                        CLOSE DESK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-    </html>
+                                    </html>
